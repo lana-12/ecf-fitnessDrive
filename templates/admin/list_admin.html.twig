@@ -1,0 +1,33 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Liste  | {{ parent() }} {% endblock %}
+
+{% block body %}
+
+    <main>
+        <h1> {{titleList}} </h1>
+
+        <p>Il y a {{countAdmins}} d'administrateurs.
+    <ul>
+        
+        {% for admin in admins %}
+            <li> Nom Admin : {{admin.name}} - Id : {{admin.id}}
+            </li>
+                
+        {% else %}
+            <p> error<p>
+        {% endfor %}
+        
+        
+        
+        </ul>
+
+    </main>
+
+
+{% endblock %}
+    
+        
+    
+
+    

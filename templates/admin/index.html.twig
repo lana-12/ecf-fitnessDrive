@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin | {{ parent() }} {% endblock %}
+
+
+
+{% block body %}
+
+    <main>
+        <h1>Page des Administarteurs</h1>
+
+
+    <h2> A faire </h2>
+
+    <ol>
+        <li> Navbar => refléchir si la mettre que pour lecture seule</li>
+        <li> SideBar</li>
+        <li> Liste</li>
+        <li> </li>
+        <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des Clients</a> </li>
+        <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des structures</a> </li>
+        <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des Administrateurs</a> </li>
+        <li><a href="{{ path('app_findadmin') }}"> Affiche 1 admin</a> </li>
+    </ol>
+
+
+    </main>
+
+{% endblock %}
