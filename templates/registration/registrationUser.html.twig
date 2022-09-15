@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<style>
+    .tiltle_h1_form{
+        text-align: center;
+    }
+</style>
+
+<main class="container">
+    <h1 class="tiltle_h1_form">Création d'un nouveau Franchisé </h1>
+
+    <h2>Première étape</h2>
+    <p>Attention ces informations sont obligatoires pour la connection à leurs comptes </p>
+    <p>Tous les champs de ce formulaire sont obligatoire pour valider la nouvelle franchise. </p>
+<!-- *FORMULAIRE LIER A ENTITY USER 
+     *ROLE PARTNER
+-->
+    <form class="container-fluid" method="Post" action="">
+
+    <legend> Informations Client </legend>
+        <div class="form-group">
+            <label class="form-label " for="username">Nom</label>
+            <input class="form-control" type="text" id="username" name="username" placeholder="Le nom du client" required >
+        </div>   
+
+        <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="text" id="email" name="email" placeholder="Avoir si je la met autoGénéré avec mot de passe " required >
+        </div>              
+        <div class="form-group">
+            <label class="form-label" for="password">Cliquer sur le bouton pour générer un nouveau mot de passe</label>
+            <input class="" type="password" id="password" name="password" placeholder="Avoir si je la met autoGénéré avec mot de passe " required >
+            <button class="btn btn-primary" type="submit">Générer </button>
+        </div>              
+
+            <button class="btn btn-primary" type="submit">Enregistrer</button>
+        </form>
+
+
+
+    </main>
+
+
+
+{% endblock %}
+
+
+
+

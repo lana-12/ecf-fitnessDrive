@@ -7,21 +7,23 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * loginUser home page
+ * loginhome 
  */
 
+#[Route('/', name: 'app_login_home')]
 
-class LoginUserController extends AbstractController
+
+class LoginHomeController extends AbstractController
 {
-    #[Route('/', name: 'app_login')]
+    #[Route('/', name: 'app_login_home')]
 
     public function index(): Response
     {
-        return $this->render('loginUser/index.html.twig');
+        return $this->render('loginHome/index.html.twig');
     }
 
     
-    #[Route('/data', name: 'app_default/data')]
+    #[Route('/data', name: 'app_default_data')]
     public function test(): Response
     {
         // $pdo = new DataBaseMySQL('fitness_drive', 'localhost', 'root', '');

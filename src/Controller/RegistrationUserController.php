@@ -3,15 +3,51 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationUserType;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/user', name: 'app_user')]
 
-class UserController extends AbstractController
+class RegistrationUserController extends AbstractController
 {
+    #[Route('/', name: 'app_user')]
+    public function index(): Response
+    {
+        return $this->render('user/index.html.twig');
+
+    }
+
+
+    #[Route('/new', name: 'app_user_new')]
+
+    public function new(Request $request): Response
+    {
+        $user = new User();
+        $formUser = $this->createForm(RegistrationUserType::class, $user);
+
+        //Mise à jour Objet $formUser avec les valeurs saisie
+        $formUser->handleRequest($request);
+
+        //S'assure de la validitédu form et que les valaurs sont cohérentes
+        if ($formUser->isSubmitted() && $formUser->isValid()){
+            // dd($formUser->getData());
+            dd($user);
+            
+            // return $this->redirectToRoute('app_user');
+            }
+            // return $this->renderForm('registration/registrationUser.html.twig', [
+            //     'form' => $formUser,
+            // ]);
+        return $this->render('registration/registrationUser.html.twig');
+
+    }
+
+
     // #[Route('/user', name: 'app_user')]
     // public function createUser(ManagerRegistry $doctrine): Response
     // {

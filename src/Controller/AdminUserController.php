@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
+#[Route('/admin', name: 'app_admin')]
 
 
 class AdminUserController extends AbstractController
@@ -21,7 +22,7 @@ class AdminUserController extends AbstractController
      * 
      * @return Response
      */
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/', name: 'app_admin')]
     public function index() : Response
     {
         
@@ -37,7 +38,7 @@ class AdminUserController extends AbstractController
      * @param AdminRepository $adminRepository
      * @return Response
      */
-    #[Route('/admin/listadmin', name: 'app_admin_listadmin')]
+    #[Route('/listadmin', name: 'app_admin_listadmin')]
     public function displayListAdmnins(AdminRepository $adminRepository) : Response
     {
 
@@ -60,7 +61,7 @@ class AdminUserController extends AbstractController
      * Display one admin 
      */
 
-    #[Route('/admin/findadmin', name: 'app_findadmin')]
+    #[Route('/findadmin', name: 'app_admin_findadmin')]
     public function findAdmninByName(AdminRepository $adminRepository) : Response
     {
         //Methode ds repository queryBuilder mettre ds signature (AdminRepository $adminRepository)
