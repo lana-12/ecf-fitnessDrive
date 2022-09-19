@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationUserType;
+use App\Form\NewUserType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/user', name: 'app_user')]
 
-class RegistrationUserController extends AbstractController
+class NewUserController extends AbstractController
 {
     #[Route('/', name: 'app_user')]
     public function index(): Response
@@ -24,26 +26,66 @@ class RegistrationUserController extends AbstractController
 
 
     #[Route('/new', name: 'app_user_new')]
+    #[Route('/{id}/edit', name: 'app_user_edit')]
 
-    public function new(Request $request): Response
+    /**
+     * For create and Edit NewUser 
+     */
+
+    public function formUser(Request $request, EntityManagerInterface $entityManager, User $user=null): Response
     {
-        $user = new User();
-        $formUser = $this->createForm(RegistrationUserType::class, $user);
+        if(!$user){
+            $user = new User();
+                
+        }
 
-        //Mise à jour Objet $formUser avec les valeurs saisie
-        $formUser->handleRequest($request);
-
+        $form = $this->createForm(NewUserType::class, $user);
+        //Mise à jour Objet $formUser avec les valeurs saisie- récupération
+        $form->handleRequest($request);
+        // dd($user);
+        
         //S'assure de la validitédu form et que les valaurs sont cohérentes
-        if ($formUser->isSubmitted() && $formUser->isValid()){
-            // dd($formUser->getData());
-            dd($user);
-            
-            // return $this->redirectToRoute('app_user');
+        if ($form->isSubmitted() && $form->isValid()){
+            if(!$user->getId()){
+                //add the default role field   si utilisateur saisie un autre nom celui-ci sera ecrassé
+                // a voir si on le met apres if isValid...
+                $user->setRole('Client');
             }
-            // return $this->renderForm('registration/registrationUser.html.twig', [
-            //     'form' => $formUser,
-            // ]);
-        return $this->render('registration/registrationUser.html.twig');
+            // dd($user);
+            
+            // $entityManager->persist($user);
+            // $entityManager->flush();
+            
+            $this->addFlash('success', 'Message envoyé');
+
+
+            // pour afficher la suite sur une autre page
+            //pour l'instant j'ai afficher
+            return $this->render('user/index.html.twig',[
+                'user'=> $user,
+                
+            ]);
+
+        }
+        
+        
+        
+        return $this->render('form/newUser.html.twig',[
+            'formUser'=>$form->createView(),
+
+            //Variable in editMode
+            'editMode'=> $user->getId() !== null,
+            'h1Edit'=> $user->getUsername() !== null,
+        ]);
+
+        
+
+    }
+
+    #[Route('/success', name: 'app_user_success')]
+    public function success(): Response
+    {
+        return $this->render('user/index.html.twig');
 
     }
 

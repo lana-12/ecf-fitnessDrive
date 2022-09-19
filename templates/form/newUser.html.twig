@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création - Etape I | {{ parent() }}{% endblock %}
+{% block body %}
+
+
+<main class="container">
+    {% if editMode %}
+
+        <h1 class="tiltle_h1_form">Modification de {{ h1Edit }}</h1>
+
+            <h2>Etape I</h2>
+                <p> Détailler les étapes + combien d'étape, Peut etre faire soit un fil ariane ou autre...
+        {% else %}
+            
+    <h1 class="tiltle_h1_form">Création d'un nouveau Franchisé </h1>
+
+    <h2>Première étape</h2>
+    <p>Attention ces informations sont obligatoires pour la connection à leurs comptes </p>
+    <p>Tous les champs de ce formulaire sont obligatoire pour valider la nouvelle franchise. </p>
+    <p> Détailler les étapes + combien d'étape</p>
+
+    {% endif %}
+
+
+
+<!-- *FORMULAIRE LIER A ENTITY USER 
+     *ROLE PARTNER
+-->
+
+{# A voir pourquoi ca ne marche pas #}
+    {# {% for messgae in app.flashes('success') %}
+        <div class ='alert alert-success' role='alert'>
+            <p> {{message}} </p>
+        </div>
+    {% endfor %}
+#}
+{{form_start(formUser)}}
+
+<legend> Informations Client </legend>
+
+        <div class="form-group">
+            {{ form_row(formUser.username,{'attr': {'placeholder':'Nom du Gérant'}}) }}
+        </div>   
+
+        <div class="form-group">
+            {{ form_row(formUser.email, {'attr': {'placeholder':'Email du Gérant'}}) }}
+        </div>      
+
+        <div class="form-group">
+            {{ form_row(formUser.password, {'attr': {'placeholder':'Mot de passe du Gérant'}}) }}
+        </div>               
+            {# <button class="btn btn-primary" type="submit">Générer </button> #}
+
+        <button class="btn btn-success" type="submit">
+        
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter
+        {% endif %}
+        
+        </button>
+
+{{form_end(formUser)}}
+    
+
+    </main> 
+{% endblock %}
+
+
+
+
