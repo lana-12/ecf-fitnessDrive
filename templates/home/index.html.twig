@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil | {{ parent() }} {% endblock %}
+
+{% block stylesheets %} 
+    {{ parent() }}
+        {# {{ encore_entry_link_tags('login') }} #}
+
+{% endblock %}
+
+{% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('test') }} 
+{% endblock %}
+
+{% block body %}
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand title_home"><h1>Fitness Drive</h1></a>
+                <a href=" {{ path('app_login') }} " class="btn btn-outline-success" type="button">Connection</a>
+            </div>
+        </nav>
+    </header>
+    <main >
+
+            <h2>Bienvenue sur notre Application </h2>
+
+            <h2>Gestion des permissions</h2>
+
+            <p>Veuillez vous identifier pour accéder à votre compte !!</p>
+        
+    </main>
+
+{% endblock %}

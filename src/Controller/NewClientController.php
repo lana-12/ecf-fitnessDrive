@@ -12,10 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-#[Route('/user', name: 'app_user')]
+#[Route('/user')]
 
-class NewUserController extends AbstractController
+class NewClientController extends AbstractController
 {
     #[Route('/', name: 'app_user')]
     public function index(): Response
@@ -32,29 +34,31 @@ class NewUserController extends AbstractController
      * For create and Edit NewUser 
      */
 
-    public function formUser(Request $request, EntityManagerInterface $entityManager, User $user=null): Response
+    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null): Response
     {
         if(!$user){
             $user = new User();
                 
         }
-
         $form = $this->createForm(NewUserType::class, $user);
-        //Mise à jour Objet $formUser avec les valeurs saisie- récupération
+
         $form->handleRequest($request);
-        // dd($user);
         
-        //S'assure de la validitédu form et que les valaurs sont cohérentes
+        //S'assure de la validité du form et que les valaurs sont cohérentes
         if ($form->isSubmitted() && $form->isValid()){
             if(!$user->getId()){
-                //add the default role field   si utilisateur saisie un autre nom celui-ci sera ecrassé
-                // a voir si on le met apres if isValid...
-                $user->setRole('Client');
+                
             }
-            // dd($user);
+            $user->setRoles(['ROLE_CLIENT']);
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
             
-            // $entityManager->persist($user);
-            // $entityManager->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
             
             $this->addFlash('success', 'Message envoyé');
 
@@ -65,10 +69,7 @@ class NewUserController extends AbstractController
                 'user'=> $user,
                 
             ]);
-
         }
-        
-        
         
         return $this->render('form/newUser.html.twig',[
             'formUser'=>$form->createView(),

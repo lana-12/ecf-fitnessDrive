@@ -2,33 +2,48 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
-class User
+#[UniqueEntity(fields:'email', message:'L\'email que vous avez indiqué est déjà utiliser')]
+
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+
     #[ORM\Column(length: 254, unique:true)]
-    #[Assert\NotBlank()]
+    // #[Assert\Email()]
     private ?string $email = null;
 
+
+
     #[ORM\Column(length: 60)]
-    #[Assert\NotBlank()]
     private ?string $password = null;
 
+    // #[Assert\NotBlank(message: 'Veuillez saisir un mot de passe!')]
+    // #[Assert\EqualTo(propertyPath:'password', message:'Vous n\'avez pas tapé le même mot de passe')]
+    // private ?string $confirmPassword = null;
+
+
+
     #[ORM\Column(length: 100)]
-    #[Assert\NotBlank()]
     private ?string $username = null;
 
-    #[ORM\Column()]
-    private ?string $role = null;
+    #[ORM\Column(type: "json")]
+    private ?array $roles = null;
+
+
 
     public function getId(): ?int
     {
@@ -55,10 +70,26 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
+
+    // public function getConfirmPassword(): ?string
+    // {
+    //     return $this->confirmPassword;
+    // }
+
+    // public function setConfirmPassword(string $confirmPassword): self
+    // {
+    //     $this->confirmPassword = $confirmPassword;
+
+    //     return $this;
+    // }
+
+    public function getUserIdentifier(): string
+    {
+        return(string) $this->email;
+    }
     public function getUsername(): ?string
     {
         return $this->username;
@@ -71,18 +102,32 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRoles(): array
     {
         
-        return $this->role;
+        $roles = $this->roles;
+        // $roles[] ='ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setRole(string $role): self
+    public function setRoles(array $roles): self
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
 
+
+    public function getSalt()
+    {
+
+    }
+
+
+    public function eraseCredentials()
+    {
+        
+    }
     
 }

@@ -3,6 +3,7 @@
 {% block title %}Création - Etape I | {{ parent() }}{% endblock %}
 {% block body %}
 
+{{ parent()}}
 
 <main class="container">
     {% if editMode %}
@@ -40,16 +41,20 @@
 <legend> Informations Client </legend>
 
         <div class="form-group">
-            {{ form_row(formUser.username,{'attr': {'placeholder':'Nom du Gérant'}}) }}
+            {{ form_row(formUser.username,{'label':'Nom','attr': {'placeholder':'Nom du Gérant'}}) }}
         </div>   
 
         <div class="form-group">
-            {{ form_row(formUser.email, {'attr': {'placeholder':'Email du Gérant'}}) }}
+            {{ form_row(formUser.email, {'label':'Email','attr': {'placeholder':'Email du Gérant'}}) }}
         </div>      
 
         <div class="form-group">
-            {{ form_row(formUser.password, {'attr': {'placeholder':'Mot de passe du Gérant'}}) }}
-        </div>               
+            {{ form_row(formUser.password, {'label':'Mot de passe','attr': {'placeholder':'Mot de passe du Gérant'}}) }}
+        </div>         
+                
+        {# <div class="form-group">
+            {{ form_row(formUser.confirmPassword, {'label':'Confirmation de votre mot de passe','attr': {'placeholder':'répétez votre mot de passe'}}) }}
+        </div>                               #}
             {# <button class="btn btn-primary" type="submit">Générer </button> #}
 
         <button class="btn btn-success" type="submit">

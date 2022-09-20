@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -19,7 +20,6 @@ class NewUserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class,[
-                'label'=> 'Nom',
                 'required'=> true,
                 'row_attr' => ['class' => '', 'id' => 'username'],
 
@@ -28,10 +28,9 @@ class NewUserType extends AbstractType
                     new Length([
                         'min'=> 5, 'max'=> 100, 'minMessage' =>'Le nom doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' =>'Le nom doit faire entre {{ limit }} et {{ limit }} caractères']),
                     ]       
-                ]) 
+                ])  
                 
             ->add('email', EmailType::class,[
-                'label'=> 'Email',
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'email'],
 
@@ -42,7 +41,6 @@ class NewUserType extends AbstractType
             ])
 
             ->add('password', PasswordType::class,[
-                'label'=> 'Mot de passe',
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'mdpUser'],                
                 
@@ -51,8 +49,20 @@ class NewUserType extends AbstractType
                         new Length([
                             'min'=> 8, 'max'=> 100, 'minMessage' =>'Votre mot de passe doit contenir au moins {{ limit }} caractères',]),
                     ]
-
                 ])
+                
+            // ->add('confirmPassword', PasswordType::class,[
+            //     'required'=> true, 
+            //     'row_attr' => ['class' => '', 'id' => 'mdpUser'],                
+
+            //     'constraints'=> [
+            //             new NotBlank(['message'=> 'Veuillez saisir le même mot de passe!']),
+            //             new Length([
+            //                 'min'=> 8, 'max'=> 100, 'minMessage' =>'Votre mot de passe doit contenir au moins {{ limit }} caractères',]),
+            //             // new EqualTo(['propertyPath'=>'password', 'message'=>'Vous n\'avez pas tapé le même mot de passe'])
+            //         ]
+
+            // ])
 
 
             // ->add('role', TextType::class,[
