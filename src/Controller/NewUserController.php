@@ -17,7 +17,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/user')]
 
-class NewClientController extends AbstractController
+class NewUserController extends AbstractController
 {
     #[Route('/', name: 'app_user')]
     public function index(): Response
@@ -38,7 +38,6 @@ class NewClientController extends AbstractController
     {
         if(!$user){
             $user = new User();
-                
         }
         $form = $this->createForm(NewUserType::class, $user);
 
@@ -49,7 +48,7 @@ class NewClientController extends AbstractController
             if(!$user->getId()){
                 
             }
-            $user->setRoles(['ROLE_CLIENT']);
+            $user->setRoles(['ROLE_USER']);
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,

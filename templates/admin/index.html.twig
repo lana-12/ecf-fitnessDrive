@@ -4,26 +4,116 @@
 
 
 
-{% block body %}
+{% block body %} 
 
-    <main>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><h1>Fitness Drive</h1></a>
+
+                {# AU CLIC REVENIR SUR ACCUEIL #}
+                {# <a href="{{ path('app_logout') }}" class="nav-link">Déconnection</a> #}
+                <button class="btn btn-success btn-sm">Déconnection</button>
+                            
+            </div>
+        </nav>
+    </header>
+            <nav>
+                <div class="container-fluid">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Text ici" aria-label="Search">
+                        <button class="btn btn-outline-success btn-sm" type="submit">Rechercher</button>
+                    </form>
+                </div>
+            </nav>
+
+
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+    <a class="navbar-brand" href="#">Offcanvas navbar</a>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+    <main class="">
         <h1>Page des Administarteurs</h1>
 
+    FINALEMENT FAIRE UNE NAVBAR MAIS QUI S OUVRE SUR LE COTE
+    A VOIR POUR LA BARRE LATERAL 
 
-    <h2> A faire </h2>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-4">
+                        <h2> A faire </h2>
 
-    <ol>
-        <li> Navbar => refléchir si la mettre que pour lecture seule</li>
-        <li> SideBar</li>
-        <li> Liste</li>
-        <li> </li>
-        <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des Clients</a> </li>
-        <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des structures</a> </li>
-        <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des Administrateurs</a> </li>
-        <li><a href="{{ path('app_admin_findadmin') }}"> Affiche 1 admin</a> </li> 
-    </ol>
+                            <ol>
+                                <li> Navbar => refléchir si la mettre que pour lecture seule</li>
+                                <li> SideBar</li>
+                                <li> Liste</li>
+                                <li> </li>
+                                <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des Clients</a> </li>
+                                <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des structures</a> </li>
+                                <li><a href="{{ path('app_admin_listadmin') }}"> Accéder à la liste des Administrateurs</a> </li>
+                                <li><a href="{{ path('app_admin_findadmin') }}"> Affiche 1 admin</a> </li> 
+                            </ol>
+                    </div>
+
+                    <div class="col-7">
+                        <p>Nombre Total de Clients =    </p>
+                        <p>Nombre Total de Structures =    </p>
+                    </div>
+                    
 
 
+
+
+
+
+                </div>
+            </div>
     </main>
 
 {% endblock %}

@@ -1,6 +1,4 @@
 body{
-    width: 100%;
-    height: 100vh;
     background: rgb(51, 48, 48) url("./../img/img2.jpg");
     background-size: cover;
     background-position: center;
@@ -10,9 +8,9 @@ body{
     align-items: center;
 }
 
-h1, .login {
+.login {
     text-align: center;
-    line-height: 50px;
+    line-height: 0px;
     color: #fff;
 }
 
@@ -36,7 +34,23 @@ h1, .login {
     z-index: -1 ;
 }
 
-button{
-    /* background-color: #048b9a ; */
+.btn{
     text-align: center;
+    display: flex;
+    margin: 20px;
+    background: #0b6e40;
+    color: #fff;
+}
+
+h1{
+    text-align: center;
+    padding-bottom: 100px;
+    color: #fff;
+}
+h2{
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+input{
+    margin: 20px;
 }

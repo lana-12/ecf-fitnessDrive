@@ -1,0 +1,18 @@
+body{
+    background: rgb(131, 127, 127);
+    color: white;
+}
+
+fieldset{
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.btn{
+    display: flex;
+    margin: 20px;
+    background: #0b6e40;
+    color: #fff;
+}

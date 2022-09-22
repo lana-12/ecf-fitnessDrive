@@ -1,0 +1,36 @@
+body{
+    background: rgb(51, 48, 48) url("./../img/img3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    text-align: center;
+}
+header{
+    border-bottom: solid 1px #fff;
+    box-shadow: 1px 1px 2px black, 0 0 1em #0b6e40, 0 0 0.2em #0b6e40;
+}
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 20px;
+}
+/* #0b6e40 */
+
+.box_center{
+    text-shadow: 1px 1px 2px black, 0 0 1em #0b6e40, 0 0 0.2em #0b6e40;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+h2{
+    font-size: 2.5em;
+    margin-bottom: 50px;
+}
+
+p{
+    font-size: 1.8em;
+}

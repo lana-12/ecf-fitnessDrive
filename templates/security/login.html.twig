@@ -3,8 +3,9 @@
 {% block title %}Connection | {{ parent()}}{% endblock %}
 
 {% block stylesheets %} 
-    {{ parent() }}
+        {{ parent() }}
         {{ encore_entry_link_tags('login') }}
+
 {% endblock %}
 
 {% block javascripts %}
@@ -29,12 +30,12 @@
 
                 <div class="box-connexion">
                     <div class="login form-group" >
+                        <h2>Saisissez vos identifiants de connection</h2>
+                            
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="" placeholder="exemple@exemple.fr" autocomplete="email" required autofocus>
 
-                        <label class="form-label" for="inputEmail">Veuillez saisir vos identifiants</label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="" placeholder="exemple@youpy.fr" autocomplete="email" required autofocus>
-
-                        <label class="form-label" for="inputPassword">Veuillez saisir votre mot de Passe</label>
-                        <input type="password" name="password" id="inputPassword" class="" autocomplete="current-password" required>
+                            
+                            <input type="password" name="password" id="inputPassword" class="" placeholder="Mot de passe" autocomplete="current-password" required>
 
                     </div>
                 <input type="hidden" name="_csrf_token"
@@ -52,7 +53,8 @@
                     </div>
                 #}
 
-                <button class="btn btn-success" type="submit">Connection</button>
+                <button class="btn  mx-auto" type="submit">Connection</button>
+                
             </div>
         </form>
 </main>       

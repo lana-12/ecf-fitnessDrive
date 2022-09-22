@@ -20,9 +20,12 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+    .addEntry('favicon', './assets/img/favicon.png')
     .addEntry('app', './assets/app.js')
     .addEntry('test', './assets/js/test.js')
-    .addEntry('login', './assets/styles/login_home.css')
+    .addEntry('login', './assets/css/login.css')
+    .addEntry('home', './assets/css/home.css')
+    .addEntry('new_user', './assets/css/new_user.css')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

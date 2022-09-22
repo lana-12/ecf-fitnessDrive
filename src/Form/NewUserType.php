@@ -42,7 +42,7 @@ class NewUserType extends AbstractType
 
             ->add('password', PasswordType::class,[
                 'required'=> true, 
-                'row_attr' => ['class' => '', 'id' => 'mdpUser'],                
+                'row_attr' => ['class' => '', 'id' => 'id_password'],                
                 
                 'constraints'=> [
                         new NotBlank(['message'=> 'Veuillez saisir un mot de passe!']),
