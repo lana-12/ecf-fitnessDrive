@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\User;
-use App\Form\NewUserType;
+use App\Form\ClientType;
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +28,7 @@ class NewUserController extends AbstractController
 
     }
 
-
+// AVOIR SI JE LE MET DS SECURITY  CONTROLLER
     #[Route('/new', name: 'app_user_new')]
     #[Route('/{id}/edit', name: 'app_user_edit')]
 
@@ -34,13 +36,15 @@ class NewUserController extends AbstractController
      * For create and Edit NewUser 
      */
 
-    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null): Response
+    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null, Client $client): Response
     {
         if(!$user){
             $user = new User();
         }
-        $form = $this->createForm(NewUserType::class, $user);
-
+        $form = $this->createForm(UserType::class, $user);
+        $user->setRoles(['ROLE_CLIENT']);
+        
+        
         $form->handleRequest($request);
         
         //S'assure de la validité du form et que les valaurs sont cohérentes
@@ -48,14 +52,12 @@ class NewUserController extends AbstractController
             if(!$user->getId()){
                 
             }
-            $user->setRoles(['ROLE_USER']);
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('password')->getData()
                 )
             );
-            
             $entityManager->persist($user);
             $entityManager->flush();
             
@@ -70,7 +72,7 @@ class NewUserController extends AbstractController
             ]);
         }
         
-        return $this->render('form/newUser.html.twig',[
+        return $this->render('user/formUser.html.twig',[
             'formUser'=>$form->createView(),
 
             //Variable in editMode

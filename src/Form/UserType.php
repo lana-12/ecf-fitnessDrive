@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class NewUserType extends AbstractType
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -51,22 +51,27 @@ class NewUserType extends AbstractType
                     ]
                 ])
                 
-            // ->add('confirmPassword', PasswordType::class,[
-            //     'required'=> true, 
-            //     'row_attr' => ['class' => '', 'id' => 'mdpUser'],                
+            ->add('confirmPassword', PasswordType::class,[
+                'required'=> true, 
+                'row_attr' => ['class' => '', 'id' => 'mdpUser'],                
 
-            //     'constraints'=> [
-            //             new NotBlank(['message'=> 'Veuillez saisir le même mot de passe!']),
-            //             new Length([
-            //                 'min'=> 8, 'max'=> 100, 'minMessage' =>'Votre mot de passe doit contenir au moins {{ limit }} caractères',]),
-            //             // new EqualTo(['propertyPath'=>'password', 'message'=>'Vous n\'avez pas tapé le même mot de passe'])
-            //         ]
+                'constraints'=> [
+                        new NotBlank(['message'=> 'Veuillez saisir le même mot de passe!']),
+                        new Length([
+                            'min'=> 8, 'max'=> 100, 'minMessage' =>'Votre mot de passe doit contenir au moins {{ limit }} caractères',]),
+                        // new EqualTo(['propertyPath'=>'password', 'message'=>'Vous n\'avez pas tapé le même mot de passe'])
+                    ]
 
-            // ])
+            ])
 
 
-            // ->add('role', TextType::class,[
-            //     'label'=> 'Nom','required'=> true])
+            // ->add('role', ChoiceType::class,[
+            //     'label'=> 'Nom',
+            //     'required'=> true,
+            //     'choices' => [
+            //         'Franchise' =>'',
+            //         'Structure'=> ''
+            //     ]])
 
         ;
     }
@@ -76,6 +81,9 @@ class NewUserType extends AbstractType
         //vers quel objet le form va être lié
         $resolver->setDefaults([
             'data_class' => User::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id' => 'user_item',
         ]);
     }
 }

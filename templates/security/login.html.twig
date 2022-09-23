@@ -19,12 +19,15 @@
     <h1 class="title_home" >Fitness Drive</h1>
         <form action="" method="post">
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger">{{ error.messageKey }}</div>
             {% endif %}
+            {# {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %} #}
 
             {% if app.user %}
                 <div class="mb-3 text-white">
-                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnection</a>
                 </div>
             {% endif %}
 

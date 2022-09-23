@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,17 +33,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 60)]
     private ?string $password = null;
 
-    // #[Assert\NotBlank(message: 'Veuillez saisir un mot de passe!')]
-    // #[Assert\EqualTo(propertyPath:'password', message:'Vous n\'avez pas tapé le même mot de passe')]
-    // private ?string $confirmPassword = null;
-
-
+    #[Assert\NotBlank(message: 'Veuillez saisir un mot de passe!')]
+    #[Assert\EqualTo(propertyPath:'password', message:'Vous n\'avez pas tapé le même mot de passe')]
+    private ?string $confirmPassword = null;
 
     #[ORM\Column(length: 100)]
     private ?string $username = null;
 
     #[ORM\Column(type: "json")]
     private ?array $roles = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Client::class)]
+    
+    private Collection $client;
+
+    public function __construct()
+    {
+        $this->client = new ArrayCollection();
+    }
 
 
 
@@ -74,17 +83,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    // public function getConfirmPassword(): ?string
-    // {
-    //     return $this->confirmPassword;
-    // }
+    public function getConfirmPassword(): ?string
+    {
+        return $this->confirmPassword;
+    }
 
-    // public function setConfirmPassword(string $confirmPassword): self
-    // {
-    //     $this->confirmPassword = $confirmPassword;
+    public function setConfirmPassword(string $confirmPassword): self
+    {
+        $this->confirmPassword = $confirmPassword;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
     public function getUserIdentifier(): string
     {
@@ -128,6 +137,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         
+    }
+
+    /**
+     * @return Collection<int, Client>
+     */
+    public function getClient(): Collection
+    {
+        return $this->client;
+    }
+
+    public function addClient(Client $client): self
+    {
+        if (!$this->client->contains($client)) {
+            $this->client->add($client);
+            $client->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): self
+    {
+        if ($this->client->removeElement($client)) {
+            // set the owning side to null (unless already changed)
+            if ($client->getUser() === $this) {
+                $client->setUser(null);
+            }
+        }
+
+        return $this;
     }
     
 }

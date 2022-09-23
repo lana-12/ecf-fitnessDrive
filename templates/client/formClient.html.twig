@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création - Etape II | {{ parent() }}{% endblock %}
+
+{% block stylesheets %} 
+
+        {{ parent() }}
+        {# {{ encore_entry_link_tags('new_user') }} #}
+
+{% endblock %}
+
+{% block javascripts %}
+            {{ parent() }}
+        {# {{ encore_entry_script_tags('test') }}  #}
+{% endblock %}
+
+
+
+
+
+{% block body %}
+
+{{ parent()}}
+
+<main class="container">
+
+    <h2>Création du Compte Client - Franchise</h2>
+
+    <p>faire un form </p>
+{# {{form_start(formUser)}} #}
+{{form_start(formClient)}}
+{{form_rest(formClient)}}
+<button class="btn btn-primary mx-auto" type="submit"> Enregister</button>
+
+
+{# {{dump(formClient)}} #}
+
+
+</main> 
+{% endblock %}
+
+
+
+
