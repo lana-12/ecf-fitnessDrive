@@ -2,20 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Client;
-use App\Form\ClientType;
-use App\Repository\ClientRepository;
+use App\Entity\Partner;
+use App\Form\PartnerType;
+use App\Repository\PartnerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-#[Route('/client')]
+#[Route('/partner')]
 
-class NewClientController extends AbstractController
+class NewPartnerController extends AbstractController
 {
     // #[Route('/', name: 'app_user')]
     // public function index(): Response
@@ -24,47 +24,47 @@ class NewClientController extends AbstractController
 
     // }
 
-    #[Route('/new', name: 'app_client_new')]
+    #[Route('/new', name: 'app_partner_new')]
 
     /**
-     * For create NewClient
+     * For create NewPartner
      */
 
-    public function formClient(Request $request, EntityManagerInterface $entityManager, ClientRepository $clientRepository): Response
+    public function formpartner(Request $request, EntityManagerInterface $entityManager, PartnerRepository $partnerRepository): Response
     {
-        $client = new Client();
+        $partner = new Partner();
         
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(PartnerType::class, $partner);
         $form->handleRequest($request);
         
         //S'assure de la validité du form et que les valaurs sont cohérentes
         if ($form->isSubmitted() && $form->isValid()){
             
-            $clientRepository->add($client, true);
-            $entityManager->persist($client);
+            $partnerRepository->add($partner, true);
+            $entityManager->persist($partner);
             $entityManager->flush();
             
             
             
             
             // $this->addFlash('success', 'Message envoyé');
-            return $this->render('client/client.html.twig',[
-                'client'=> $client,
+            return $this->render('partner/partner.html.twig',[
+                'partner'=> $partner,
                 
             ]);
             
-            // dd($client);
+            // dd($partner);
             
             // pour afficher la suite sur une autre page
             //pour l'instant j'ai afficher
             // return $this->render('user/index.html.twig',[
-                //     'user'=> $client,
+                //     'user'=> $partner,
                 
                 // ]);
             }
         
-        return $this->render('client/formClient.html.twig',[
-            'formClient'=>$form->createView(),
+        return $this->render('partner/formPartner.html.twig',[
+            'formpartner'=>$form->createView(),
 
         ]);
 

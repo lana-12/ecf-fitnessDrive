@@ -14,10 +14,10 @@ class Admin
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'adminUser', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -44,6 +44,16 @@ class Admin
 
     public function setUser(?User $user): self
     {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setAdminUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getAdminUser() !== $this) {
+            $user->setAdminUser($this);
+        }
+
         $this->user = $user;
 
         return $this;

@@ -10,18 +10,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  *  
  */
 
-#[Route('/client')]
+#[Route('/partner')]
 
 
-class ClientController extends AbstractController
+class PartnerController extends AbstractController
 {
-    #[Route('/', name: 'app_client')]
+    #[Route('/', name: 'app_partner')]
 
 
 
     public function index(): Response
     {
-        return $this->render('client/client.html.twig');
+        return $this->render('partner/partner.html.twig');
     }
 
 

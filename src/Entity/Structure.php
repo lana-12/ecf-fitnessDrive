@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\StructureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StructureRepository::class)]
@@ -17,10 +16,10 @@ class Structure
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $nameStructure = null;
+    #[ORM\Column(length: 50)]
+    private ?string $name_structure = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $address = null;
 
     #[ORM\Column]
@@ -33,27 +32,26 @@ class Structure
     private ?int $phone = null;
 
     #[ORM\Column]
-    private ?bool $active = null;
+    private ?bool $is_active = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $shortDescription = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $full_description = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $fullDescription = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $short_description = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
-    private Collection $perms;
+    #[ORM\OneToOne(mappedBy: 'structure', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'structures')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Client $client = null;
+    private ?Partner $partner = null;
+
+    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
+    private Collection $permissions;
 
     public function __construct()
     {
-        $this->perms = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,12 +61,12 @@ class Structure
 
     public function getNameStructure(): ?string
     {
-        return $this->nameStructure;
+        return $this->name_structure;
     }
 
-    public function setNameStructure(string $nameStructure): self
+    public function setNameStructure(string $name_structure): self
     {
-        $this->nameStructure = $nameStructure;
+        $this->name_structure = $name_structure;
 
         return $this;
     }
@@ -121,50 +119,72 @@ class Structure
         return $this;
     }
 
-    public function isActive(): ?bool
+    public function isIsActive(): ?bool
     {
-        return $this->active;
+        return $this->is_active;
     }
 
-    public function setActive(bool $active): self
+    public function setIsActive(bool $is_active): self
     {
-        $this->active = $active;
-
-        return $this;
-    }
-
-    public function getShortDescription(): ?string
-    {
-        return $this->shortDescription;
-    }
-
-    public function setShortDescription(?string $shortDescription): self
-    {
-        $this->shortDescription = $shortDescription;
+        $this->is_active = $is_active;
 
         return $this;
     }
 
     public function getFullDescription(): ?string
     {
-        return $this->fullDescription;
+        return $this->full_description;
     }
 
-    public function setFullDescription(?string $fullDescription): self
+    public function setFullDescription(?string $full_description): self
     {
-        $this->fullDescription = $fullDescription;
+        $this->full_description = $full_description;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getShortDescription(): ?string
     {
-        return $this->createdAt;
+        return $this->short_description;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setShortDescription(?string $short_description): self
     {
-        $this->createdAt = $createdAt;
+        $this->short_description = $short_description;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setStructure(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getStructure() !== $this) {
+            $user->setStructure($this);
+        }
+
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPartner(): ?Partner
+    {
+        return $this->partner;
+    }
+
+    public function setPartner(?Partner $partner): self
+    {
+        $this->partner = $partner;
 
         return $this;
     }
@@ -172,35 +192,23 @@ class Structure
     /**
      * @return Collection<int, Permission>
      */
-    public function getPerms(): Collection
+    public function getPermissions(): Collection
     {
-        return $this->perms;
+        return $this->permissions;
     }
 
-    public function addPerm(Permission $perm): self
+    public function addPermission(Permission $permission): self
     {
-        if (!$this->perms->contains($perm)) {
-            $this->perms->add($perm);
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
         }
 
         return $this;
     }
 
-    public function removePerm(Permission $perm): self
+    public function removePermission(Permission $permission): self
     {
-        $this->perms->removeElement($perm);
-
-        return $this;
-    }
-
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Client $client): self
-    {
-        $this->client = $client;
+        $this->permissions->removeElement($permission);
 
         return $this;
     }

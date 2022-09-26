@@ -21,7 +21,7 @@ class AdminRepository extends ServiceEntityRepository
         parent::__construct($registry, Admin::class);
     }
 
-    public function add(Admin $entity, bool $flush = false): void
+    public function save(Admin $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -39,49 +39,20 @@ class AdminRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllAdmin(): ?array
-    {
-        return
-        $this->createQueryBuilder('a')
-            ->getQuery()
-            ->getResult()
-        ;
-
-    }
-    
-    public function findOneByName($name): array | Admin
-    {
-        return
-        $this->createQueryBuilder('a')
-            ->andWhere('a.name = :name')
-            ->setParameter('name', $name)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
-
-    
-
-
-
-
-// /**
-// * @return Admin Returns an array of Admin objects
-// */
-//     public function findUserAdminByName($name): Admin
-//     {
-//         $queryBuilder = $this->createQueryBuilder('a')
-//             ->where('a.name = :name')
-//             ->setParameter('name', $name)
-//             ;
-//             if (empty($name)) {
-//                 $admin = $queryBuilder->getQuery();
-//             }
-            
-//             return $admin->getResult();
-
-//     }
+//    /**
+//     * @return Admin[] Returns an array of Admin objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('a')
+//            ->andWhere('a.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('a.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
 //    public function findOneBySomeField($value): ?Admin
 //    {

@@ -4,10 +4,10 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -24,7 +24,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    public function add(User $entity, bool $flush = false): void
+    public function save(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -81,20 +81,22 @@ public function findByWithQueryBuilder(string $username, string $email=null): ?U
     return $queryUsername->getOneOrNullResult();
     
 }
-// /**
-// * @return User[] Returns an array of User objects
-// */
-// public function findByExampleField($value): array
-// {
-//     return $this->createQueryBuilder('u')
-//         ->andWhere('u.exampleField = :val')
-//         ->setParameter('val', $value)
-//         ->orderBy('u.id', 'ASC')
-//         ->setMaxResults(10)
-//         ->getQuery()
-//         ->getResult()
-//     ;
-// }
+
+
+//    /**
+//     * @return User[] Returns an array of User objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('u')
+//            ->andWhere('u.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('u.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
 //    public function findOneBySomeField($value): ?User
 //    {
@@ -106,5 +108,3 @@ public function findByWithQueryBuilder(string $username, string $email=null): ?U
 //        ;
 //    }
 }
-
-

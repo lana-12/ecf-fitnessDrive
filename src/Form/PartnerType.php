@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Client;
+use App\Entity\Partner;
 use App\Form\UserType;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -16,12 +16,12 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ClientType extends AbstractType
+class PartnerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class,[
+            ->add('name_partner', TextType::class,[
                 'label'=> 'Nom de la franchise',
                 'attr'=>[
                 'placeholder'=>'exemple Fitness Drive Montpellier...',
@@ -37,7 +37,7 @@ class ClientType extends AbstractType
                 ])  
                 
             ->add('phone', TelType::class,[
-                'label'=> 'Numéro de téléphone du Client',
+                'label'=> 'Numéro de téléphone du partenaire',
                 'attr'=>[
                 'placeholder'=>'exemple 0617236985',
                 ],
@@ -56,7 +56,7 @@ class ClientType extends AbstractType
                 
 
             ->add('user', UserType::class,[
-                'label'=> 'Information du compte de connection du client', 
+                'label'=> 'Information du compte de connection du partenaire', 
                 ])
                 // ->add('user', CollectionType::class,[
                 //     'entry_type'=> User::class,
@@ -68,10 +68,10 @@ class ClientType extends AbstractType
     {
         //vers quel objet le form va être lié
         $resolver->setDefaults([
-            'data_class' => Client::class,
+            'data_class' => Partner::class,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
-            'csrf_token_id' => 'client_item',
+            'csrf_token_id' => 'partner_item',
         ]);
     }
 }

@@ -17,36 +17,33 @@ class Permission
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?bool $sellDrinks = null;
+    private ?bool $is_sellDrinks = null;
 
     #[ORM\Column]
-    private ?bool $saleVitaminBar = null;
+    private ?bool $is_saleVitaminBar = null;
 
     #[ORM\Column]
-    private ?bool $manageSchedule = null;
+    private ?bool $is_manageSchedule = null;
 
     #[ORM\Column]
-    private ?bool $sendNewsletter = null;
+    private ?bool $is_sendNewsletter = null;
 
     #[ORM\Column]
-    private ?bool $lockerRoom = null;
+    private ?bool $is_lockerRoom = null;
 
     #[ORM\Column]
-    private ?bool $shower = null;
+    private ?bool $is_shower = null;
 
     #[ORM\Column]
-    private ?bool $sportsCoach = null;
+    private ?bool $is_sportsCoach = null;
 
     #[ORM\Column]
-    private ?bool $appFitnessDrive = null;
+    private ?bool $is_appFitnessDrive = null;
 
     #[ORM\Column]
-    private ?bool $shopFitnessDrive = null;
+    private ?bool $is_shopFitnessDrive = null;
 
-    #[ORM\Column]
-    private ?bool $saleOtherProducts = null;
-
-    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'perms')]
+    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'permissions')]
     private Collection $structures;
 
     public function __construct()
@@ -59,122 +56,110 @@ class Permission
         return $this->id;
     }
 
-    public function isSellDrinks(): ?bool
+    public function isIsSellDrinks(): ?bool
     {
-        return $this->sellDrinks;
+        return $this->is_sellDrinks;
     }
 
-    public function setSellDrinks(bool $sellDrinks): self
+    public function setIsSellDrinks(bool $is_sellDrinks): self
     {
-        $this->sellDrinks = $sellDrinks;
+        $this->is_sellDrinks = $is_sellDrinks;
 
         return $this;
     }
 
-    public function isSaleVitaminBar(): ?bool
+    public function isIsSaleVitaminBar(): ?bool
     {
-        return $this->saleVitaminBar;
+        return $this->is_saleVitaminBar;
     }
 
-    public function setSaleVitaminBar(bool $saleVitaminBar): self
+    public function setIsSaleVitaminBar(bool $is_saleVitaminBar): self
     {
-        $this->saleVitaminBar = $saleVitaminBar;
+        $this->is_saleVitaminBar = $is_saleVitaminBar;
 
         return $this;
     }
 
-    public function isManageSchedule(): ?bool
+    public function isIsManageSchedule(): ?bool
     {
-        return $this->manageSchedule;
+        return $this->is_manageSchedule;
     }
 
-    public function setManageSchedule(bool $manageSchedule): self
+    public function setIsManageSchedule(bool $is_manageSchedule): self
     {
-        $this->manageSchedule = $manageSchedule;
+        $this->is_manageSchedule = $is_manageSchedule;
 
         return $this;
     }
 
-    public function isSendNewsletter(): ?bool
+    public function isIsSendNewsletter(): ?bool
     {
-        return $this->sendNewsletter;
+        return $this->is_sendNewsletter;
     }
 
-    public function setSendNewsletter(bool $sendNewsletter): self
+    public function setIsSendNewsletter(bool $is_sendNewsletter): self
     {
-        $this->sendNewsletter = $sendNewsletter;
+        $this->is_sendNewsletter = $is_sendNewsletter;
 
         return $this;
     }
 
-    public function isLockerRoom(): ?bool
+    public function isIsLockerRoom(): ?bool
     {
-        return $this->lockerRoom;
+        return $this->is_lockerRoom;
     }
 
-    public function setLockerRoom(bool $lockerRoom): self
+    public function setIsLockerRoom(bool $is_lockerRoom): self
     {
-        $this->lockerRoom = $lockerRoom;
+        $this->is_lockerRoom = $is_lockerRoom;
 
         return $this;
     }
 
-    public function isShower(): ?bool
+    public function isIsShower(): ?bool
     {
-        return $this->shower;
+        return $this->is_shower;
     }
 
-    public function setShower(bool $shower): self
+    public function setIsShower(bool $is_shower): self
     {
-        $this->shower = $shower;
+        $this->is_shower = $is_shower;
 
         return $this;
     }
 
-    public function isSportsCoach(): ?bool
+    public function isIsSportsCoach(): ?bool
     {
-        return $this->sportsCoach;
+        return $this->is_sportsCoach;
     }
 
-    public function setSportsCoach(bool $sportsCoach): self
+    public function setIsSportsCoach(bool $is_sportsCoach): self
     {
-        $this->sportsCoach = $sportsCoach;
+        $this->is_sportsCoach = $is_sportsCoach;
 
         return $this;
     }
 
-    public function isAppFitnessDrive(): ?bool
+    public function isIsAppFitnessDrive(): ?bool
     {
-        return $this->appFitnessDrive;
+        return $this->is_appFitnessDrive;
     }
 
-    public function setAppFitnessDrive(bool $appFitnessDrive): self
+    public function setIsAppFitnessDrive(bool $is_appFitnessDrive): self
     {
-        $this->appFitnessDrive = $appFitnessDrive;
+        $this->is_appFitnessDrive = $is_appFitnessDrive;
 
         return $this;
     }
 
-    public function isShopFitnessDrive(): ?bool
+    public function isIsShopFitnessDrive(): ?bool
     {
-        return $this->shopFitnessDrive;
+        return $this->is_shopFitnessDrive;
     }
 
-    public function setShopFitnessDrive(bool $shopFitnessDrive): self
+    public function setIsShopFitnessDrive(bool $is_shopFitnessDrive): self
     {
-        $this->shopFitnessDrive = $shopFitnessDrive;
-
-        return $this;
-    }
-
-    public function isSaleOtherProducts(): ?bool
-    {
-        return $this->saleOtherProducts;
-    }
-
-    public function setSaleOtherProducts(bool $saleOtherProducts): self
-    {
-        $this->saleOtherProducts = $saleOtherProducts;
+        $this->is_shopFitnessDrive = $is_shopFitnessDrive;
 
         return $this;
     }
@@ -191,7 +176,7 @@ class Permission
     {
         if (!$this->structures->contains($structure)) {
             $this->structures->add($structure);
-            $structure->addPerm($this);
+            $structure->addPermission($this);
         }
 
         return $this;
@@ -200,7 +185,7 @@ class Permission
     public function removeStructure(Structure $structure): self
     {
         if ($this->structures->removeElement($structure)) {
-            $structure->removePerm($this);
+            $structure->removePermission($this);
         }
 
         return $this;

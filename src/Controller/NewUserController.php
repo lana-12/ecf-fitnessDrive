@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Client;
 use App\Entity\User;
-use App\Form\ClientType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -36,7 +34,7 @@ class NewUserController extends AbstractController
      * For create and Edit NewUser 
      */
 
-    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null, Client $client): Response
+    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null): Response
     {
         if(!$user){
             $user = new User();

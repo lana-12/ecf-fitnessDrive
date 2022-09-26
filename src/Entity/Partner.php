@@ -2,37 +2,34 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
+use App\Repository\PartnerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ClientRepository::class)]
-#[ORM\Table(name: '`clients`')]
-class Client
+#[ORM\Entity(repositoryClass: PartnerRepository::class)]
+#[ORM\Table(name: '`partners`')]
+class Partner
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    #[ORM\Column(length: 50)]
+    private ?string $name_partner = null;
 
     #[ORM\Column]
     private ?int $phone = null;
 
     #[ORM\Column]
-    private bool $isActive;
+    private ?bool $is_active = null;
 
-
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Structure::class),]
-    private Collection $structures;
-
-    #[ORM\ManyToOne(inversedBy: 'client')]
-    #[ORM\JoinColumn(name:'user_id', referencedColumnName:'id')]
+    #[ORM\OneToOne(inversedBy: 'partner', cascade: ['persist', 'remove'])]
     private ?User $user = null;
+
+    #[ORM\OneToMany(mappedBy: 'partner', targetEntity: Structure::class)]
+    private Collection $structures;
 
     public function __construct()
     {
@@ -44,18 +41,17 @@ class Client
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNamePartner(): ?string
     {
-        return $this->name;
+        return $this->name_partner;
     }
 
-    public function setName(string $name): self
+    public function setNamePartner(string $name_partner): self
     {
-        $this->name = $name;
+        $this->name_partner = $name_partner;
 
         return $this;
     }
-
 
     public function getPhone(): ?int
     {
@@ -69,31 +65,29 @@ class Client
         return $this;
     }
 
-    public function getIsActive(): ?bool
+    public function isIsActive(): ?bool
     {
-        return $this->active;
+        return $this->is_active;
     }
 
-    public function setIsActive(bool $active): self
+    public function setIsActive(bool $is_active): self
     {
-        $this->active = $active;
+        $this->is_active = $is_active;
 
         return $this;
     }
 
-
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getUser(): ?User
     {
-        return $this->createdAt;
+        return $this->user;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setUser(?User $user): self
     {
-        $this->createdAt = $createdAt;
+        $this->user = $user;
 
         return $this;
     }
-
 
     /**
      * @return Collection<int, Structure>
@@ -107,7 +101,7 @@ class Client
     {
         if (!$this->structures->contains($structure)) {
             $this->structures->add($structure);
-            $structure->setClient($this);
+            $structure->setPartner($this);
         }
 
         return $this;
@@ -117,22 +111,10 @@ class Client
     {
         if ($this->structures->removeElement($structure)) {
             // set the owning side to null (unless already changed)
-            if ($structure->getClient() === $this) {
-                $structure->setClient(null);
+            if ($structure->getPartner() === $this) {
+                $structure->setPartner(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }

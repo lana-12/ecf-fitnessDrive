@@ -15,7 +15,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
 #[UniqueEntity(fields:'email', message:'L\'email que vous avez indiqué est déjà utiliser')]
-
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -23,12 +22,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $username = null;
 
-    #[ORM\Column(length: 254, unique:true)]
-    // #[Assert\Email()]
+    #[ORM\Column(length: 255, unique:true)]
     private ?string $email = null;
-
-
 
     #[ORM\Column(length: 60)]
     private ?string $password = null;
@@ -37,26 +35,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\EqualTo(propertyPath:'password', message:'Vous n\'avez pas tapé le même mot de passe')]
     private ?string $confirmPassword = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $username = null;
+    #[ORM\Column()]
+    private array $roles = [];
 
-    #[ORM\Column(type: "json")]
-    private ?array $roles = null;
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Partner $partner = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Client::class)]
-    
-    private Collection $client;
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Structure $structure = null;
 
-    public function __construct()
-    {
-        $this->client = new ArrayCollection();
-    }
-
-
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Admin $adminUser = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+    public function getUserIdentifier(): string
+    {
+        return(string) $this->email;
     }
 
     public function getEmail(): ?string
@@ -79,10 +88,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
         return $this;
     }
-
-
     public function getConfirmPassword(): ?string
     {
         return $this->confirmPassword;
@@ -95,29 +103,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUserIdentifier(): string
-    {
-        return(string) $this->email;
-    }
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     public function getRoles(): array
     {
-        
-        $roles = $this->roles;
-        // $roles[] ='ROLE_USER';
-
+        $roles = $this->roles; 
         return array_unique($roles);
+
     }
 
     public function setRoles(array $roles): self
@@ -127,46 +117,59 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPartner(): ?Partner
+    {
+        return $this->partner;
+    }
+
+    public function setPartner(?Partner $partner): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($partner === null && $this->partner !== null) {
+            $this->partner->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($partner !== null && $partner->getUser() !== $this) {
+            $partner->setUser($this);
+        }
+
+        $this->partner = $partner;
+
+        return $this;
+    }
+
+    public function getStructure(): ?Structure
+    {
+        return $this->structure;
+    }
+
+    public function setStructure(?Structure $structure): self
+    {
+        $this->structure = $structure;
+
+        return $this;
+    }
+
+    public function getAdminUser(): ?Admin
+    {
+        return $this->adminUser;
+    }
+
+    public function setAdminUser(?Admin $adminUser): self
+    {
+        $this->adminUser = $adminUser;
+
+        return $this;
+    }
 
     public function getSalt()
     {
 
     }
 
-
     public function eraseCredentials()
     {
         
     }
-
-    /**
-     * @return Collection<int, Client>
-     */
-    public function getClient(): Collection
-    {
-        return $this->client;
-    }
-
-    public function addClient(Client $client): self
-    {
-        if (!$this->client->contains($client)) {
-            $this->client->add($client);
-            $client->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClient(Client $client): self
-    {
-        if ($this->client->removeElement($client)) {
-            // set the owning side to null (unless already changed)
-            if ($client->getUser() === $this) {
-                $client->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-    
 }
