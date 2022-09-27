@@ -17,7 +17,7 @@ class Partner
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $name_partner = null;
+    private ?string $namePartner = null;
 
     #[ORM\Column]
     private ?int $phone = null;
@@ -43,12 +43,12 @@ class Partner
 
     public function getNamePartner(): ?string
     {
-        return $this->name_partner;
+        return $this->namePartner;
     }
 
-    public function setNamePartner(string $name_partner): self
+    public function setNamePartner(string $namePartner): self
     {
-        $this->name_partner = $name_partner;
+        $this->namePartner = $namePartner;
 
         return $this;
     }

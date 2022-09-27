@@ -33,14 +33,16 @@ class NewPartnerController extends AbstractController
     public function formpartner(Request $request, EntityManagerInterface $entityManager, PartnerRepository $partnerRepository): Response
     {
         $partner = new Partner();
-        
+        // $user->setRoles(['ROLE_PARTNER']);
         $form = $this->createForm(PartnerType::class, $partner);
         $form->handleRequest($request);
         
         //S'assure de la validité du form et que les valaurs sont cohérentes
         if ($form->isSubmitted() && $form->isValid()){
             
-            $partnerRepository->add($partner, true);
+
+
+
             $entityManager->persist($partner);
             $entityManager->flush();
             
@@ -51,9 +53,9 @@ class NewPartnerController extends AbstractController
             return $this->render('partner/partner.html.twig',[
                 'partner'=> $partner,
                 
+                
             ]);
             
-            // dd($partner);
             
             // pour afficher la suite sur une autre page
             //pour l'instant j'ai afficher

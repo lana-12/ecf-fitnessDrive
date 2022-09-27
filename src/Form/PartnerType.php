@@ -21,7 +21,7 @@ class PartnerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name_partner', TextType::class,[
+            ->add('namePartner', TextType::class,[
                 'label'=> 'Nom de la franchise',
                 'attr'=>[
                 'placeholder'=>'exemple Fitness Drive Montpellier...',
@@ -49,10 +49,10 @@ class PartnerType extends AbstractType
             ])
             
 
-            // ->add('is_active', CheckboxType::class,[
-            //     'label'=> 'Activer la franchise',
-            //     'required'=> false 
-            //     ])
+            ->add('is_active', CheckboxType::class,[
+                'label'=> 'Activer la franchise',
+                'required'=> false 
+                ])
                 
 
             ->add('user', UserType::class,[

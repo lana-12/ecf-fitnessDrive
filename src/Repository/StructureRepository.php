@@ -39,6 +39,17 @@ class StructureRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllStructure(): ?array
+    {
+        return
+        $this->createQueryBuilder('s')
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
+
+
 //    /**
 //     * @return Structure[] Returns an array of Structure objects
 //     */

@@ -22,7 +22,9 @@ class UserType extends AbstractType
             ->add('username', TextType::class,[
                 'required'=> true,
                 'row_attr' => ['class' => '', 'id' => 'username'],
-
+                'attr'=>[
+                    'placeholder'=>'exemple Durand',
+                    ],
                 'constraints'=> [
                     new NotBlank(['message'=> 'Le champ ne peut pas être vide !']),
                     new Length([
@@ -33,7 +35,9 @@ class UserType extends AbstractType
             ->add('email', EmailType::class,[
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'email'],
-
+                'attr'=>[
+                    'placeholder'=>'exemple durand@exemple.fr',
+                    ],
                 'constraints'=> [
                     new NotBlank(['message'=> 'Veuillez saisir un Email valide !']),
                     new Email(['mode'=>'html5', 'message'=>'L\'adresse {{ value }} n\'est pas valide']),

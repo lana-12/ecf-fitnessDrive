@@ -34,13 +34,13 @@ class NewUserController extends AbstractController
      * For create and Edit NewUser 
      */
 
-    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null): Response
+    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $mr, User $user=null): Response
     {
         if(!$user){
             $user = new User();
         }
+        $user->setRoles(['ROLE_PARTNER']);
         $form = $this->createForm(UserType::class, $user);
-        $user->setRoles(['ROLE_CLIENT']);
         
         
         $form->handleRequest($request);
@@ -60,12 +60,13 @@ class NewUserController extends AbstractController
             $entityManager->flush();
             
             $this->addFlash('success', 'Message envoyé');
-
+            $users = $user->getRoles();
 
             // pour afficher la suite sur une autre page
             //pour l'instant j'ai afficher
             return $this->render('user/index.html.twig',[
                 'user'=> $user,
+                'users'=> $users,
                 
             ]);
         }

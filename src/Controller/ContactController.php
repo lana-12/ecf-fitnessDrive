@@ -6,19 +6,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ *  
+ */
 
-#[Route('/partner')]
+#[Route('/contact')]
 
 
-class PartnerController extends AbstractController
+class ContactController extends AbstractController
 {
-    #[Route('/', name: 'app_partner')]
+    #[Route('/', name: 'app_contact')]
 
 
 
     public function index(): Response
     {
-        return $this->render('partner/partner.html.twig');
+        return $this->render('contact/contact.html.twig');
     }
 
 

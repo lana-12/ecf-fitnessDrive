@@ -39,6 +39,26 @@ class PartnerRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllPartner(): ?array
+    {
+        return
+        $this->createQueryBuilder('p')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findOneByName($name): array | Partner
+    {
+        return
+        $this->createQueryBuilder('p')
+            ->andWhere('p.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    
 //    /**
 //     * @return Partner[] Returns an array of Partner objects
 //     */

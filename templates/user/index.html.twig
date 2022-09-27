@@ -9,7 +9,10 @@
     <main>
         <h1>Response du form</h1>
 
-    <h2>Le nom est : </h2>
+
+        <h2>user</h2>
+
+    <h3>Le nom est : </h3>
         <p>{{ user.username }}</p>
 
     <h3>Son email est : </h3>
@@ -17,7 +20,22 @@
 
     <h3>Son password est :</h3>
         <p>{{ user.password }}</p>
+
+
         {{ dump(user) }}
+
+
+        {# <h2>partner</h2>
+
+    <h3>Le nom Franchise est : </h3>
+        <p>{{ partner.user.name_partner }}</p>
+
+    <h3>Son tel est : </h3>
+        <p>{{ partner.user.phone }}</p>
+
+    <h3>Actif</h3>
+        <p>{{ partner.user.is_active }}</p>
+        {{ dump(user) }} #}
 
 
 

@@ -1,0 +1,47 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %} Liste  | {{ parent() }} {% endblock %}
+
+{% block body %}
+{% block header %} {{ parent() }}  {% endblock  %}
+
+
+    <main>
+        <h1> {{titleList}} </h1>
+
+        <p>Il y a {{countPartners}} partenaires.</p>
+    
+        
+        <div class="d-flex justify-content-around flex-wrap container mt-5">
+        
+            {% for partner in partners %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+
+                        {% if partner %}
+                            <h5 class="card-title">{{partner.namePartner}}  </h5>
+                            <p class="">Gérer par {{partner.user.username}} </p>
+                        {% endif %}
+
+                        <p class="card-text">Ici la liste des structures avec <a href='{{ path('app_admin_show_structure') }}'>Voir détail</a> </p>
+                    
+                    </div>
+
+                    <div class="card-footer">
+                        <span><a href="mailto:{{partner.user.email}} ">{{partner.user.email}}<a></span>
+                        <span><a href="tel:{{partner.phone}} ">{{partner.phone}}<a></span>
+                    </div>
+
+
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+
+{% endblock %}
+    
+        
+    
+
+    
