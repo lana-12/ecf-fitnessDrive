@@ -162,11 +162,13 @@ class Structure
 
     public function setUser(?User $user): self
     {
+        //supprime le côté propriétaire de la relation si nécessaire
         // unset the owning side of the relation if necessary
         if ($user === null && $this->user !== null) {
             $this->user->setStructure(null);
         }
 
+        // définit le côté propriétaire de la relation si nécessaire
         // set the owning side of the relation if necessary
         if ($user !== null && $user->getStructure() !== $this) {
             $user->setStructure($this);

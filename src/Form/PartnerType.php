@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class PartnerType extends AbstractType
 {
@@ -57,10 +58,11 @@ class PartnerType extends AbstractType
 
             ->add('user', UserType::class,[
                 'label'=> 'Information du compte de connection du partenaire', 
+                'constraints'=> [
+                    new Valid(),
+                ]
+                
                 ])
-                // ->add('user', CollectionType::class,[
-                //     'entry_type'=> User::class,
-                //     ])
         ;
     }
 

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/index.html.twig' %}
 
 {% block title %}Création - Etape II | {{ parent() }}{% endblock %}
 
@@ -19,18 +19,21 @@
 
 
 {% block body %}
+{% block header %} {{parent()}} {% endblock  %} 
+{% block aside %} {{parent()}} {% endblock  %} 
 
-{{ parent()}}
+
 
 <main class="container">
 
-    <h2>Création du Compte Partner - Franchise</h2>
+    <h2>Création de la structure de la franchise</h2>
 
-    <p>faire un form </p>
+
 {# {{form_start(formUser)}} #}
-{{form_start(formpartner)}}
+{# {{form_start(formpartner)}}
 {{form_rest(formpartner)}}
-<button class="btn btn-primary mx-auto" type="submit"> Enregister</button>
+<button class="btn btn-success mx-auto" type="submit"> Enregister</button>
+<button class="btn btn-success mx-auto" type="submit"> Ajouter une structure</button> #}
 
 
 {# {{dump(formpartner)}} #}

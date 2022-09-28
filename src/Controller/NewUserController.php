@@ -53,8 +53,11 @@ class NewUserController extends AbstractController
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
+
+                    // pour modifier son mot de passe
                     $form->get('password')->getData()
                 )
+            
             );
             $entityManager->persist($user);
             $entityManager->flush();

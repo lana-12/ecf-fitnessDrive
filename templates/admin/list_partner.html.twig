@@ -24,12 +24,14 @@
                         {% endif %}
 
                         <p class="card-text">Ici la liste des structures avec <a href='{{ path('app_admin_show_structure') }}'>Voir détail</a> </p>
+                        <span><a href="mailto:{{partner.user.email}} ">{{partner.user.email}}<a></span>
+                        <span><a href="tel:{{partner.phone}} ">{{partner.phone}}<a></span>
                     
                     </div>
 
                     <div class="card-footer">
-                        <span><a href="mailto:{{partner.user.email}} ">{{partner.user.email}}<a></span>
-                        <span><a href="tel:{{partner.phone}} ">{{partner.phone}}<a></span>
+                        <a type="button" class="btn btn-success" href="#">Modifier<a>
+                        
                     </div>
 
 

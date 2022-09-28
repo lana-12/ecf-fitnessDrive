@@ -1,0 +1,46 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Création - Etape I | {{ parent() }}{% endblock %}
+
+{% block stylesheets %} 
+
+        {{ parent() }}
+        {# {{ encore_entry_link_tags('new_user') }} #}
+
+{% endblock %}
+
+{% block javascripts %}
+            {{ parent() }}
+        {# {{ encore_entry_script_tags('test') }}  #}
+{% endblock %}
+
+
+
+
+
+{% block body %}
+
+{% block header %} {{parent()}} {% endblock  %} 
+{% block aside %} {{parent()}} {% endblock  %} 
+
+<main class="container">
+
+    <h2>Création du Compte de la Franchise</h2>
+
+
+{# {{form_start(formUser)}} #}
+{{form_start(formpartner)}}
+{{form_rest(formpartner)}}
+<button class="btn btn-success mx-auto" type="submit"> Enregister</button>
+<button class="btn btn-success mx-auto" type="submit"> Ajouter une structure</button>
+
+
+{# {{dump(formpartner)}} #}
+
+
+</main> 
+{% endblock %}
+
+
+
+
