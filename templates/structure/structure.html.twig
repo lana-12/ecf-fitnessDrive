@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Struture| {{ parent() }}{% endblock %}
+
+
+
+{% block body %}
+
+{{ parent()}}
+
+<main class="container">
+
+    <h2>Bienvenue sur votre compte   "structure"</h2>
+
+    <p>Voici vos permissions</p>
+
+<h3>Le nom est : </h3>
+        <p>{{ structure.user.username }}</p>
+
+    <h3>Son email est : </h3>
+        <p>{{ structure.user.email }}</p>
+
+    <h3>Son password est :</h3>
+        <p>{{ structure.user.password }}</p>
+        <p>{{ structure.nameStructure }}</p>
+
+
+        {{ dump(structure) }}
+
+</main> 
+{% endblock %}
+
+
+
+

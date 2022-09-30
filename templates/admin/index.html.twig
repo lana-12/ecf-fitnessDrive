@@ -8,91 +8,109 @@
 
     {% block header %} 
         <header>
-            <nav class="navbar navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#"><h2>Fitness Drive</h2></a>
-                    {# AU CLIC REVENIR SUR ACCUEIL  #}
-                    {# <a href="{{ path('app_logout') }}" class="nav-link btn btn-success btn-sm" type="button">Déconnection</a> #}
-                    <a href="{{ path('app_logout') }}" class="btn btn-success btn-sm" type="button">Déconnection</a>            
-                </div>
-            </nav>
-        </header>
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#"><h1>Fitness Drive</h1></a>
+
+                    {% if app.user %}
+                        Bienvenue
+                        {{ app.user.username }}
+                                
+                    {% endif %}
+
+
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="{{ path('app_admin') }}">Home</a>
+                                    </li>
+
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Compte de connexion
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="{{ path('user_new') }}">Créer</a></li>
+
+                                            <li><a class="dropdown-item" href="#">Modifier</a></li>
+                                        </ul>
+                                    </li>                                    
+                                    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Franchise
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="{{ path('new_partner') }}">Créer</a></li>
+                                            {# <li><hr class="dropdown-divider"></li> #}
+                                            <li><a class="dropdown-item" href="#">Modifier</a></li>
+                                        </ul>
+                                    </li>                                    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Structure
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="{{ path('new_structure') }}">Créer</a></li>
+                                            {# <li><hr class="dropdown-divider"></li> #}
+                                            <li><a class="dropdown-item" href="#">Modifier</a></li>
+                                        </ul>
+                                    </li>                                    
+                                    <li class="nav-item">
+                                    <a href="{{ path('app_logout') }}" class="nav-link">Déconnection</a>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+                                
+
     {% endblock  %} 
-    {% block aside %}
-    <aside class="d-flex">
-        <button class="btn btn-success btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark" aria-controls="offcanvasDark"><i class="bi bi-house-door"></i></button>
-        <nav class="d-flex justify-content-end">
-                    <div class="col-10">
-                        <form class="d-flex ">
-                            <input class="form-control me-2" type="search" placeholder="Text ici" aria-label="Search">
-                            <button class="btn btn-success btn-sm" type="submit">Rechercher</button>
-                        </form>
-                    </div>
-                </nav>
-
-        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasDark" aria-labelledby="offcanvasDarkLabel">
-          <div class="offcanvas-header">
-
-
-            <h4 class="offcanvas-title" id="offcanvasDarkLabel">Menu</h4>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-">
-                  <h2> Fait mais à revoir </h2>
-                    <ol>
-                        <h5>Franchise</h5>
-                          <li><a href="{{ path('app_admin_listpartner') }}"> Accéder à la liste des Franchises</a> </li>
-                          <li><a href="{{ path('app_admin_show_structure') }}"> Accéder à la liste des structures</a> </li>
-
-                        <h5>Structure</h5>
-                  <h2> A faire </h2>
-
-                        <li> Navbar => mettre le slogan + btn + LOGO </li>
-                        <li> SideBar => enlever le btn et en frist mobile => S OUVRE SUR LE COTE  = BARRE LATERAL </li>
-
-                        <li><a href="{{ path('app_admin_listpartner') }}"> Modifier les Franchises</a> </li>
-                        <li> <a href="{{ path('app_admin_listpartner') }}"> Modifier les structures</a></li>
-                        <li><a href="{{ path('app_new_partner') }}"> Ajouter une nouvelle Franchise</a> </li>
-                        <li><a href="{{ path('app_new_structure') }}"> Ajouter une nouvelle Structures</a> </li> 
-                    </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </aside>
-
-    {% endblock  %} 
-
 
 
     <main class="container-fluid">
 
+        <div class=" d-flex justify-content-around">
+            <p>Nombre Total de Clients = {{ countPartners }}   </p>
+            <p>Nombre Total de Structures =  {{ countStructures }}  </p>
+        </div>
 
-          <div class=" d-flex justify-content-around">
-              <p>Nombre Total de Clients = {{ countPartners }}   </p>
-              <p>Nombre Total de Structures =  {{ countStructures }}  </p>
-          </div>
-
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col">
-                <div class="d-flex ">
-                  <h2>Listes des Franchises </h2>
-                      <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Franchise Active</label>
-                      </div>
-                </div>
-                    <ol>
-                        <li></li>
-                    </ol>
-              </div>
+        <nav class="d-flex justify-content-end">
+            <div class="col-10">
+                <form class="d-flex ">
+                    <input class="form-control me-2" type="search" placeholder="Text ici" aria-label="Search">
+                    <button class="btn btn-success btn-sm" type="submit">Rechercher</button>
+                </form>
             </div>
-          </div>
+        </nav>
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex justify-content-around ">
+                        <h2> {{ titleIndex }}</h2>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Franchise Active</label>
+                            </div>
+                    </div>
+
+                {% include "admin/_listpartner.html.twig" %}
+
+                </div>
+            </div>
+        </div>
     </main>
 
 {% endblock %}
+

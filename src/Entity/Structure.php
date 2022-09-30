@@ -17,7 +17,7 @@ class Structure
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $name_structure = null;
+    private ?string $nameStructure = null;
 
     #[ORM\Column(length: 100)]
     private ?string $address = null;
@@ -29,7 +29,7 @@ class Structure
     private ?string $city = null;
 
     #[ORM\Column]
-    private ?int $phone = null;
+    private ?string $phone = null;
 
     #[ORM\Column]
     private ?bool $is_active = null;
@@ -40,14 +40,14 @@ class Structure
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $short_description = null;
 
-    #[ORM\OneToOne(mappedBy: 'structure', cascade: ['persist', 'remove'])]
-    private ?User $user = null;
-
     #[ORM\ManyToOne(inversedBy: 'structures')]
     private ?Partner $partner = null;
 
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
     private Collection $permissions;
+
+    #[ORM\ManyToOne(inversedBy: 'structure', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -61,12 +61,12 @@ class Structure
 
     public function getNameStructure(): ?string
     {
-        return $this->name_structure;
+        return $this->nameStructure;
     }
 
-    public function setNameStructure(string $name_structure): self
+    public function setNameStructure(string $nameStructure): self
     {
-        $this->name_structure = $name_structure;
+        $this->nameStructure = $nameStructure;
 
         return $this;
     }
@@ -107,12 +107,12 @@ class Structure
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
 
@@ -155,29 +155,6 @@ class Structure
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        //supprime le côté propriétaire de la relation si nécessaire
-        // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
-            $this->user->setStructure(null);
-        }
-
-        // définit le côté propriétaire de la relation si nécessaire
-        // set the owning side of the relation if necessary
-        if ($user !== null && $user->getStructure() !== $this) {
-            $user->setStructure($this);
-        }
-
-        $this->user = $user;
-
-        return $this;
-    }
 
     public function getPartner(): ?Partner
     {
@@ -211,6 +188,18 @@ class Structure
     public function removePermission(Permission $permission): self
     {
         $this->permissions->removeElement($permission);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -20,23 +20,22 @@
 
 {% block body %}
 {% block header %} {{parent()}} {% endblock  %} 
-{% block aside %} {{parent()}} {% endblock  %} 
 
 
 
 <main class="container">
 
-    <h2>Création de la structure de la franchise</h2>
+    <h2>Création de la structure</h2>
 
 
 {# {{form_start(formUser)}} #}
-{# {{form_start(formpartner)}}
-{{form_rest(formpartner)}}
+{{form_start(formStructure)}}
+{{form_rest(formStructure)}}
 <button class="btn btn-success mx-auto" type="submit"> Enregister</button>
-<button class="btn btn-success mx-auto" type="submit"> Ajouter une structure</button> #}
+{# <button class="btn btn-success mx-auto" type="submit"> Ajouter une Structure</button> #}
 
 
-{# {{dump(formpartner)}} #}
+
 
 
 </main> 

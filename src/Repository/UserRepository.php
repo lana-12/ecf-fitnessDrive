@@ -64,7 +64,7 @@ public function findByWithQueryBuilder(string $username, string $email=null): ?U
         ->where('u.username = :username')
         ->setParameter('username', $username)
         ->orderBy('u.id', 'DESC')
-        ->setMaxResults(1)
+        ->setMaxResults(10)
     ;
     if($email !== null){
         $queryBuilderUsername
@@ -78,7 +78,8 @@ public function findByWithQueryBuilder(string $username, string $email=null): ?U
 //getResult= collection entity = vide ou 1 à n
 //getOneOrNullresult = 1 ou aucun resultat
 //getSingleresult = 1 seul resultat si 0 une exception lancé
-    return $queryUsername->getOneOrNullResult();
+    return $queryUsername->getResult();
+    // return $queryUsername->getOneOrNullResult();
     
 }
 

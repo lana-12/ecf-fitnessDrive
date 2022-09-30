@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Admin;
 use App\Entity\Partner;
+use App\Entity\Structure;
 use App\Entity\User;
 use App\Repository\AdminRepository;
 use App\Repository\PartnerRepository;
@@ -26,84 +27,74 @@ class AdminUserController extends AbstractController
      * @return Response
      */
     #[Route('/', name: 'app_admin')]
-    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo ) : Response
+    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, ManagerRegistry $doctrine ) : Response
     {
+        //Methode avec PartnerRepository => recup tt les partners
+        $partners = $partnerRepo->findAllPartner();
+
+        //Methode avec ManagerRegistry => recup tt les partners
+        // $repository = $doctrine->getRepository(Partner::class);
+        // $partners = $repository->findAll();
+
+        //Methode avec ManagerRegistry => recup tt les structures
+        $structures = $structureRepo->findAllStructure();
 
         // A VOIR SI JE NE PEUX PAS LES METTRE DS REPOSITORY
         // display how many partners
-        $partners = $partnerRepo->findAllPartner();
         $countPartners = count($partners);
-
         // display how many structures
-        $structures = $structureRepo->findAllStructure();
         $countStructures = count($structures);
 
+
         return $this->render('admin/index.html.twig',[
-            'titleIndex'=> 'Page des Administrateurs',
+            'titleIndex'=> 'Listes des Franchises',
             'countPartners'=> $countPartners,
             'countStructures'=> $countStructures,
+            'partners'=> $partners,
 
         ]);
     }
 
-
-    /**
-     * Display List + count
-     *
-     * @param AdminRepository $adminRepository
-     * @return Response
-     */
-    #[Route('/listpartner', name: 'app_admin_listpartner')]
-    public function displayList(ManagerRegistry $doctrine,PartnerRepository $partnerRepo) : Response
+    #[Route('/showpartner/{id<\d+>}', name: 'show-partner')]
+    public function showPartner(ManagerRegistry $doctrine, int $id) : Response
     {
-
-        //Methode ds repository queryBuilder mettre ds signature (AdminRepository $adminRepository)
         $repository = $doctrine->getRepository(Partner::class);
 
-        $partners = $repository->findAll();
-        dump($partners);
-        // Methode display count
-        $countPartners= count($partners);
-        
+        $partner = $repository->find($id);
 
-
-
-        
-
-        return $this->render('admin/list_partner.html.twig',[
-            'titleList'=> 'Liste des Franchises',
-            'countPartners'=> $countPartners,
-            'partners'=> $partners,
-            
+        return $this->render('admin/showpartner.html.twig',[
+            'partner'=> $partner,
         ]);
-    }
 
-    
-    #[Route('/show', name: 'app_admin_show_structure')]
-    public function showStructure() : Response
+    }
+    #[Route('/showstructure/{id<\d+>}', name: 'show-structure')]
+    public function showStructure(ManagerRegistry $doctrine, int $id) : Response
     {
-        
+        //cette route ne marche pas, faut que je récup id qui correspond
+        $repository = $doctrine->getRepository(Structure::class);
 
-        return $this->render('admin/show_structure.html.twig',[
-            
+        $structure = $repository->find($id);
+
+
+        return $this->render('admin/showstructure.html.twig',[
+            'structure'=> $structure,
         ]);
 
     }
-
 
     /**
-     * Display one 
+     * Update Partner
      */
-    #[Route('/findadmin', name: 'app_admin_findadmin')]
-    public function findByName(AdminRepository $adminRepository) : Response
+    #[Route('/updatePartner/{id<\d+>}', name: 'updatePartner')]
+    public function findByName(PartnerRepository $partnerRepo, int $id) : Response
     {
         //Methode ds repository queryBuilder mettre ds signature (AdminRepository $adminRepository)
-        $admin = $adminRepository->findOneByName('Admin02');
-        dump($admin);
+        $partner = $partnerRepo->findBy($id) ;
+        dump($partner);
 
-        return $this->render('admin/admin.html.twig',[
+        return $this->render('admin/formPartner.html.twig',[
             'titleList'=> 'Admin',
-            'admin'=> $admin,
+            'admin'=> $partner,
         ]);
 
     }

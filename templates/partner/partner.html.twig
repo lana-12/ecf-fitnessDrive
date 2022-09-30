@@ -5,7 +5,7 @@
 
 
 {% block body %}
-
+{# {% block header %} {{ parent()}} {% endblock %} #}
 {{ parent()}}
 
 <main class="container">
@@ -14,7 +14,7 @@
 
     <p>Voici vos structures et vos permissions</p>
 
-
+{# {{dump(partner)}} #}
 
 </main> 
 {% endblock %}

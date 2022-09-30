@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/index.html.twig' %}
 
 {% block title %}Création - Etape I | {{ parent() }}{% endblock %}
 
@@ -14,7 +14,7 @@
         {{ encore_entry_script_tags('app') }} 
 {% endblock %}
 {% block body %}
-{{parent()}}
+{% block header %} {{parent()}} {% endblock  %}  
 
     <main class="container">
         {% if editMode %}

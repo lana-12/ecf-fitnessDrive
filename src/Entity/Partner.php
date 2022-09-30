@@ -20,16 +20,17 @@ class Partner
     private ?string $namePartner = null;
 
     #[ORM\Column]
-    private ?int $phone = null;
+    private ?string $phone = null;
 
     #[ORM\Column]
     private ?bool $is_active = null;
 
-    #[ORM\OneToOne(inversedBy: 'partner', cascade: ['persist', 'remove'])]
-    private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'partner', targetEntity: Structure::class)]
     private Collection $structures;
+
+    #[ORM\ManyToOne(inversedBy: 'partner', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -53,12 +54,12 @@ class Partner
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
 
@@ -77,17 +78,6 @@ class Partner
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Structure>
@@ -115,6 +105,18 @@ class Partner
                 $structure->setPartner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -9,8 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -19,7 +20,9 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
             ->add('username', TextType::class,[
+                'label'=> 'Nom',
                 'required'=> true,
                 'row_attr' => ['class' => '', 'id' => 'username'],
                 'attr'=>[
@@ -33,6 +36,7 @@ class UserType extends AbstractType
                 ])  
                 
             ->add('email', EmailType::class,[
+                'label'=> 'Email',
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'email'],
                 'attr'=>[
@@ -42,12 +46,15 @@ class UserType extends AbstractType
                     new NotBlank(['message'=> 'Veuillez saisir un Email valide !']),
                     new Email(['mode'=>'html5', 'message'=>'L\'adresse {{ value }} n\'est pas valide']),
                 ]
-            ])
+                ])
 
             ->add('password', PasswordType::class,[
+                'label'=> 'Mot de passe',
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'id_password'],                
-                
+                'attr' => [
+                    'autocomplete' => 'new-password'
+                ],
                 'constraints'=> [
                         new NotBlank(['message'=> 'Veuillez saisir un mot de passe!']),
                         new Length([
@@ -56,28 +63,43 @@ class UserType extends AbstractType
                 ])
                 
             ->add('confirmPassword', PasswordType::class,[
+                'label'=> 'Confirmation du mot de passe',
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'mdpUser'],                
-
                 'constraints'=> [
                         new NotBlank(['message'=> 'Veuillez saisir le même mot de passe!']),
                         new Length([
                             'min'=> 8, 'max'=> 100, 'minMessage' =>'Votre mot de passe doit contenir au moins {{ limit }} caractères',]),
                         // new EqualTo(['propertyPath'=>'password', 'message'=>'Vous n\'avez pas tapé le même mot de passe'])
                     ]
+                ])
 
-            ])
 
+            ->add('roles', ChoiceType::class,[
+                'required'=> true,
+                'label'=> 'Type d\'utilisateur',
+                'placeholder'=>'Choisissez ...',
+                'choices' => [
+                    'Franchise' => 'ROLE_PARTNER',
+                    'Structure'=> 'ROLE_STRUCTURE'
+                ],
+        ]);
 
-            // ->add('role', ChoiceType::class,[
-            //     'label'=> 'Nom',
-            //     'required'=> true,
-            //     'choices' => [
-            //         'Franchise' =>'',
-            //         'Structure'=> ''
-            //     ]])
+        // Permet la manipulation an array
+            $builder->get('roles')
+                    ->addModelTransformer(new CallbackTransformer(
+                        function ($rolesAsArray) {
+                    // transform the array to a string
+                        return implode(', ', $rolesAsArray);
+                },
+                        function ($rolesAsString) {
+                    // transform the string back to an array
+                        return explode(', ', $rolesAsString);
+                }
+            ));
+                    
 
-        ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)

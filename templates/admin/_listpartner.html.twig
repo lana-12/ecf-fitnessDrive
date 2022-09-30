@@ -1,0 +1,33 @@
+
+        <div class="d-flex justify-content-around flex-wrap container mt-5">
+        
+            {% for partner in partners %}
+                {% if partner.isIsActive  %}
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+
+                            {% if partner %}
+                                <h5 class="card-title">{{partner.namePartner}}  </h5>
+                                <p class="">Gérer par {{partner.user.username}} </p>
+                            {% endif %}
+
+                            <p class="card-text">Ici la liste des structures avec <a href='#'>Voir détail</a> </p>
+                            <span><a href="mailto:{{partner.user.email}} ">{{partner.user.email}}<a></span>
+                            <span><a href="tel:{{partner.phone}} ">{{partner.phone}}<a></span>
+                        
+                        </div>
+
+                        <div class="card-footer">
+                            <a href=" {{ path( 'show-partner', {'id': partner.id}) }} " type="button" class="btn-sm btn-success">Détail</a>
+                            <a href=" # " type="button" class="btn-sm btn-warning">Modifier</a>                        
+                        </div>
+                    </div>
+                {% else %}
+                    <p>Oups, une erreur est survenue !!!</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+    
+
+    

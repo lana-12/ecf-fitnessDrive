@@ -21,7 +21,7 @@ class PartnerRepository extends ServiceEntityRepository
         parent::__construct($registry, Partner::class);
     }
 
-    public function save(Partner $entity, bool $flush = false): void
+    public function add(Partner $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -45,8 +45,12 @@ class PartnerRepository extends ServiceEntityRepository
         $this->createQueryBuilder('p')
             ->getQuery()
             ->getResult()
+
         ;
     }
+
+
+
     public function findOneByName($name): array | Partner
     {
         return

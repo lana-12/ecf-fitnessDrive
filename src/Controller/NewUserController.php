@@ -27,19 +27,18 @@ class NewUserController extends AbstractController
     }
 
 // AVOIR SI JE LE MET DS SECURITY  CONTROLLER
-    #[Route('/new', name: 'app_user_new')]
-    #[Route('/{id}/edit', name: 'app_user_edit')]
+    #[Route('/new', name: 'user_new')]
+    #[Route('/{id}/edit', name: 'user_edit')]
 
     /**
      * For create and Edit NewUser 
      */
 
-    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $mr, User $user=null): Response
+    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $mr, User $user=null, UserRepository $userRepository): Response
     {
         if(!$user){
             $user = new User();
         }
-        $user->setRoles(['ROLE_PARTNER']);
         $form = $this->createForm(UserType::class, $user);
         
         
@@ -57,24 +56,22 @@ class NewUserController extends AbstractController
                     // pour modifier son mot de passe
                     $form->get('password')->getData()
                 )
-            
+
             );
             $entityManager->persist($user);
             $entityManager->flush();
             
             $this->addFlash('success', 'Message envoyé');
-            $users = $user->getRoles();
 
             // pour afficher la suite sur une autre page
             //pour l'instant j'ai afficher
             return $this->render('user/index.html.twig',[
                 'user'=> $user,
-                'users'=> $users,
                 
             ]);
         }
         
-        return $this->render('user/formUser.html.twig',[
+        return $this->render('admin/formUser.html.twig',[
             'formUser'=>$form->createView(),
 
             //Variable in editMode

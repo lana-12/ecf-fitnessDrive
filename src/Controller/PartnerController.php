@@ -12,12 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PartnerController extends AbstractController
 {
-    #[Route('/', name: 'app_partner')]
+    #[Route('/show', name: 'app_partner_show')]
 
 
 
     public function index(): Response
     {
+        
+
+
+
         return $this->render('partner/partner.html.twig');
     }
 

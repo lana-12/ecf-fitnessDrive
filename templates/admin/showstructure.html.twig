@@ -1,0 +1,39 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Liste  | {{ parent() }} {% endblock %}
+
+{% block body %} 
+{% block header %} {{parent()}}  {% endblock  %}
+    <main class='container'>
+        <h1> Détail de la Structure  </h1>
+    <div class="d-flex justify-content-center mt-5">
+        
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+
+                        {% if structure %}
+                            <h5 class="card-title">{{structure.namestructure}}  </h5>
+                            <p class="">Gérer par {{structure.user.username}} </p>
+                        {% endif %}
+
+                        {# <p class="card-text">Ici la liste des structures avec <a href='{{ path('show-structure') }}'>Voir détail</a> </p> #}
+                        <span><a href="mailto:{{structure.user.email}} ">{{structure.user.email}}<a></span>
+                        <span><a href="tel:{{structure.phone}} ">{{structure.phone}}<a></span>
+                    
+                    </div>
+
+                    <div class="card-footer">
+                        <a type="button" class="btn btn-warning" href="#">Modifier</a>
+                    </div>
+                </div>
+        </div>
+
+    </main>
+
+
+{% endblock %}
+    
+        
+    
+
+    

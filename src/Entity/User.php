@@ -38,14 +38,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column()]
     private array $roles = [];
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Partner $partner = null;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Partner::class, cascade: ['persist', 'remove'])]
+    private Collection $partner;
 
-    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Structure $structure = null;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Structure::class, cascade: ['persist', 'remove'])]
+    private Collection $structure;
 
-    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Admin $adminUser = null;
+    public function __construct()
+    {
+        $this->partner = new ArrayCollection();
+        $this->structure = new ArrayCollection();
+    }
+
+    
 
     public function getId(): ?int
     {
@@ -117,51 +122,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPartner(): ?Partner
-    {
-        return $this->partner;
-    }
-
-    public function setPartner(?Partner $partner): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($partner === null && $this->partner !== null) {
-            $this->partner->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($partner !== null && $partner->getUser() !== $this) {
-            $partner->setUser($this);
-        }
-
-        $this->partner = $partner;
-
-        return $this;
-    }
-
-    public function getStructure(): ?Structure
-    {
-        return $this->structure;
-    }
-
-    public function setStructure(?Structure $structure): self
-    {
-        $this->structure = $structure;
-
-        return $this;
-    }
-
-    public function getAdminUser(): ?Admin
-    {
-        return $this->adminUser;
-    }
-
-    public function setAdminUser(?Admin $adminUser): self
-    {
-        $this->adminUser = $adminUser;
-
-        return $this;
-    }
+    
 
     public function getSalt()
     {
@@ -171,5 +132,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         
+    }
+
+    /**
+     * @return Collection<int, Partner>
+     */
+    public function getPartner(): Collection
+    {
+        return $this->partner;
+    }
+
+    public function addPartner(Partner $partner): self
+    {
+        if (!$this->partner->contains($partner)) {
+            $this->partner->add($partner);
+            $partner->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartner(Partner $partner): self
+    {
+        if ($this->partner->removeElement($partner)) {
+            // set the owning side to null (unless already changed)
+            if ($partner->getUser() === $this) {
+                $partner->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Structure>
+     */
+    public function getStructure(): Collection
+    {
+        return $this->structure;
+    }
+
+    public function addStructure(Structure $structure): self
+    {
+        if (!$this->structure->contains($structure)) {
+            $this->structure->add($structure);
+            $structure->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStructure(Structure $structure): self
+    {
+        if ($this->structure->removeElement($structure)) {
+            // set the owning side to null (unless already changed)
+            if ($structure->getUser() === $this) {
+                $structure->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

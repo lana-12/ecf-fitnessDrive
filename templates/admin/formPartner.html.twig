@@ -20,8 +20,7 @@
 
 {% block body %}
 
-{% block header %} {{parent()}} {% endblock  %} 
-{% block aside %} {{parent()}} {% endblock  %} 
+{% block header %} {{parent()}} {% endblock  %}  
 
 <main class="container">
 
@@ -32,7 +31,6 @@
 {{form_start(formpartner)}}
 {{form_rest(formpartner)}}
 <button class="btn btn-success mx-auto" type="submit"> Enregister</button>
-<button class="btn btn-success mx-auto" type="submit"> Ajouter une structure</button>
 
 
 {# {{dump(formpartner)}} #}
