@@ -1,0 +1,36 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Liste Admin | {{ parent() }} {% endblock %}
+
+{% block stylesheets %} 
+
+        {{ parent() }}
+        {# {{ encore_entry_link_tags('new_user') }} #}
+
+{% endblock %}
+
+{% block javascripts %}
+            {{ parent() }}
+        {# {{ encore_entry_script_tags('test') }}  #}
+{% endblock %}
+
+
+
+
+
+{% block body %}
+
+{% block header %} {{parent()}} {% endblock  %}  
+
+
+    <main class="container-fluid">
+
+        <h1>Liste des Administrateurs</h1>
+        {# <p>{{name}}</p> #}
+<pre>
+    {{ dump(name) }}
+</pre>
+    </main>
+
+{% endblock %}
+

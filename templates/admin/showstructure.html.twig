@@ -11,22 +11,25 @@
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
 
-                        {% if structure %}
-                            <h5 class="card-title">{{structure.namestructure}}  </h5>
+                        
+                            <h5 class="card-title">Fitness Drive {{structure.partner.namePartner}} - {{structure.namestructure}}  </h5>
                             <p class="">Gérer par {{structure.user.username}} </p>
-                        {% endif %}
 
-                        {# <p class="card-text">Ici la liste des structures avec <a href='{{ path('show-structure') }}'>Voir détail</a> </p> #}
-                        <span><a href="mailto:{{structure.user.email}} ">{{structure.user.email}}<a></span>
-                        <span><a href="tel:{{structure.phone}} ">{{structure.phone}}<a></span>
-                    
-                    </div>
+                        <p class="card-text">  
+                            <ul>
+                                <li><a href="mailto:{{structure.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{structure.user.email}}<a></li>
+                                <li><a href="tel:{{structure.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{structure.phone}}<a></li>
+                            </ul>
+                        </p>
+                    </div> 
 
                     <div class="card-footer">
-                        <a type="button" class="btn btn-warning" href="#">Modifier</a>
+                        <a href=" # " type="button" class="btn-sm btn-warning">Modifier</a>                      
                     </div>
                 </div>
         </div>
+
+        <h2>Liste des permissions</h2>
 
     </main>
 

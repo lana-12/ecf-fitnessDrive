@@ -9,12 +9,12 @@ use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
 #[UniqueEntity(fields:'email', message:'L\'email que vous avez indiqué est déjà utiliser')]
+#[UniqueEntity(fields:'username', message:'Le nom que vous avez indiqué est déjà utiliser')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -22,7 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, unique:true)]
     private ?string $username = null;
 
     #[ORM\Column(length: 255, unique:true)]
@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 60)]
     private ?string $password = null;
 
-    #[Assert\NotBlank(message: 'Veuillez saisir un mot de passe!')]
+    #[Assert\NotBlank(message: 'Veuillez confirmer le mot de passe!')]
     #[Assert\EqualTo(propertyPath:'password', message:'Vous n\'avez pas tapé le même mot de passe')]
     private ?string $confirmPassword = null;
 

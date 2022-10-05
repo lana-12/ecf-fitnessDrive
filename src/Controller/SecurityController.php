@@ -17,7 +17,8 @@ class SecurityController extends AbstractController
         // }
 
         // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
+        // $error = $authenticationUtils->getLastAuthenticationError();
+        $error = 'Votre identifiant ou votre Mot de passe est incorrect !';
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 

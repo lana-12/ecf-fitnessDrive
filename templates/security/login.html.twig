@@ -2,28 +2,30 @@
 
 {% block title %}Connection | {{ parent()}}{% endblock %}
 
-{% block stylesheets %} 
-        {{ parent() }}
-        {{ encore_entry_link_tags('login') }}
-
+{# {% block stylesheets %} 
+{{parent()}}
 {% endblock %}
 
 {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('test') }} 
-{% endblock %}
+{{parent()}}
+
+{% endblock %} #}
 
 {% block body %}
-
+<body class='body_login'>
+{% block header %}
+    <header class='header_login'>
+    </header>
+{% endblock %}
 <main>
+{# assets/images/logo.png was copied to public/build/images/logo.png #}
+{# <img src="{{ asset('build/images/img3.jpg') }}" alt="ACME logo"> #}
+
     <h1 class="title_home" >Fitness Drive</h1>
         <form action="" method="post">
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey }}</div>
+                <div class="alert alert-danger">{{ error }}</div>
             {% endif %}
-            {# {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %} #}
 
             {% if app.user %}
                 <div class="mb-3 text-white">
@@ -33,7 +35,8 @@
 
                 <div class="box-connexion">
                     <div class="login form-group" >
-                        <h2>Saisissez vos identifiants de connection</h2>
+                        <h2 class="h2_login">Se connecter</h2>
+                    
                             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="" placeholder="exemple@exemple.fr" autocomplete="email" required autofocus>
 
                             <input type="password" name="password" id="inputPassword" class="" placeholder="Mot de passe" autocomplete="current-password" required>
@@ -58,5 +61,6 @@
                 
             </div>
         </form>
-</main>       
+</main>   
+</body>    
 {% endblock %}

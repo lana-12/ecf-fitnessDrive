@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\PartnerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PartnerRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 #[ORM\Table(name: '`partners`')]
+#[UniqueEntity(fields:'namePartner', message:'Le nom que vous avez indiqué existe déjà')]
+#[UniqueEntity(fields:'phone', message:'Le numéro de téléphone que vous avez indiqué existe déjà ')]
+
+
 class Partner
 {
     #[ORM\Id]
@@ -16,10 +21,10 @@ class Partner
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, unique:true)]
     private ?string $namePartner = null;
 
-    #[ORM\Column]
+    #[ORM\Column(unique:true)]
     private ?string $phone = null;
 
     #[ORM\Column]

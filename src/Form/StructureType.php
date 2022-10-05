@@ -2,17 +2,19 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Partner;
 use App\Entity\Structure;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class StructureType extends AbstractType
 {
@@ -27,7 +29,14 @@ class StructureType extends AbstractType
                 'placeholder'=>'Choisissez la Franchise',
                 'choice_label'=> function (Partner $partner){
                     return $partner->getNamePartner();
-                },     
+                },
+                // Classer par ordre alphabétiq
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->orderBy('p.namePartner', 'ASC');
+                },
+    
+                
             ])
 
             //RECUP LA COLLECTION DE USER
@@ -39,12 +48,20 @@ class StructureType extends AbstractType
                 'choice_label'=> function (User $user){
                     return $user->getUsername();
                 },
+                // Recup uniquement ROLE_STRUCTURE
+                'query_builder' => function (UserRepository $userRepo) {
+                    $qb = $userRepo->createQueryBuilder('u');
+                    return $qb
+                        ->where('u.roles LIKE :role')
+                        ->setParameter('role', '%"' . 'ROLE_STRUCTURE' . '"%')
+                        ->orderBy('u.username');}
+
             ])
 
             ->add('nameStructure', TextType::class,[
                 'label'=> 'Nom de la structure',
                 'attr'=>[
-                'placeholder'=>'Mettre le nom du gérant de la structure',
+                'placeholder'=>'Mettre le nom du gérant de la structure ex Dupond',
                 ],
                 'required'=> true,
                 'constraints'=> [

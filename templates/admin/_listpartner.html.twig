@@ -1,4 +1,4 @@
-
+{# INCLUDE DS admin/index Affiche la liste Franchise #}
         <div class="d-flex justify-content-around flex-wrap container mt-5">
         
             {% for partner in partners %}
@@ -7,19 +7,25 @@
                         <div class="card-body">
 
                             {% if partner %}
-                                <h5 class="card-title">{{partner.namePartner}}  </h5>
+                                <h5 class="card-title">Fitness Drive -{{partner.namePartner}}  </h5>
                                 <p class="">Gérer par {{partner.user.username}} </p>
                             {% endif %}
 
-                            <p class="card-text">Ici la liste des structures avec <a href='#'>Voir détail</a> </p>
-                            <span><a href="mailto:{{partner.user.email}} ">{{partner.user.email}}<a></span>
-                            <span><a href="tel:{{partner.phone}} ">{{partner.phone}}<a></span>
-                        
+                            <p class="card-text">
+                                <ul>
+                                    <li>
+                                        <a href="mailto:{{partner.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{partner.user.email}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="tel:{{partner.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{partner.phone}}</a>
+                                    </li>
+                                </ul>
+                            </p>
                         </div>
 
                         <div class="card-footer">
                             <a href=" {{ path( 'show-partner', {'id': partner.id}) }} " type="button" class="btn-sm btn-success">Détail</a>
-                            <a href=" # " type="button" class="btn-sm btn-warning">Modifier</a>                        
+                            <a href=" {{ path( 'partner_edit', {'id': partner.id}) }} " type="button" class="btn-sm btn-warning">Modifier</a>                        
                         </div>
                     </div>
                 {% else %}

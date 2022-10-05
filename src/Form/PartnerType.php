@@ -2,17 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\Partner;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Partner;
+use App\Repository\UserRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class PartnerType extends AbstractType
 {
@@ -23,16 +24,24 @@ class PartnerType extends AbstractType
                 //RECUP LA COLLECTION DE USER
             ->add('user', EntityType::class,[
                 'class'=> User::class,
+                'label'=> 'Selectionner un compte',
                 'placeholder'=>'Choisissez le compte de connexion',
                 'choice_label'=> function (User $user){
                     return $user->getUsername();
                 },
+                'query_builder' => function (UserRepository $userRepo) {
+                    $qb = $userRepo->createQueryBuilder('u');
+                    return $qb
+                        ->where('u.roles LIKE :role')
+                        ->setParameter('role', '%"' . 'ROLE_PARTNER' . '"%')
+                        ->orderBy('u.username');}
+
             ])
 
             ->add('namePartner', TextType::class,[
                 'label'=> 'Nom de la franchise',
                 'attr'=>[
-                'placeholder'=>'exemple Fitness Drive Montpellier...',
+                'placeholder'=>'Mettre le nom de la ville',
                 ],
                 'required'=> true,
                 

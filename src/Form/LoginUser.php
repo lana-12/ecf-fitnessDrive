@@ -21,7 +21,6 @@ class LoginUserType extends AbstractType
             ->add('email', EmailType::class,[
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'email'],
-
                 'constraints'=> [
                     new NotBlank(['message'=> 'Veuillez saisir un Email valide !']),
                     new Email(['mode'=>'html5', 'message'=>'L\'adresse {{ value }} n\'est pas valide']),
@@ -30,7 +29,6 @@ class LoginUserType extends AbstractType
             ->add('password', PasswordType::class,[
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'id_password'],                
-                
                 'constraints'=> [
                         new NotBlank(['message'=> 'Veuillez saisir un mot de passe!']),
                         new Length([

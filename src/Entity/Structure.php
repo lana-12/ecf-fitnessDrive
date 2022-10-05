@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\StructureRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StructureRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: StructureRepository::class)]
 #[ORM\Table(name: '`structures`')]
+#[UniqueEntity(fields:'nameStructure', message:'Le nom que vous avez indiqué existe déjà')]
+#[UniqueEntity(fields:'phone', message:'Le numéro de téléphone que vous avez indiqué existe déjà ')]
+
 class Structure
 {
     #[ORM\Id]
@@ -16,7 +20,7 @@ class Structure
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, unique:true)]
     private ?string $nameStructure = null;
 
     #[ORM\Column(length: 100)]
@@ -28,7 +32,7 @@ class Structure
     #[ORM\Column(length: 50)]
     private ?string $city = null;
 
-    #[ORM\Column]
+    #[ORM\Column(unique:true)]
     private ?string $phone = null;
 
     #[ORM\Column]

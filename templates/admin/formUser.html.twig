@@ -6,12 +6,12 @@
 {% block stylesheets %} 
 
         {{ parent() }}
-        {{ encore_entry_link_tags('new_user') }}
+        {# {{ encore_entry_link_tags('new_user') }} #}
 
 {% endblock %}
 {% block javascripts %}
             {{ parent() }}
-        {{ encore_entry_script_tags('app') }} 
+        {# {{ encore_entry_script_tags('app') }}  #}
 {% endblock %}
 {% block body %}
 {% block header %} {{parent()}} {% endblock  %}  
@@ -58,14 +58,14 @@
 
     {{form_start(formUser)}}
             <fieldset>
-                <legend> Informations Client </legend>
+                <legend> Compte de connexion </legend>
 
                     <div class="form-group">
-                        {{ form_row(formUser.username,{'label':'Nom','attr': {'placeholder':'Nom du Gérant'}}) }}
+                        {{ form_row(formUser.username,{'label':'Nom','attr': {'placeholder':'Nom de l\'utilisateur'}}) }}
                     </div>   
 
                     <div class="form-group">
-                        {{ form_row(formUser.email, {'label':'Email','attr': {'placeholder':'Email du Gérant'}}) }}
+                        {{ form_row(formUser.email, {'label':'Email','attr': {'placeholder':'Email de l\'utilisateur'}}) }}
                     </div>      
 
                     <div class="form-group">

@@ -21,19 +21,36 @@
 {% block body %}
 
 {% block header %} {{parent()}} {% endblock  %}  
-
+{% block Breadcrumb %}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Créer une Franchise</li>
+            </ol>
+        </nav>
+    {% endblock  %} 
 <main class="container">
+        <h2>Franchise</h2>
+    {% if editMode %}
+    {# NE MARCHE PAS AFFICHE I #}
+            <h3 class="tiltle_h3_form">Modification de {{ h3Edit }}</h3>
+            
+    {% else %}
+        <h2>Création du Compte de la Franchise</h2>
+    {% endif %}
 
-    <h2>Création du Compte de la Franchise</h2>
 
-
-{# {{form_start(formUser)}} #}
 {{form_start(formpartner)}}
 {{form_rest(formpartner)}}
-<button class="btn btn-success mx-auto" type="submit"> Enregister</button>
+
+<button class="btn btn-success mx-auto" type="submit"> 
+    {% if editMode %}
+        Enregistrer les modifications
+    {% else %}
+        Ajouter
+    {% endif %}</button>
 
 
-{# {{dump(formpartner)}} #}
 
 
 </main> 

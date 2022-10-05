@@ -1,3 +1,5 @@
+{# CLIC SUR DETAIL ET ON ARRIVE ICI #}
+
 {% extends 'admin/index.html.twig' %}
 
 {% block title %}Liste  | {{ parent() }} {% endblock %}
@@ -6,27 +8,50 @@
 {% block header %} {{parent()}}  {% endblock  %}
     <main class='container'>
         <h1> Détail de la franchise  </h1>
-    <div class="d-flex justify-content-center mt-5">
-        
+            <div class="d-flex justify-content-center mt-5">
+                
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
 
                         {% if partner %}
-                            <h5 class="card-title">{{partner.namePartner}}  </h5>
+                            <h5 class="card-title">Fitness Drive - {{partner.namePartner}}  </h5>
                             <p class="">Gérer par {{partner.user.username}} </p>
                         {% endif %}
 
-                        <p class="card-text">Ici la liste des structures avec <a href='#'>Voir détail</a> </p>
-                        <span><a href="mailto:{{partner.user.email}} ">{{partner.user.email}}<a></span>
-                        <span><a href="tel:{{partner.phone}} ">{{partner.phone}}<a></span>
-                    
+                        <p class="card-text">
+                            <ul>
+                                <li><a href="# ">lien interne - Voir les permissions globales<a></li>
+                                <li><a href="mailto:{{partner.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{partner.user.email}}<a></li>
+                                <li><a href="tel:{{partner.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{partner.phone}}<a></li>
+                            </ul>
+                        </p>
                     </div>
 
                     <div class="card-footer">
                         <a type="button" class="btn btn-warning" href="#">Modifier</a>
                     </div>
                 </div>
-        </div>
+            </div>
+
+            <h2>Liste des structures associées</h2>
+            {# NE MARCHE PAS  #}
+            {# {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %} #}
+{% for structure in structures %}
+    {# {% if structure.isIsActive  %} #}
+        {% if structure.partner.id is same as partner.id %} 
+        
+            {% include "admin/_liststructure.html.twig" %}
+
+            
+        {% endif %}
+{% endfor %}
+
+        <h2>Permissions Globales</h2>
+
 
     </main>
 

@@ -54,6 +54,7 @@ class NewUserController extends AbstractController
                     $user,
 
                     // pour modifier son mot de passe
+                    //récup les données saisies par l'utilisateur.
                     $form->get('password')->getData()
                 )
 
@@ -61,7 +62,7 @@ class NewUserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             
-            $this->addFlash('success', 'Message envoyé');
+            // $this->addFlash('success', 'Message envoyé');
 
             // pour afficher la suite sur une autre page
             //pour l'instant j'ai afficher
