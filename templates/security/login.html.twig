@@ -1,66 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connection | {{ parent()}}{% endblock %}
-
-{# {% block stylesheets %} 
-{{parent()}}
-{% endblock %}
-
-{% block javascripts %}
-{{parent()}}
-
-{% endblock %} #}
+{% block title %} Connection | {{ parent()}}{% endblock %}
 
 {% block body %}
-<body class='body_login'>
-{% block header %}
-    <header class='header_login'>
-    </header>
-{% endblock %}
-<main>
-{# assets/images/logo.png was copied to public/build/images/logo.png #}
-{# <img src="{{ asset('build/images/img3.jpg') }}" alt="ACME logo"> #}
+    <body class='body_login'>
 
-    <h1 class="title_home" >Fitness Drive</h1>
-        <form action="" method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="mb-3 text-white">
-                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnection</a>
+        <header class='header_login'>
+        {% block navbar %} 
+            <nav class="navbar navbar- bg- nav_login">
+                <div class="container-fluid">
+                    <a class="navbar-logo" href="#">
+                        <h5 class="title_home" >Logo</h5></a>
+                        {# <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top"> #}
+                    <a class="navbar-brand" href="#">
+                        <h1 class="title_home" >Fitness Drive</h1>
+                    </a>
                 </div>
-            {% endif %}
+            </nav>
+        {% endblock %}
+        </header>
 
-                <div class="box-connexion">
-                    <div class="login form-group" >
-                        <h2 class="h2_login">Se connecter</h2>
-                    
-                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="" placeholder="exemple@exemple.fr" autocomplete="email" required autofocus>
+        <main class='main_login'>
+            <div class='row'>
+                {# <div class='col-12'> #}
+                    <form action="" method="post">
+                        {# {% if error %}
+                            <div class="alert alert-danger">
+                            {{ error }}
+                            </div>
+                        {% endif %} #}
 
-                            <input type="password" name="password" id="inputPassword" class="" placeholder="Mot de passe" autocomplete="current-password" required>
-
-                    </div>
-                <input type="hidden" name="_csrf_token"
-                    value="{{ csrf_token('authenticate') }}"
-                >
-
-                {#
-                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                    See https://symfony.com/doc/current/security/remember_me.html
-
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" name="_remember_me"> Remember me
-                        </label>
-                    </div>
-                #}
-
-                <button class="btn  mx-auto" type="submit">Connection</button>
+                        {% if app.user %}
+                            <div class="mb-3 text-white">
+                                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnection</a>
+                            </div>
+                        {% endif %}
+                        <div class="box"> 
+                            <legend><h2 class="h2_login">Se connecter</h2></legend>
                 
+                            <div class="mb-3 px-5">
+                                <label for="inputEmail" class="form-label">Identifiant</label>
+                                <input type="email" class="form-control" value="{{ last_username }}" name="inputEmail" id="inputEmail" aria-describedby="email" placeholder="exemple@exemple.fr" autocomplete="email" required autofocus>
+                                {# <div id="emailHelp" class="form-text"></div> #}
+                            </div>
+
+                            <div class="mb-3 px-5">
+                                <label for="inputPassword" class="form-label">Mot de Passe</label>
+                                <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" autocomplete="current-password" required>
+                            </div>
+                            <div class="mb-3 px-5 form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" >
+                                <label class="form-check-label " for="exampleCheck1">Check me out</label>
+                            </div>
+
+                            <button class="btn mx-auto" type="submit">Connexion</button>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        </div>
+
+                    </form>
+                {# </div> #}
             </div>
-        </form>
-</main>   
-</body>    
+        </main>   
+    </body>
 {% endblock %}

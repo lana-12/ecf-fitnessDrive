@@ -2,38 +2,33 @@
 
 {% block title %} Accueil | {{ parent() }} {% endblock %}
 
-{% block stylesheets %} 
-        {{ parent() }}
-        {# {{ encore_entry_link_tags('home') }} #}
+{% block stylesheets %} {% endblock %}
 
-{% endblock %}
-
-{% block javascripts %}
-            {{ parent() }}
-        {# {{ encore_entry_script_tags('test') }}  #}
-{% endblock %}
+{% block javascripts %} {% endblock %}
 
 {% block body %}
     <header>
+    {% block navbar %} 
         <nav class="navbar navbar-dark shadow-5-strong ">
             <div class="container">
                 <a class="navbar-brand title_home" href="#"><h1>Fitness Drive</h1></a>
                 <a href=" {{ path('app_login') }} " class="btn btn-success" type="button">Connection</a>
             </div>
         </nav>
+    {% endblock %}
     </header>
+
     <main class="box_center" >
         <div class="row">
-        <div class="col-12">
-            <h2>Bienvenue sur notre Application </h2>
+            <div class="col-12">
+                <h2>Bienvenue sur notre Application </h2>
 
-            
-
+        
 {# METTRE DE L ANIMATION #}
-            <h2>Gestion des partenaires et des structures</h2>
-            <p>Veuillez vous identifier pour accéder à votre compte !!</p>
-        </div>
+                <h3>Gestion des partenaires et des structures</h3>
+                    <p>Veuillez vous identifier pour accéder à votre compte !!</p>
             </div>
+        </div>
     </main>
 
 {% endblock %}

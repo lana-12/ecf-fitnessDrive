@@ -1,33 +1,56 @@
-body_login
-    background: rgb(51, 48, 48) url("../../images/img3.jpg")
+.body_login
+    background: rgb(51, 48, 48) url("./../images/img3.jpg")
+    height: 100vh
     background-size: cover
     background-position: center
     background-repeat: no-repeat
     color: #fff
     text-align: center
 
-header_login
-    border-bottom: solid 1px #fff
-    box-shadow: 1px 1px 2px black, 0 0 1em #0b6e40, 0 0 0.2em #0b6e40
-
-
-nav_login
+.header_login
+    box-shadow: 1px 1px 2px black, 0 0 1em $green, 0 0 0.2em $green
     display: flex
-    justify-content: center
-    align-items: center
+    
+.nav_login
     margin: 0px 20px
-//  #0b6e40
-
-.box_center
-    text-shadow: 1px 1px 2px black, 0 0 1em #0b6e40, 0 0 0.2em #0b6e40
-    min-height: 80vh
     display: flex
     justify-content: center
     align-items: center
 
-h2_login
-    font-size: 2.5em
-    margin-bottom: 50px
+.main_login
+    display: flex
+    justify-content: center
+    align-content: center
+    margin-top: 30%
+    // margin-bottom: 50%
 
-p_login
+.box
+    display: flex 
+    flex-direction: column
+    justify-content: center
+    align-content: center
+    position: relative
+    background: transparent 
+    width: 400px
+    height: auto
+    border: 1px solid #fff
+    border-radius: 20px
+    &:before
+        content: ''
+        position: absolute
+        width: 100%
+        height: 100%
+        background: rgba(0,0,0,0.5)
+        border-radius: 20px
+        z-index: -1
+
+.h2_login
+    text-shadow: 1px 1px 2px black, 0 0 1em $green, 0 0 0.2em $green
     font-size: 1.8em
+    padding-top: 20px
+
+.btn
+    background-color: $green
+    color: #fff 
+    margin: auto
+    margin-bottom: 20px
