@@ -26,11 +26,11 @@
             <div class='row'>
                 {# <div class='col-12'> #}
                     <form action="" method="post">
-                        {# {% if error %}
+                        {% if error %}
                             <div class="alert alert-danger">
-                            {{ error }}
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
                             </div>
-                        {% endif %} #}
+                        {% endif %}
 
                         {% if app.user %}
                             <div class="mb-3 text-white">
@@ -42,14 +42,13 @@
                 
                             <div class="mb-3 px-5">
                                 <label for="inputEmail" class="form-label">Identifiant</label>
-                                <input type="email" class="form-control" value="{{ last_username }}" name="inputEmail" id="inputEmail" aria-describedby="email" placeholder="exemple@exemple.fr" autocomplete="email" required autofocus>
-                                {# <div id="emailHelp" class="form-text"></div> #}
+                                <input type="email" class="form-control" value="{{ last_username }}" name="email" id="inputEmail" aria-describedby="email" placeholder="exemple@exemple.fr" autocomplete="email" required autofocus>
                             </div>
 
                             <div class="mb-3 px-5">
                                 <label for="inputPassword" class="form-label">Mot de Passe</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="Mot de passe" autocomplete="current-password" required value="">
+                                    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" autocomplete="current-password" required >
                                     <span role="button" class="input-group-text">
                                         <i class="bi bi-eye" id="eye" ></i>
                                         <i class="bi bi-eye-slash d-none" id="eye-slash"></i>
@@ -57,6 +56,8 @@
                                     {# onclick="togglePassword()"  #}
                                 </div>
                             </div>
+                            {# <input type="hidden" name="_taget_path" value="/">
+                            <input type="hidden" name=""> #}
 
                             <button class="btn mx-auto" type="submit">Connexion</button>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">

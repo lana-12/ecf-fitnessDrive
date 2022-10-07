@@ -28,7 +28,7 @@ security:
             #     check_path: app_login
             logout:
                 path: app_logout
-                
+                target: /login
                 # where to redirect after logout
                 # target: app_any_route
             # provider: users_in_memory

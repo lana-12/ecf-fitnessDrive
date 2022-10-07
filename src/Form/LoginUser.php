@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -20,7 +18,6 @@ class LoginUserType extends AbstractType
         $builder
             ->add('email', EmailType::class,[
                 'required'=> true, 
-                'row_attr' => ['class' => '', 'id' => 'email'],
                 'constraints'=> [
                     new NotBlank(['message'=> 'Veuillez saisir un Email valide !']),
                     new Email(['mode'=>'html5', 'message'=>'L\'adresse {{ value }} n\'est pas valide']),
@@ -28,7 +25,6 @@ class LoginUserType extends AbstractType
             ])
             ->add('password', PasswordType::class,[
                 'required'=> true, 
-                'row_attr' => ['class' => '', 'id' => 'id_password'],                
                 'constraints'=> [
                         new NotBlank(['message'=> 'Veuillez saisir un mot de passe!']),
                         new Length([
