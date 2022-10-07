@@ -5,8 +5,10 @@
 
 
 {% block body %}
+<header>
+            {% block navbar %} {{ parent()}}  {% endblock %}
+        </header>
 
-{{ parent()}}
 
 <main class="container-fluid">
 

@@ -2,21 +2,13 @@
 
 {% block title %}Création - Etape I | {{ parent() }}{% endblock %}
 
-
-{% block stylesheets %} 
-
-        {{ parent() }}
-        {{ encore_entry_link_tags('new_user') }}
-
-{% endblock %}
-{% block javascripts %}
-            {{ parent() }}
-        {{ encore_entry_script_tags('app') }} 
-{% endblock %}
 {% block body %}
-{{parent()}}
+{% block header %} {{parent()}} {% endblock  %}  
 
     <main class="container">
+
+Uniquement pour le franchisé ou structure
+
         {% if editMode %}
 
             <h1 class="tiltle_h1_form">Modification de {{ h1Edit }}</h1>

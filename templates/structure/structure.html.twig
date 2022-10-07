@@ -5,10 +5,12 @@
 
 
 {% block body %}
+    <header>
+        {% block navbar %} {{ parent()}} {% endblock %}
+    </header>
 
-{{ parent()}}
 
-<main class="container">
+    <main class="container">
 
     <h2>Bienvenue sur votre compte   "structure"</h2>
 

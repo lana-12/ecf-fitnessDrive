@@ -1,0 +1,15 @@
+/* Import file only */
+
+// Folder tools
+@import "./tools/variables.sass";
+
+// Folder generals
+@import "./generals/body.sass";
+@import "./generals/reset.sass";
+
+// Folder components
+@import "./components/switch.sass";
+
+// Folder pages
+@import "./pages/login.sass";
+
