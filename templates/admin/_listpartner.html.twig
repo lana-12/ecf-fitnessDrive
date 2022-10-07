@@ -1,14 +1,14 @@
 {# INCLUDE DS admin/index Affiche la liste Franchise #}
-        <div class="d-flex justify-content-around flex-wrap container mt-5">
+        <div class="d-flex justify-content-around flex-wrap container mt-5 partner">
         
             {% for partner in partners %}
-                {% if partner.isIsActive  %}
+                {# {% if partner.isIsActive  %} #}
                     <div class="card" style="width: 18rem;">
-                        <div class="card-body">
+                        <div class="card-body" id="partner">
 
                             {% if partner %}
                                 <h5 class="card-title">Fitness Drive -{{partner.namePartner}}  </h5>
-                                <p class="">Gérer par {{partner.user.username}} </p>
+                                <p class="text-muted">Gérer par {{partner.user.username}} </p>
                             {% endif %}
 
                             <p class="card-text">
@@ -20,17 +20,33 @@
                                         <a href="tel:{{partner.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{partner.phone}}</a>
                                     </li>
                                 </ul>
-                            </p>
-                        </div>
 
-                        <div class="card-footer">
+                                <!-- Rounded switch -->
+                                <div class="d-flex justify-content-around" >
+                                {# {{ if partner.isActive}} #}
+                                    <p id='switchText'>Active</p>
+                                {# {{ else }} #}
+                                <p id='switchText'>InActive</p>
+                                {# {{ endif }} #}
+                                    <label class="switch"> 
+                                        <input type="checkbox" id="switchCheck" >
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </p>
+                        <pre>
+                            {{ dump(partner.isActive) }}
+                        </pre>
+                        </div>
+                        
+                        <div class="card-footer d-flex justify-content-around">
                             <a href=" {{ path( 'show-partner', {'id': partner.id}) }} " type="button" class="btn-sm btn-success">Détail</a>
                             <a href=" {{ path( 'partner_edit', {'id': partner.id}) }} " type="button" class="btn-sm btn-warning">Modifier</a>                        
                         </div>
                     </div>
-                {% else %}
+                {# {% else %}
                     <p>Oups, une erreur est survenue !!!</p>
-                {% endif %}
+                {% endif %} #}
             {% endfor %}
         </div>
         
