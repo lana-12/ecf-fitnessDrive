@@ -1,16 +1,16 @@
-// alert('display')
-// Function dispalyPassword
-// NE MARCHE PAS 0 REVOIR
-const passwordInput = document.querySelector('#inputPassword')
-const eyeIcon = document.querySelector('#eye')
-const eyeSlashIcone = document.querySelector('#eye-slash')
+// ------- Display input Password whith Icon -------
 
-function togglePassword(){
-    passwordInput.type = passwordInput.type === 'text' ? 'password' : 'text'
-    eyeIcon.classList.contains('d-none') ? eyeIcon.classList.remove('d-none') : eyeIcon.classList.add('d-none')  
-    eyeSlashIcone.classList.contains('d-none') ? eyeSlashIcone.classList.remove('d-none') : eyeSlashIcone.classList.add('d-none');
-}
+// Selected Icon and inputPassword
+const togglePassword = document.querySelector("#togglePassword");
+const password = document.querySelector("#inputPassword");
 
-// passwordInput.addEventListener('click', togglePassword());
-
+//Attach an event listener to the icon to display the input
+togglePassword.addEventListener("click", function () {
+    // toggle the type attribute
+    const type = password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+    
+    // toggle the icon
+    this.classList.toggle("bi-eye-slash");
+});
 
