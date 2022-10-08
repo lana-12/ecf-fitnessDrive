@@ -5,66 +5,35 @@
 {% block title %}Liste  | {{ parent() }} {% endblock %}
 
 {% block body %} 
-{% block header %} {{parent()}}  {% endblock  %}
-    <main class='container'>
-        <h1> Détail de la franchise  </h1>
-            <div class="d-flex justify-content-center mt-5">
-                
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
+    <body>
+    {% block header %} {{parent()}}  {% endblock  %}
 
-                        {% if partner %}
-                            <h5 class="card-title">Fitness Drive - {{partner.namePartner}}  </h5>
-                            <p class="">Gérer par {{partner.user.username}} </p>
-                        {% endif %}
+        <main class='container-fluid'>
+            <h1> Détail de la franchise  </h1>
+                {% include "_partials/_partner.html.twig" %}
 
-                        <p class="card-text">
-                            <ul>
-                                <li><a href="# ">lien interne - Voir les permissions globales<a></li>
-                                <li><a href="mailto:{{partner.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{partner.user.email}}<a></li>
-                                <li><a href="tel:{{partner.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{partner.phone}}<a></li>
-                            </ul>
-                            <!-- Rounded switch -->
-                                <div class="d-flex justify-content-around" >
-                                    <p>Active</p>
-
-                                    <label class="switch"> 
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                        </p>
+                <h2>Liste des structures associées</h2>
+                {# NE MARCHE PAS  #}
+                {# {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
                     </div>
-
-                    <div class="card-footer">
-                        <a type="button" class="btn btn-warning" href="#">Modifier</a>
-                    </div>
-                </div>
-            </div>
-
-            <h2>Liste des structures associées</h2>
-            {# NE MARCHE PAS  #}
-            {# {% if error %}
-                <div class="alert alert-danger">
-                    {{ error }}
-                </div>
-            {% endif %} #}
-{% for structure in structures %}
-    {# {% if structure.isIsActive  %} #}
+                {% endif %}
+                #}
+    {% for structure in structures %}
         {% if structure.partner.id is same as partner.id %} 
         
-            {% include "admin/_liststructure.html.twig" %}
+            {% include "_partials/_liststructure.html.twig" %}
 
-            
         {% endif %}
-{% endfor %}
+    {% endfor %}
 
-        <h2>Permissions Globales</h2>
-
-
-    </main>
+            <h2>Permissions Globales</h2>
 
 
+        </main>
+
+    </body>
 {% endblock %}
     
         

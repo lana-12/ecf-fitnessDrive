@@ -82,7 +82,24 @@ public function findByWithQueryBuilder(string $username, string $email=null): ?U
     // return $queryUsername->getOneOrNullResult();
     
 }
-
+    // public function findAllUsers(): array
+    //     {        
+    //         $query = $this->getEntityManager()->createQuery("
+    //             SELECT u 
+    //             FROM App\Entity\User u 
+    //             WHERE u.roles LIKE '%ROLE_PARTNER%' 
+    //             OR u.roles LIKE '%ROLE_STRUCTURE%' 
+    //         ");
+    //         return $query->getResult();
+    //     }
+    public function findByRole($role): ?array
+        {
+            return $this->createQueryBuilder('u')
+                ->where('u.roles =:role')
+                ->setParameter('role', $role)
+                ->getQuery()
+                ->getResult();
+        }    
 
 //    /**
 //     * @return User[] Returns an array of User objects

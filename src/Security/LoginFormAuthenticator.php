@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +47,18 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+        $roles = $token->getRoleNames();
+        
+        // if (in_array('ROLE_PARTNER', $roles, true)) {
+        //     $user = $token->getUser();
+        //     $id = $user->getId();
+        //     return new RedirectResponse($this->router->generate('app_partner_show', ['id'=> $id]));
+        // } else if (in_array('ROLE_STUCTURE', $roles, true)){
+        //     $user = $token->getUser();
+        //     $slug = $user->slug;
+        //     return new RedirectResponse($this->router->generate("app_structure_show", ['slug' => $slug]));
+        // } 
+        // return new RedirectResponse($this->router->generate('/'));
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('app_admin'));
         // return $this->render('client/client.html.twig');

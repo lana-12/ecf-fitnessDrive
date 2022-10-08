@@ -31,9 +31,9 @@ class AdminController extends AbstractController
     public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, ManagerRegistry $doctrine ) : Response
     {
         //Methode avec PartnerRepository => recup tt les partners
-        $partners = $partnerRepo->findAllPartner();
+        $partners = $partnerRepo->findAllPartners();
         //Methode avec StructureRepository => recup tt les structures
-        $structures = $structureRepo->findAllStructure();
+        $structures = $structureRepo->findAllStructures();
 
         //Methode avec ManagerRegistry => recup tt les partners
         // $repository = $doctrine->getRepository(Partner::class);

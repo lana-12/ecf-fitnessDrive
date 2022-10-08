@@ -1,0 +1,43 @@
+{# <showStructure include ds admin/showStructure #}
+
+<div class="d-flex justify-content-center bg-dark mt-5">
+            
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+
+        {% if structure %}
+        {# <pre>
+            {{ dump(structure.user.roles) }}
+        </pre>
+        {% if structure.user.roles == 0 %}
+            hello
+        {% else %}
+            tu peux
+        {% endif %} #}
+                <h5 class="card-title">Fitness Drive {{structure.partner.namePartner}} - {{structure.namestructure}} 
+                </h5>
+                <p class="text-muted">Gérer par {{structure.user.username}} </p>
+        {% endif %}
+
+                <p class="card-text">  
+                    <ul>
+                        <li><a href="mailto:{{structure.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{structure.user.email}}<a></li>
+                        <li><a href="tel:{{structure.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{structure.phone}}<a></li>
+                    </ul>
+
+                <!-- Rounded switch -->
+                    <div class="d-flex justify-content-around" >
+                        <p>Active</p>
+
+                        <label class="switch"> 
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </p>
+        </div> 
+        <div class="card-footer">
+            <a href=" # " type="button" class="btn-sm btn-warning">Modifier</a>                      
+        </div>
+    </div>
+</div>

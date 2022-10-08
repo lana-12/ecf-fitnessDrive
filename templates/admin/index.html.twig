@@ -3,24 +3,25 @@
 {% block title %}Admin | {{ parent() }} {% endblock %}
 
 {% block body %} 
-    <body>
+    <body >
 
     {% block header %} 
         <header>
             {% block navbar %}  
-                {% include "admin/_navbarAdmin.html.twig" %} 
+                {% include "_partials/_navbarAdmin.html.twig" %} 
             {% endblock %}        
         </header>
                                 
     {% endblock  %} 
 
-        <main class="container">
+        <main class='container-fluid'>
 
             <div class=" d-flex justify-content-around">
                 <p>Total de Franchise = {{ countPartners }}   </p>
                 <p>Total de Structures =  {{ countStructures }}  </p>
             </div>
 
+<!-- Barre de recherche -->
             <nav class="d-flex justify-content-end">
                 <div class="col-10">
                     <form class="d-flex ">
@@ -30,13 +31,14 @@
                 </div>
             </nav>
 
-            <div class="container-fluid">
+            <section class="">
                 <div class="row">
                     <div class="col">
                             <h2> {{ titleIndex }}</h2>
                                 <a class='check' href='#'>Toutes</a>
                                 <a class='check' href='#'>Active</a>
                                 <a class='check' href='#'>Inactive</a>
+                <!-- A VOIR SI COMMUTATEUR OU LIEN -->
                         {# <div class="d-flex justify-content-around ">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
@@ -44,11 +46,11 @@
                                 </div>
                         </div> #}
 
-                    {% include "admin/_listpartner.html.twig" %}
+                    {% include "_partials/_listpartner.html.twig" %}
 
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
 
     </body>

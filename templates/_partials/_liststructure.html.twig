@@ -1,0 +1,52 @@
+{# Include ds admin/showpartner and  #}
+
+<div class="d-flex justify-content-center flex-wrap container mt-5">            
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+{{ dump(structure.isIsActive)}}
+{{ dump(structure.id)}}
+{{ dump(structure.partner.namePartner)}}
+{{ dump(structure.partner.id)}}
+<pre>
+        {{ dump(role) }}
+        {# {{ dump(id) }} #}
+    </pre>
+        {% if structure %}               
+            <h5 class="card-title">Fitness Drive -  
+                {{structure.partner.namePartner}} - 
+                {{structure.nameStructure}}  
+            </h5>
+        {% endif %}
+            <p class="text-muted">Gérer par {{structure.user.username}} </p>
+                <p class="card-text"> 
+                    <ul>
+                        <li>
+                            <a href="mailto:{{structure.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{structure.user.email}}</a>
+                        </li>
+                        <li>
+                            <a href="tel:{{structure.phone}}"><i class="bi bi-telephone-fill p-2"></i>{{structure.phone}}</a>
+                        </li>
+                    </ul>
+                    <!-- Rounded switch -->
+                    <div class="d-flex justify-content-around" >
+                        <p>Active</p>
+                        <label class="switch"> 
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </p>
+        </div>
+        <div class="card-footer">
+{# {% if condition %}{% endif %} #}
+            <a href=" {{ path( 'show-structure', {'id': structure.id}) }} " type="button" class="btn-sm btn-success">Détail</a>
+            <div class="vr"></div>
+            <a href=" # " type="button" class="btn-sm btn-warning">Modifier</a>                        
+        </div>
+    </div>
+</div>
+
+
+    
+
+    

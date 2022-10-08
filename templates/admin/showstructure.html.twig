@@ -3,46 +3,20 @@
 {% block title %}Liste  | {{ parent() }} {% endblock %}
 
 {% block body %} 
+    <body>
 {% block header %} {{parent()}}  {% endblock  %}
-    <main class='container'>
-        <h1> Détail de la Structure  </h1>
-    <div class="d-flex justify-content-center mt-5">
+
+        <main class='container-fluid'>
+            <h1> Détail de la Structure  </h1>
         
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-
-                        
-                            <h5 class="card-title">Fitness Drive {{structure.partner.namePartner}} - {{structure.namestructure}}  </h5>
-                            <p class="">Gérer par {{structure.user.username}} </p>
-
-                        <p class="card-text">  
-                            <ul>
-                                <li><a href="mailto:{{structure.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{structure.user.email}}<a></li>
-                                <li><a href="tel:{{structure.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{structure.phone}}<a></li>
-                            </ul>
-                            <!-- Rounded switch -->
-                                <div class="d-flex justify-content-around" >
-                                    <p>Active</p>
-
-                                    <label class="switch"> 
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                        </p>
-                    </div> 
-
-                    <div class="card-footer">
-                        <a href=" # " type="button" class="btn-sm btn-warning">Modifier</a>                      
-                    </div>
-                </div>
-        </div>
-
-        <h2>Liste des permissions</h2>
-
-    </main>
+        {% include "_partials/_structure.html.twig" %}
 
 
+            <h2>Liste des permissions</h2>
+
+        </main>
+
+    </body>
 {% endblock %}
     
         

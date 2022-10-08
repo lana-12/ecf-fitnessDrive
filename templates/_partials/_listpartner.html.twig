@@ -3,7 +3,7 @@
         
             {% for partner in partners %}
                 {# {% if partner.isIsActive  %} #}
-                    <div class="card" style="width: 18rem;">
+                    <div class="card " style="width: 18rem;">
                         <div class="card-body" id="partner">
 
                             {% if partner %}
@@ -41,6 +41,7 @@
                         
                         <div class="card-footer d-flex justify-content-around">
                             <a href=" {{ path( 'show-partner', {'id': partner.id}) }} " type="button" class="btn-sm btn-success">Détail</a>
+                            <div class="vr"></div>
                             <a href=" {{ path( 'partner_edit', {'id': partner.id}) }} " type="button" class="btn-sm btn-warning">Modifier</a>                        
                         </div>
                     </div>

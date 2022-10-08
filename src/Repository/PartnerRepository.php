@@ -39,7 +39,7 @@ class PartnerRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllPartner(): ?array
+    public function findAllPartners(): ?array
     {
         return
         $this->createQueryBuilder('p')
@@ -48,7 +48,6 @@ class PartnerRepository extends ServiceEntityRepository
 
         ;
     }
-
 
 
     public function findOneByName($name): array | Partner

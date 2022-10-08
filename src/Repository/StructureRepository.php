@@ -39,7 +39,7 @@ class StructureRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllStructure(): ?array
+    public function findAllStructures(): ?array
     {
         return
         $this->createQueryBuilder('s')
@@ -48,8 +48,18 @@ class StructureRepository extends ServiceEntityRepository
         ;
 
     }
+//MARCHE faire la meme chose pour permissions ds son repo 
+    public function findAllStructuresByPartner($id) :?array
+    {
+        return $this->createQueryBuilder('s')
+                    ->where('s.partner = :id')
+                    ->setParameter('id', $id)
+                    ->orderBy('s.nameStructure')
+                    ->getQuery()
+                    ->getResult();
+    }
 
-
+    
 //    /**
 //     * @return Structure[] Returns an array of Structure objects
 //     */

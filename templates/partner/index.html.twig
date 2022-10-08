@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Franchise | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <body>
+    {% block navbar %}  
+        {% include "_partials/_navbarClient.html.twig" %} 
+    {% endblock %}
+
+        <main class="container-fluid">
+
+        {% if app.user %}
+            <h2 class=''>Bienvenue {{ app.user.username }}
+            </h2>
+        {% endif %}
+
+    {% if partner %}
+    {{ dump(partner.user.id)}}
+{{ dump(partner.user.roles)}}
+
+Inserer un autre affichage et puis voila, attention supp les choses inutiles
+            <h3>Fitness Drive - {{partner.namePartner}}</h3>
+
+            <h4>Détail</h4>
+
+    <!-- Display the structures -->
+        {% for structure in structures %}
+
+        <!-- Display the structures du partner -->
+            {% if structure.partner.id %}
+                {% include "_partials/_liststructure.html.twig" %}
+            {% else %}
+
+            <div class="alert alert-success">
+                <p> Oups une erreur est survenue !</p>
+            </div>
+
+            {% endif %}
+        {% endfor %}
+
+            <h4>Vos permissions</h4>
+    {% else %}
+        <div class="alert alert-success">
+            <p> Oups une erreur est survenue !</p>
+        </div> 
+    {% endif %}
+
+
+        </main> 
+    </body>
+{% endblock %}
+
+
+
+
