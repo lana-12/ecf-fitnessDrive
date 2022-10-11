@@ -6,6 +6,8 @@
 {% block header %} {{parent()}} {% endblock  %}  
 
     <main class="container">
+
+    {{ include('_partials/_modalConfirm.html.twig') }}
         {% if editMode %}
 
             <h1 class="tiltle_h1_form">Modification de {{ h1Edit }}</h1>
@@ -30,8 +32,7 @@
 
         {% endif %}
 
-                    <button id='test' onclick='show()' class="btn mx-auto" type="submit">test alert </button>
-
+                    
 
     <!-- *FORMULAIRE LIER A ENTITY USER 
         *ROLE PARTNER
@@ -45,7 +46,8 @@
         {% endfor %}
     #}
 
-    {{form_start(formUser)}}
+
+    {{form_start(formUser, { 'attr': {'id': 'user'} })}}
             <fieldset>
                 <legend> Compte de connexion </legend>
 
@@ -84,6 +86,7 @@
             </fieldset>
         {{form_end(formUser)}}
         
+{# <button id='test' data-bs-toggle="modal" data-bs-target="#test" class="btn mx-auto" type="submit">test alert </button> #}
 
     </main> 
 {% endblock %}

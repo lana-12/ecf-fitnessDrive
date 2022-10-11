@@ -8,9 +8,11 @@
 @import "./generals/reset.sass";
 
 // Folder components
+@import "./components/sidebar.sass";
 @import "./components/switch.sass";
 
 // Folder pages
 @import "./pages/home.sass";
 @import "./pages/login.sass";
+@import "./pages/indexAdmin.sass";
 

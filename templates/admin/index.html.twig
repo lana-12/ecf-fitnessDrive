@@ -2,56 +2,95 @@
 
 {% block title %}Admin | {{ parent() }} {% endblock %}
 
+{% block javascripts %}
+	{{parent()}}
+{% endblock %}
+
+
+
 {% block body %} 
-    <body >
+<body >
+<!-- wrapper end -->
+	<div class="wrapper">
 
-    {% block header %} 
-        <header>
-            {% block navbar %}  
-                {% include "_partials/_navbarAdmin.html.twig" %} 
-            {% endblock %}        
-        </header>
-                                
-    {% endblock  %} 
+		<header>
+<!-- header menu start -->
 
-        <main class='container-fluid'>
+{% block navbar %}
 
-            <div class=" d-flex justify-content-around">
-                <p>Total de Franchise = {{ countPartners }}   </p>
-                <p>Total de Structures =  {{ countStructures }}  </p>
-            </div>
+	{% include "_partials/_header.html.twig" %}
 
-<!-- Barre de recherche -->
-            <nav class="d-flex justify-content-end">
-                <div class="col-10">
-                    <form class="d-flex ">
-                        <input class="form-control me-2" type="search" placeholder="Text ici" aria-label="Search">
-                        <button class="btn btn-success btn-sm" type="submit">Rechercher</button>
-                    </form>
-                </div>
-            </nav>
+{% endblock %}
+<!-- header menu end -->
 
-            <section class="">
-                <div class="row">
-                    <div class="col">
-                            <h2> {{ titleIndex }}</h2>
-                                <a class='check' href='#'>Toutes</a>
-                                <a class='check' href='#'>Active</a>
-                                <a class='check' href='#'>Inactive</a>
-                <!-- A VOIR SI COMMUTATEUR OU LIEN -->
-                        {# <div class="d-flex justify-content-around ">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                                    <label class="form-check-label" for="flexSwitchCheckChecked">Franchise Active</label>
-                                </div>
-                        </div> #}
+<!-- sidebar start -->
 
-                    {% include "_partials/_listpartner.html.twig" %}
+{% block aside %}
 
-                    </div>
-                </div>
-            </section>
-        </main>
+{% include "_partials/_sidebar.html.twig" %}
+
+
+{% endblock %}
+<!-- sidebar end -->
+
+	</div>
+<!-- wrapper end -->
+	<!-- main container start -->
+
+<main class='main-container col-12'>
+
+	<section>
+		<div class="row">
+			<div class='count col-12'>
+				<span class='total'>Total :
+					{{ countPartners }} Franchises | 
+					{{ countStructures }} Structures
+				</span>
+			</div>
+		<div>
+	</section>
+
+	<section>
+		<!-- Barre de recherche start-->
+		<nav class="row">
+			<div class="col-12">
+				<form class="search form-group ">
+					<input id="searchbar" onkeyup="search_animal()" class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+					<button class="btn btn-sm" type="submit">Rechercher</button>
+
+				</form>
+			</div>
+		</nav>
+		<!-- Barre de recherche end-->
+	</section>
+{# A VOIR SI JE LE MET DS CARDS #}
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<h2 class='titleIndex'> {{ titleIndex }}</h2>
+					<a class='check' href='#'>Toutes</a>
+					<a class='check' href='#'>Active</a>
+					<a class='check' href='#'>Inactive</a>
+			</div>
+		</div>
+
+		<!-- A VOIR SI COMMUTATEUR OU LIEN -->
+				{# <div class="d-flex justify-content-around ">
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+							<label class="form-check-label" for="flexSwitchCheckChecked">Franchise Active</label>
+						</div>
+				</div> #}
+	</section>
+	<section>
+			{% include "_partials/_listpartner.html.twig" %}
+	</section>
+		
+</main>
+
+
+
+<!-- main container end -->
 
     </body>
 {% endblock %}

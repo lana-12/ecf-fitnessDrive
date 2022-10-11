@@ -5,7 +5,7 @@ const togglePassword = document.querySelector("#togglePassword");
 const password = document.querySelector("#inputPassword");
 
 //Attach an event listener to the icon to display the input
-togglePassword.addEventListener("click", function () {
+togglePassword.addEventListener("click", function() {
     // toggle the type attribute
     const type = password.getAttribute("type") === "password" ? "text" : "password";
     password.setAttribute("type", type);
