@@ -51,16 +51,12 @@
                                     <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" autocomplete="current-password" required />
                                     <span role="button" class="input-group-text">
                                         <i class="bi bi-eye" id="togglePassword"></i>
-                                    {# <span role="button" class="input-group-text"> #}
-                                        {# <i class="bi bi-eye" id="eye" ></i> #}
-                                    </span> 
-                                    {# onclick="togglePassword()"  #}
+                                    
                                 </div>
                             </div>
-                            {# <input type="hidden" name="_taget_path" value="/">
-                            <input type="hidden" name=""> #}
 
                             <button class="btn mx-auto" type="submit">Connexion</button>
+                            
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                         </div>
 

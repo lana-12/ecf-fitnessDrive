@@ -59,7 +59,11 @@ class AdminController extends AbstractController
         $repository = $doctrine->getRepository(Partner::class);
         $partner = $repository->find($id);
 
-            $structures = $structureRepo->findAllStructure();
+        //avec cette method mettre ds twig que id==
+            // $structures = $structureRepo->findAllStructures();
+
+        //display the structures from partner
+        $structures = $structureRepo->findAllStructuresByPartner($id);
             dump($structures);
             $error = 'Aucune structure associée';
             return $this->render('admin/showpartner.html.twig',[
@@ -89,27 +93,6 @@ class AdminController extends AbstractController
         ]);
 
     }
-
-    /**
-     * Update Partner
-     */
-    #[Route('/updatePartner/{id<\d+>}', name: 'updatePartner')]
-    public function findByName(PartnerRepository $partnerRepo, int $id) : Response
-    {
-        //Methode ds repository queryBuilder mettre ds signature (AdminRepository $adminRepository)
-        $partner = $partnerRepo->findBy($id) ;
-        dump($partner);
-
-        return $this->render('admin/formPartner.html.twig',[
-            'titleList'=> 'Admin',
-            'admin'=> $partner,
-        ]);
-
-    }
-
-
-
-
 
     /**
      * Display ListAdmins + countadmins
@@ -158,5 +141,3 @@ class AdminController extends AbstractController
 
     
 }
-
-

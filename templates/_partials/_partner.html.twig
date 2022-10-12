@@ -1,7 +1,7 @@
 {# ShowPartner include ds admin/showpartner and partner/partner #}
 
-<div class="d-flex justify-content-center bg-dark mt-5">
-    <div class="card" style="width: 18rem;">
+<div class="d-flex justify-content-center mt-5">
+    <div class="card " style="width: 18rem;">
         <div class="card-body">
 {{ dump(partner.isIsActive)}}
 
@@ -11,7 +11,7 @@
     {% endif %}
             <p class="card-text">
                 <ul>
-                    <li><a href="#">lien interne - Voir les permissions globales<a></li>
+                    <li><a h ref="#">lien interne - Voir les permissions globales<a></li>
                     <li><a href="mailto:{{partner.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{partner.user.email}}<a></li>
                     <li><a href="tel:{{partner.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{partner.phone}}<a></li>
                 </ul>
@@ -25,8 +25,8 @@
                 </div>
             </p>
         </div>
-        <div class="card-footer">
-            <a type="button" class="btn-sm btn-warning" href="#">Modifier</a>
+        <div class="card-footer d-flex justify-content-center">
+            <a type="button" class="btn-sm btn-warning" href="{{ path('partner_edit', {'id': partner.id}) }}">Modifier</a>
         </div>
     </div>
 </div>

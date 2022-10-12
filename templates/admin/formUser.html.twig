@@ -1,34 +1,55 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block title %}Création - Etape I | {{ parent() }}{% endblock %}
+{% block title %}Utilisateur | {{ parent() }}{% endblock %}
 
 {% block body %}
 {% block header %} {{parent()}} {% endblock  %}  
 
-    <main class="container">
+    <main class="main-container col-12">
+
+    {% block Breadcrumb %}
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_admin') }}">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Créer un Utilisateur</li>
+                </ol>
+            </nav>
+        </section>
+    {% endblock  %}
+
 
     {{ include('_partials/_modalConfirm.html.twig') }}
-        {% if editMode %}
 
-            <h1 class="tiltle_h1_form">Modification de {{ h1Edit }}</h1>
+        {% if editMode %}
+            <h1 class="">Modifier de {{ h1Edit }}</h1>
 
                 <h2>Etape I</h2>
-                    <p> Détailler les étapes + combien d'étape, Peut etre faire soit un fil ariane ou autre...
+                    
         {% else %}
                 
-            <h1 class="tiltle_h1_form">Création d'un nouveau compte de connexion </h1>
+            <h1 class="">Création d'un nouveau compte de connexion </h1>
 
                 {# color: #0b6e40 ; #}
-                    <ul class="" style="list-style-type: disc; ">
-                        <li>Pour chaque utilisateur</li>
-                            <ul>
-                                <li>* Franchise </li>
-                                    
-                                <li>* Structure </li>
-                            </ul>
+            <ul class="" style="list-style-type: disc; ">
+                <li>Pour chaque utilisateur</li>
+                    <ul>
+                        <li>* Franchise </li>
+                            
+                        <li>* Structure </li>
                     </ul>
-                <p>Ce compte de connexion est obligatoire pour pourvoir se connecter à leur compte.</p>
+            </ul>
+
+            <div class="box1"
+                <p>La création d'un compte de connexion est obligatoire pour pourvoir créer la
+                <span>Franchise</span> ou la <span>Structure</span> mais aussi pour se connecter à leur compte.</p>
+            </div>
+
+            <div class="box1">
                 <p> Un email leur sera envoyé automatiquement avec leur id et mpd.</p>
+            </div>
 
         {% endif %}
 

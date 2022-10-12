@@ -5,10 +5,11 @@
 {% block title %}Liste  | {{ parent() }} {% endblock %}
 
 {% block body %} 
-    <body>
+<body>
     {% block header %} {{parent()}}  {% endblock  %}
 
-        <main class='container-fluid'>
+    <main class='main-container col-12'>
+
             <h1> Détail de la franchise  </h1>
                 {% include "_partials/_partner.html.twig" %}
 
@@ -18,22 +19,18 @@
                     <div class="alert alert-danger">
                         {{ error }}
                     </div>
-                {% endif %}
-                #}
-    {% for structure in structures %}
-        {% if structure.partner.id is same as partner.id %} 
+                {% endif %} #}
+            
         
             {% include "_partials/_liststructure.html.twig" %}
 
-        {% endif %}
-    {% endfor %}
 
             <h2>Permissions Globales</h2>
 
 
-        </main>
+    </main>
 
-    </body>
+</body>
 {% endblock %}
     
         

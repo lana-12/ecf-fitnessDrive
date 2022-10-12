@@ -15,9 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class NewPartnerController extends AbstractController
 {
     #[Route('/newpartner', name: 'new_partner')]
-    #[Route('/{id}/edit', name: 'partner_edit')]
+    #[Route('/partner/{id}/edit', name: 'partner_edit')]
     /**
-     * For create NewPartner
+     * For create and edit partner
      */
 
     public function formpartner(Request $request, EntityManagerInterface $entityManager,Partner $partner=null, ManagerRegistry $doctrine, ): Response
@@ -38,12 +38,10 @@ class NewPartnerController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
             
-            
-            
             // $this->addFlash('success', 'Message envoyé');
+            
             return $this->render('partner/partner.html.twig',[
                 'partner'=> $partner,
-                
             ]);
             
             // pour afficher la suite sur une autre page
@@ -53,19 +51,15 @@ class NewPartnerController extends AbstractController
                 
                 // ]);
             }
-            $nameP = $partner->getNamePartner();
-        
-        return $this->render('admin/formPartner.html.twig',[
+
+            return $this->render('admin/formPartner.html.twig',[
             'formpartner'=>$formPartner->createView(),
 
             //Variable in editMode
             'editMode'=> $partner->getId() !== null,
-            // Ne marche pas display I
-            'h3Edit'=> $nameP !== null,
+            'partner' => $partner,
 
         ]);
     }
-    
+
 }
-
-

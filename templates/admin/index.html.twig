@@ -3,51 +3,65 @@
 {% block title %}Admin | {{ parent() }} {% endblock %}
 
 {% block javascripts %}
+	
 	{{parent()}}
+	
 {% endblock %}
 
 
 
 {% block body %} 
 <body >
+
+{% block header %}
 <!-- wrapper end -->
 	<div class="wrapper">
 
 		<header>
 <!-- header menu start -->
 
-{% block navbar %}
+		{% block navbar %}
 
-	{% include "_partials/_header.html.twig" %}
+			{% include "_partials/_headerAdmin.html.twig" %}
 
-{% endblock %}
+		{% endblock %}
 <!-- header menu end -->
+		</header>
 
 <!-- sidebar start -->
 
-{% block aside %}
+		{% block aside %}
 
-{% include "_partials/_sidebar.html.twig" %}
+		{% include "_partials/_sidebarAdmin.html.twig" %}
 
 
-{% endblock %}
+		{% endblock %}
 <!-- sidebar end -->
 
 	</div>
 <!-- wrapper end -->
 	<!-- main container start -->
+{% endblock %}
 
 <main class='main-container col-12'>
 
 	<section>
 		<div class="row">
 			<div class='count col-12'>
-				<span class='total'>Total :
-					{{ countPartners }} Franchises | 
-					{{ countStructures }} Structures
-				</span>
+				<div>
+				{% if app.user %}
+					<span class=''>Bienvenue
+						{{ app.user.username }}
+					</span>
+				{% endif %}
+				</div>
+				<div>
+					<span class='total'>Total :
+						{{ countPartners }} Franchises | 
+						{{ countStructures }} Structures
+					</span>
 			</div>
-		<div>
+		</div>
 	</section>
 
 	<section>

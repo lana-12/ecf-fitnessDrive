@@ -3,10 +3,11 @@
 {% block title %}Liste  | {{ parent() }} {% endblock %}
 
 {% block body %} 
-    <body>
+<body>
 {% block header %} {{parent()}}  {% endblock  %}
 
-        <main class='container-fluid'>
+<main class='main-container col-12'>
+
             <h1> Détail de la Structure  </h1>
         
         {% include "_partials/_structure.html.twig" %}
@@ -14,9 +15,9 @@
 
             <h2>Liste des permissions</h2>
 
-        </main>
+    </main>
 
-    </body>
+</body>
 {% endblock %}
     
         

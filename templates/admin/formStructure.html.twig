@@ -1,27 +1,56 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block title %}Création - Etape II | {{ parent() }}{% endblock %}
+{% block title %}Structure | {{ parent() }}{% endblock %}
 
 
 {% block body %}
 {% block header %} {{parent()}} {% endblock  %} 
 
-<main class="container">
+    <main class="main-container col-12">
 
-    <h2>Création de la structure</h2>
+    {% block Breadcrumb %}
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_admin') }}">Accueil</a>
+                    </li>
 
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {% if editMode %}
+                            Modifier une Structure
+                        {% else %}
+                            Créer une Structure
+                        {% endif %}
+                    </li>
 
-{# {{form_start(formUser)}} #}
+                </ol>
+            </nav>
+        </section>
+    {% endblock  %}
+
+        {% if editMode %}
+            <h1 class="  ">Modifier la Structure de <span>{{ structure.nameStructure }}</span>
+            </h1>
+        {% else %}
+            <h1>Créer une Structure</h1>
+        {% endif %}
+<pre>
+    {{ dump(partner) }}
+</pre>
 {{form_start(formStructure)}}
 {{form_rest(formStructure)}}
-<button class="btn btn-success mx-auto" type="submit"> Enregister</button>
-{# <button class="btn btn-success mx-auto" type="submit"> Ajouter une Structure</button> #}
 
 
+        <button class="btn btn-success mx-auto" type="submit">
+            {% if editMode %}
+                Enregistrer les modifications
+            {% else %}
+                Ajouter
+            {% endif %}
+        </button>
 
-
-
-</main> 
+    </main> 
 {% endblock %}
 
 

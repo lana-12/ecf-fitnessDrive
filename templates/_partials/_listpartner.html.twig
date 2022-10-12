@@ -1,55 +1,55 @@
 {# INCLUDE DS admin/index Affiche la liste Franchise #}
-        <div class="d-flex justify-content-around flex-wrap container mt-5 partner">
-        
-            {% for partner in partners %}
-                {# {% if partner.isIsActive  %} #}
-                    <div class="card " style="width: 18rem;">
-                        <div class="card-body" id="partner">
+<div class="d-flex justify-content-around flex-wrap container mt-5 partner">
 
-                            {% if partner %}
-                                <h5 class="card-title">Fitness Drive -{{partner.namePartner}}  </h5>
-                                <p class="text-muted">Gérer par {{partner.user.username}} </p>
-                            {% endif %}
+    {% for partner in partners %}
+        {# {% if partner.isIsActive  %} #}
+            <div class="card " style="width: 18rem;">
+                <div class="card-body" id="partner">
 
-                            <p class="card-text">
-                                <ul>
-                                    <li>
-                                        <a href="mailto:{{partner.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{partner.user.email}}</a>
-                                    </li>
-                                    <li>
-                                        <a href="tel:{{partner.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{partner.phone}}</a>
-                                    </li>
-                                </ul>
+                    {% if partner %}
+                        <h5 class="card-title">Fitness Drive -{{partner.namePartner}}  </h5>
+                        <p class="text-muted">Gérer par {{partner.user.username}} </p>
+                    {% endif %}
 
-                                <!-- Rounded switch -->
-                                <div class="d-flex justify-content-around" >
-                                {# {{ if partner.isActive}} #}
-                                    <p id='switchText'>Active</p>
-                                {# {{ else }} #}
-                                <p id='switchText'>InActive</p>
-                                {# {{ endif }} #}
-                                    <label class="switch"> 
-                                        <input type="checkbox" id="switchCheck" >
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                            </p>
-                        <pre>
-                            {{ dump(partner.isActive) }}
-                        </pre>
+                    <p class="card-text">
+                        <ul>
+                            <li>
+                                <a href="mailto:{{partner.user.email}} "><i class="bi bi-envelope-fill p-2"></i>{{partner.user.email}}</a>
+                            </li>
+                            <li>
+                                <a href="tel:{{partner.phone}} "><i class="bi bi-telephone-fill p-2"></i>{{partner.phone}}</a>
+                            </li>
+                        </ul>
+
+                        <!-- Rounded switch -->
+                        <div class="d-flex justify-content-around" >
+                        {# {{ if partner.isActive}} #}
+                            <p id='switchText'>Active</p>
+                        {# {{ else }} #}
+                        <p id='switchText'>InActive</p>
+                        {# {{ endif }} #}
+                            <label class="switch"> 
+                                <input type="checkbox" id="switchCheck" >
+                                <span class="slider round"></span>
+                            </label>
                         </div>
-                        
-                        <div class="card-footer d-flex justify-content-around">
-                            <a href=" {{ path( 'show-partner', {'id': partner.id}) }} " type="button" class="btn-sm btn-success">Détail</a>
-                            <div class="vr"></div>
-                            <a href=" {{ path( 'partner_edit', {'id': partner.id}) }} " type="button" class="btn-sm btn-warning">Modifier</a>                        
-                        </div>
-                    </div>
-                {# {% else %}
-                    <p>Oups, une erreur est survenue !!!</p>
-                {% endif %} #}
-            {% endfor %}
-        </div>
+                    </p>
+                <pre>
+                    {{ dump(partner.isActive) }}
+                </pre>
+                </div>
+                
+                <div class="card-footer d-flex justify-content-around">
+                    <a href=" {{ path( 'show-partner', {'id': partner.id}) }} " type="button" class="btn-sm btn-success">Détail</a>
+                    <div class="vr"></div>
+                    <a href=" {{ path( 'partner_edit', {'id': partner.id}) }} " type="button" class="btn-sm btn-warning">Modifier</a>                        
+                </div>
+            </div>
+        {# {% else %}
+            <p>Oups, une erreur est survenue !!!</p>
+        {% endif %} #}
+    {% endfor %}
+</div>
         
     
 

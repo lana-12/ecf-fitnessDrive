@@ -54,7 +54,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
         $this->add($user, true);
     }
-
+    /**
+     * recuperate Role
+     *
+     * @param [type] $role
+     * @return array|null
+     */
+    public function findByRole($role): ?array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.roles =:role')
+            ->setParameter('role', $role)
+            ->getQuery()
+            ->getResult();
+    }    
 /**
 * @return User[] Returns username and email
 */
@@ -92,14 +105,7 @@ public function findByWithQueryBuilder(string $username, string $email=null): ?U
     //         ");
     //         return $query->getResult();
     //     }
-    public function findByRole($role): ?array
-        {
-            return $this->createQueryBuilder('u')
-                ->where('u.roles =:role')
-                ->setParameter('role', $role)
-                ->getQuery()
-                ->getResult();
-        }    
+    
 
 //    /**
 //     * @return User[] Returns an array of User objects
