@@ -2,19 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Admin;
 use App\Entity\Partner;
 use App\Entity\Structure;
-use App\Entity\User;
+use App\Entity\Permission;
+use App\Repository\UserRepository;
 use App\Repository\AdminRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
-use App\Repository\UserRepository;
+use App\Repository\PermissionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin')]
 
@@ -28,7 +30,7 @@ class AdminController extends AbstractController
      */
     #[Route('/', name: 'app_admin')]
     
-    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, ManagerRegistry $doctrine ) : Response
+    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, ManagerRegistry $doctrine, PermissionRepository $permissionRepo ) : Response
     {
         //Methode avec PartnerRepository => recup tt les partners
         $partners = $partnerRepo->findAllPartners();
@@ -44,11 +46,13 @@ class AdminController extends AbstractController
         // display how many structures
         $countStructures = count($structures);
 
+
         return $this->render('admin/index.html.twig',[
             'titleIndex'=> 'Listes des Franchises',
             'countPartners'=> $countPartners,
             'countStructures'=> $countStructures,
             'partners'=> $partners,
+            'structures'=>$structures
 
         ]);
     }
@@ -58,6 +62,7 @@ class AdminController extends AbstractController
     {
         $repository = $doctrine->getRepository(Partner::class);
         $partner = $repository->find($id);
+        
 
         //avec cette method mettre ds twig que id==
             // $structures = $structureRepo->findAllStructures();
@@ -83,13 +88,16 @@ class AdminController extends AbstractController
 
     }
     #[Route('/showstructure/{id<\d+>}', name: 'show-structure')]
-    public function showStructure(ManagerRegistry $doctrine, int $id ) : Response
+    public function showStructure(ManagerRegistry $doctrine, int $id, PermissionRepository $permissionsRepo, Permission $permission, Structure $structures  ) : Response
     {
         $repository = $doctrine->getRepository(Structure::class);
         $structure = $repository->find($id);
 
+        
+
         return $this->render('admin/showstructure.html.twig',[
             'structure'=> $structure,
+            // 'permission'=> $permissionStructure,
         ]);
 
     }

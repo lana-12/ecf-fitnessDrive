@@ -7,6 +7,7 @@ use App\Repository\StructureRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Cascade;
 
 #[ORM\Entity(repositoryClass: StructureRepository::class)]
 #[ORM\Table(name: '`structures`')]
@@ -47,11 +48,14 @@ class Structure
     #[ORM\ManyToOne(inversedBy: 'structures')]
     private ?Partner $partner = null;
 
+    #[ORM\ManyToOne(inversedBy: 'structure', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
     private Collection $permissions;
 
-    #[ORM\ManyToOne(inversedBy: 'structure', cascade: ['persist', 'remove'])]
-    private ?User $user = null;
+    // #[ORM\OneToMany(mappedBy: 'structure', targetEntity: Permission::class)]
+    // private Collection $permissions;
 
     public function __construct()
     {
@@ -172,6 +176,21 @@ class Structure
         return $this;
     }
 
+    
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
     /**
      * @return Collection<int, Permission>
      */
@@ -192,18 +211,6 @@ class Structure
     public function removePermission(Permission $permission): self
     {
         $this->permissions->removeElement($permission);
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }

@@ -17,6 +17,8 @@ class StructureController extends AbstractController
     public function index(int $id): Response
     {
 
+        
+        
         return $this->render('structure/index.html.twig'[]);
     }
 }

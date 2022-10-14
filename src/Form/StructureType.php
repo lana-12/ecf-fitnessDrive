@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Partner;
+use App\Entity\Permission;
 use App\Entity\Structure;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
@@ -125,21 +126,45 @@ class StructureType extends AbstractType
                 ])
                 
             
-            ->add('full_description', TextType::class,[
-                'label'=> 'Longue description ',
+            ->add('short_description', TextType::class,[
+                'label'=> 'Courte description ',
                 'required'=> false,
                 'attr'=>[
-                'placeholder'=>'...',
+                'placeholder'=>'Détail de la structure ...',
                 ],    
             ])
 
-            ->add('short_description', TextType::class,[
-                'label'=> 'Courte Description',
-                'required'=> false,
-                'attr'=>[
-                'placeholder'=>'...',
-                ],
+            //RECUP LA COLLECTION DE Permissions
+            ->add('permissions', EntityType::class, [
+                'class' => Permission::class,
+                'required' => true,
+                'label' => 'Choisissez les options',
+                'choice_label'=> 'titre',
+                'multiple' => true,
+                'placeholder' => 'Choisissez la Franchise',
+                'expanded' => true,
+                'choice_label' => function (Permission $permission) {
+                    return $permission->getTitle();
+                    },
+                    'query_builder' => function (EntityRepository $er) {
+        return $er->createQueryBuilder('p')
+            ->orderBy('p.title', 'ASC');
+                },
+                // Classer par ordre alphabétiq
+                // 'query_builder' => function (EntityRepository $er) {
+                //     return $er->createQueryBuilder('p')
+                //         ->orderBy('p.namePartner', 'ASC');
+                // },
+
+
             ])
+            // ->add('short_description', TextType::class,[
+            //     'label'=> 'Courte Description',
+            //     'required'=> false,
+            //     'attr'=>[
+            //     'placeholder'=>'...',
+            //     ],
+            // ])
             
         ;
     }

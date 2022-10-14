@@ -7,28 +7,22 @@
 
         <header class="header_home">
         {% block navbar %} 
-            <nav class="navbar navbar-dark shadow-5-strong ">
-                <div class="container">
-                    <div>
-                    <a class="navbar-brand title_home" href="#"><h1>Fitness Drive</h1></a>
-                    </div>
-                    <div>
-                    <a href=" {{ path('app_login') }} " class="btn btn-success" type="button">Connection</a>
-                    </div>
-                </div>
+            <nav class="navbar navbar-dark shadow-5-strong navHome ">
+            
+                <h1 class="navbar-brand titleCustom">Fitness <span class="drive">Drive</span></h1>
+                
+                <a href=" {{ path('app_login') }} " class="btn btnCustom" type="button" title="Cliquez pour ce connecter" alt="Cliquez pour ce connecter">Connexion</a>
+                
             </nav>
         {% endblock %}
         </header>
 
-        <main class="box_center" >
+        <main class="container-fluid box_center" >
             <div class="row">
                 <div class="col-12">
-                    <h2>Bienvenue sur notre Application </h2>
+                    <h2 class="h2Home">Gestion des Franchises et de leurs structures</h2>
 
-            
-    {# METTRE DE L ANIMATION #}
-                    <h3>Gestion des partenaires et des structures</h3>
-                        <p>Veuillez vous identifier pour accéder à votre compte !!</p>
+                    <p class="pHome">Veuillez vous identifier pour accéder à votre compte !!</p>
                 </div>
             </div>
         </main>

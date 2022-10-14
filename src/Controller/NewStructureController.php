@@ -35,13 +35,13 @@ class NewStructureController extends AbstractController
             if (!$structure->getId()) {
                 
             }
-
+            // $structure->addPermission($structure->getPermissions());
             $entityManager->persist($structure);
             $entityManager->flush();
 
             // $this->addFlash('success', 'Message envoyé');
             
-            return $this->render('structure/structure.html.twig', [
+            return $this->render('admin/index.html.twig', [
                 'structure'=> $structure,
 
             ]);

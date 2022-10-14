@@ -1,11 +1,13 @@
 /* Import file only */
 
 // Folder tools
-@import "./tools/variables.sass";
 
 // Folder generals
-@import "./generals/body.sass";
+@import "./generals/variables.sass";
+@import "./generals/class.sass";
+@import "./generals/mixins.sass";
 @import "./generals/reset.sass";
+@import "./generals/body.sass";
 
 // Folder components
 @import "./components/sidebar.sass";

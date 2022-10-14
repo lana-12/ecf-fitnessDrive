@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Permission;
 use App\Entity\Structure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -58,6 +60,16 @@ class StructureRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    // public function findAllPermissionsByStructures(Permission $permission): ?array
+    // {
+    //     return $this->createQueryBuilder('s')
+    //         ->join('s.permissions', 'p')
+    //         ->where('p.structures = :structures')
+    //         ->setParameter('structures', $permission->getStructures())
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 
     
 //    /**

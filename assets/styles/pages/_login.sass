@@ -8,30 +8,30 @@
     text-align: center
 
 .header_login
-    box-shadow: 1px 1px 2px black, 0 0 1em $green, 0 0 0.2em $green
+    box-shadow: 1px 1px 2px black, 0 0 0.5em $green, 0 0 0.2em $green
     display: flex
+    & .nav_login
+        margin: 0px 20px
+        display: flex
+        justify-content: center
+        align-items: center
     
-.nav_login
-    margin: 0px 20px
-    display: flex
-    justify-content: center
-    align-items: center
 
 .main_login
     display: flex
     justify-content: center
     align-content: center
     margin-top: 30%
-    // margin-bottom: 50%
 
-.box
+.boxLogin
     display: flex 
     flex-direction: column
     justify-content: center
     align-content: center
     position: relative
     background: transparent 
-    width: 400px
+    width: 280px
+        // width: 400px
     height: auto
     border: 1px solid #fff
     border-radius: 20px
@@ -43,19 +43,45 @@
         background: rgba(0,0,0,0.5)
         border-radius: 20px
         z-index: -1
+    & .h2_login
+        text-shadow: 1px 1px 2px black, 0 0 1em $green, 0 0 0.2em $green
+        font-size: 1.8em
+        padding-top: 20px
+        
+//taille ecran
+$xs: 0,
+$sm: 576px,
+$md: 768px,
+$lg: 992px,
+$xl: 1200px,
+$xxl: 1400px
 
-.h2_login
-    text-shadow: 1px 1px 2px black, 0 0 1em $green, 0 0 0.2em $green
-    font-size: 1.8em
-    padding-top: 20px
+/********MEDIA QUERY POUR ECRAN 576PX/********
+/********min-width 576px/********
+@include media($sm)
+    .main_login
+        margin-top: 15vh
+    .boxLogin
+        width: 300px
 
-.btn
-    background-color: $green
-    color: #fff 
-    margin: auto
-    margin-bottom: 20px
 
-// form i
+/********MEDIA QUERY POUR ECRAN 768PX/********
+/********min-width 768px/********
+@include media($md)
+    .main_login
+        margin-top: 15vh
+    .boxLogin
+        width: 350px
 
-//     cursor: pointer
-//     // margin-left: -30px
+/********MEDIA QUERY POUR ECRAN 992PX/********
+/********min-width 992px/********
+@include media($lg)
+    .boxLogin
+        width: 400px
+
+/********MEDIA QUERY POUR ECRAN 1200PX/********
+/********min-width 1200px/********
+@include media($lg)
+    .boxLogin
+        width: 500px
+
