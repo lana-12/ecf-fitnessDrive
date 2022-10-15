@@ -1,4 +1,5 @@
 .body_home
+    width: 100%
     background: rgb(51, 48, 48) url("../../images/img2.jpg")
     background-size: cover
     background-position: center
@@ -11,21 +12,42 @@
     box-shadow: 1px 1px 2px black, 0 0 0.5em $green, 0 0 0.2em $green
     & .navHome    
         display: flex
-        justify-content: space-around
+        justify-content: center
         align-items: center
         margin: 0px 20px
+        padding: 20px
 
 .box_center
     text-shadow: 1px 1px 2px black, 0 0 0.2em $green, 0 0 0.2em $green
-    min-height: 80vh
+    // min-height: 80vh
     display: flex
     justify-content: center
     align-items: center
+    margin-top: 50px
+    padding: 20px
     & .h2Home
         font-size: 2.5em
         margin-bottom: 50px
     & .pHome
         font-size: 1.8em
+        & a:hover
+            color: $green
+            font-weight: bolder
+            
 
 
 
+/********MEDIA QUERY POUR ECRAN 460PX/********
+/********min-width 460px/********
+@include media($sx)
+    .titleHome
+        margin-right: 40px
+        
+/********MEDIA QUERY POUR ECRAN 768PX/********
+/********min-width 768px/********
+@include media($md)
+    .titleHome
+        margin-right: 100px
+        
+        
+        

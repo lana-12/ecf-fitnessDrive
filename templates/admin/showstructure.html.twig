@@ -6,9 +6,23 @@
 <body>
 {% block header %} {{parent()}}  {% endblock  %}
 
-<main class='main-container col-12'>
+    <main class='main-container col-12'>
 
-            <h1> Détail de la Structure  </h1>
+    {% block Breadcrumb %}
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_admin') }}">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item "><a href="{{ path( 'show-partner', {'id': structure.partner.id}) }}">Franchise</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Détail de la Structure</li>
+                </ol>
+            </nav>
+        </section>
+    {% endblock  %}
+
+            <h2> Détail de la Structure <span class="detail">{{structure.nameStructure}}</span> </h2>
         
         {% include "_partials/_structure.html.twig" %}
 

@@ -1,13 +1,4 @@
 .main-container
-    width: auto
-    margin-top: 70px
-    margin-left: 35px
-    padding-left: 10px
-    padding-top: 10px
-    background-color: #e2f3eb
-    // background: url("../../images/img1.jpg")no-repeat
-    background-size: cover 
-    // transition: 0.3s
     & .count
         font-size: 0.9em
         text-align: right
@@ -15,11 +6,50 @@
     & .search
         display: flex
         margin: 10px
+        & .inputSearch 
+            background-color: $green
+        & .btnSearch
+            transition: 0.3s
+            transition-property: color, background, border-radius
+            &:hover
+                color: #fff
+                background-color: $green
+                border-radius: 50%
 
 .titleIndex
-    text-shadow: 1px 1px 2px black, 0 0 0.2em $green, 0 0 0 $green
+    // text-shadow: 1px 1px 2px black, 0 0 0.2em $green, 0 0 0 $green
+    color: #000
+    font-weight: 700
     margin: 10px
     font-size: 2em
     text-align: center
 
+.searchLink
+    & .items_check
+        & .item_check
+            transition: 0.3s
+            transition-property: color, font-weight 
+            &:hover
+                color: $greenDark
+                font-weight: bolder
+        & .active
+            text-decoration: underline
+            text-decoration-color: #0b6e40
+            font-weight: bolder
+            color: $greenDark
 
+
+
+
+/********MEDIA QUERY POUR ECRAN 768PX  ***********/
+/******min-width 768px**************/
+@include media($md)
+    .main-container
+        margin-left: 150px
+        margin-right: 0
+        padding-left: 10px
+        // padding-right: 10px
+        padding-top: 10px
+
+
+        

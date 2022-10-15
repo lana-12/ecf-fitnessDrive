@@ -2,7 +2,7 @@
 .wrapper 
     & .header-sidebar
         z-index: 1
-        background-color: rgb(47, 50, 58)
+        background-color: $backGHS
         position: fixed
         width: 100%
         height: 80px
@@ -15,7 +15,8 @@
             display: flex
             justify-content: space-around
             align-items: center
-            padding: 0 20px
+            flex-wrap: wrap
+            // padding: 0 0px
             & .icon-fas
                 // display: flex
                 & .fas-fa
@@ -36,23 +37,19 @@
                         background-color: $greenL
 
     // SIDEBAR start
-.wrapper .sidebar   
+.sidebar   
     z-index: 1
-    background-color: rgb(47, 50, 58)
+    background-color: $backGHS
     position: fixed
     top: 80px
-    //A revoir
-    // width: 250px
-    // modifier mais la refaire lorsqu'on agrandit
-    width: 15%
+    width: 50px
     height: 90%
     transition: 0.3s
     transition-property: width
     overflow-y: auto
     & .sidebar-menu
-        overflow: hidden
+        // overflow: hidden
         & .item
-            // width: 255px
             width: 255px
             overflow: hidden
             & .menu-btn
@@ -64,12 +61,6 @@
                 transition-property: color
                 &:hover
                     color: $greenL
-                & i
-                    margin-right: 10px
-                & .drop-down
-                    float: right
-                    font-size: 12px
-                    margin-top: 3px
             & .sub-menu
                 background-color: $green
                 max-height: 0
@@ -87,7 +78,7 @@
                     transition: 0.3s
                     transition-property: background
                     &:hover
-                        background-color: #0b6e40
+                        background-color: $greenDark
                 & i
                     padding-right: 30px
                     font-size: 10px
@@ -96,13 +87,23 @@
             max-height: 500px
 
 
+/********MEDIA QUERY POUR ECRAN 460PX  ***********/
+/******min-width 460px**************/
+// @include media($sx)
+    
 
-/********MEDIA QUERY POUR ECRAN 576PX  ***********/
-/******min-width 576px**************/
-@include media($sm)
-// VOIR LA DOC CAR SOUCIS CLASS="d-none d-sm-block va à la ligne"
-    // .hidden
-    //     display: inline-flex
 
+/********MEDIA QUERY POUR ECRAN 768PX  ***********/
+/******min-width 768px**************/
+@include media($md)
+    .sidebar  
+        width: 150px
+        transition: 0.3s
+        & .drop-down
+            margin-right: 50px
+            padding-right: 50px
+            float: right
+            font-size: 12px
+            margin-top: 3px
 
 

@@ -88,16 +88,14 @@ class AdminController extends AbstractController
 
     }
     #[Route('/showstructure/{id<\d+>}', name: 'show-structure')]
-    public function showStructure(ManagerRegistry $doctrine, int $id, PermissionRepository $permissionsRepo, Permission $permission, Structure $structures  ) : Response
+    public function showStructure(ManagerRegistry $doctrine, int $id) : Response
     {
         $repository = $doctrine->getRepository(Structure::class);
         $structure = $repository->find($id);
-
         
 
         return $this->render('admin/showstructure.html.twig',[
             'structure'=> $structure,
-            // 'permission'=> $permissionStructure,
         ]);
 
     }

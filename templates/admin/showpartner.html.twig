@@ -10,7 +10,20 @@
 
     <main class='main-container col-12'>
 
-            <h1> Détail de la franchise  </h1>
+    {% block Breadcrumb %}
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item back">
+                        <a href="{{ path('app_admin') }}">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Détail de la Franchise</li>
+                </ol>
+            </nav>
+        </section>
+    {% endblock  %}
+
+            <h2> Détail de la Franchise de  <span class="detail"> {{ partner.namePartner}} </span> </h2>
                 {% include "_partials/_partner.html.twig" %}
 
                 <h2>Liste des structures associées</h2>

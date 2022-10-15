@@ -8,21 +8,21 @@
         <header class="header_home">
         {% block navbar %} 
             <nav class="navbar navbar-dark shadow-5-strong navHome ">
-            
-                <h1 class="navbar-brand titleCustom">Fitness <span class="drive">Drive</span></h1>
-                
-                <a href=" {{ path('app_login') }} " class="btn btnCustom" type="button" title="Cliquez pour ce connecter" alt="Cliquez pour ce connecter">Connexion</a>
-                
+                <div class="titleHome">
+                    <h1 class="navbar-brand titleCustom">Fitness <span class="drive">Drive</span></h1>
+                </div>    
+                <div>    
+                    <a href=" {{ path('app_login') }} " class="btn btn-sm btnCustom" type="button" title="Cliquez pour ce connecter" alt="Cliquez pour ce connecter">Connexion</a>
+                </div>
             </nav>
         {% endblock %}
         </header>
 
-        <main class="container-fluid box_center" >
+        <main class=" box_center" >
             <div class="row">
                 <div class="col-12">
                     <h2 class="h2Home">Gestion des Franchises et de leurs structures</h2>
-
-                    <p class="pHome">Veuillez vous identifier pour accéder à votre compte !!</p>
+                    <p class="pHome">Veuillez vous identifier pour accéder à votre <a href=" {{ path('app_login') }} " title="Cliquez pour ce connecter" alt="Cliquez pour ce connecter"> compte </a>!!</p>
                 </div>
             </div>
         </main>

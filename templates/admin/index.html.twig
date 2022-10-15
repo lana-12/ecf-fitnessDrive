@@ -69,8 +69,8 @@
 		<nav class="row">
 			<div class="col-12">
 				<form class="search form-group ">
-					<input id="searchbar" onkeyup="search_animal()" class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-					<button class="btn btn-sm" type="submit">Rechercher</button>
+					<input id="searchbar" onkeyup="search_animal()" class="form-control inputSearch me-2" type="search" placeholder="Chercher une Franchise" aria-label="Search">
+					<button class="btn btnSearch" type="submit" alt="Cliquer pour rechercher" title="Cliquer pour rechercher"><i class="fas fa-search"></i></button>
 
 				</form>
 			</div>
@@ -78,26 +78,19 @@
 		<!-- Barre de recherche end-->
 	</section>
 {# A VOIR SI JE LE MET DS CARDS #}
-	<section class="">
+	<section class="searchLink">
 		<div class="row">
 			<div class="col-12">
 				<h2 class='titleIndex'> {{ titleIndex }}</h2>
 
 				<div class="items_check">
-					<a class='active item_check  check' data-name="all" href='#'>Toutes</a>
-					<a class='item_check check' data-name="active" href='#'>Active</a>
-					<a class='item_check check' data-name="inactive" href='#'>Inactive</a>
+					<a class='active item_check  check' data-name="all" alt="Affiche toutes les franchises" title="Affiche toutes les franchises" href='#'>Toutes</a>
+					<a class='item_check check' data-name="active" alt="Affiche uniquement les franchises Active" title="Affiche uniquement les franchises Active" href='#'>Active</a>
+					<a class='item_check check' data-name="inactive" alt="Affiche uniquement les franchises Inactive" title="Affiche uniquement les franchises Inactive" href='#'>Inactive</a>
 				</div>
 			</div>
 		</div>
 
-		<!-- A VOIR SI COMMUTATEUR OU LIEN -->
-				{# <div class="d-flex justify-content-around ">
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-							<label class="form-check-label" for="flexSwitchCheckChecked">Franchise Active</label>
-						</div>
-				</div> #}
 	</section>
 	<section>
 			{% include "_partials/_listpartner.html.twig" %}
@@ -105,10 +98,8 @@
 		
 </main>
 
-
-
 <!-- main container end -->
 
-    </body>
+</body>
 {% endblock %}
 
