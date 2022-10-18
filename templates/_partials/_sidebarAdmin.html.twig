@@ -57,19 +57,22 @@
 			<li class="item" id="permissions">
 				<a href="#permissions" class="menu-btn" alt="Permission" title="Permission">
 
-					<i class="fa-regular fa-address-card"></i>
+					<i class="fa fa-cog"></i>
 					<span class="d-none d-md-block ">Permissions<i class="fas fa-chevron-down drop-down"></i>
 					</span>
 				</a>
 				<div class="sub-menu">
-					<a href="#" alt="Ajouter" title="Ajouter">
+					<a href="{{ path('app_permission') }}" alt="Modifier" title="Modifier">
+						<i class="fa fa-pencil "></i>
+						<span>Liste</span>
+					</a>
+
+					<a href="{{ path('app_permission_new') }}" alt="Ajouter" title="Ajouter">
 						<i class="fa fa-plus "></i>
 						<span>Ajouter</span>
+
 					</a>
-					<a href="#" alt="Modifier" title="Modifier">
-						<i class="fa fa-pencil "></i>
-						<span>Modifier</span>
-					</a>
+					
 				</div>
 			</li>
 		</div>

@@ -9,7 +9,7 @@
 import './styles/app.scss';
 
 import './scripts/_functions.js';
-import './scripts/_displayPassword.js';
+// import './scripts/_displayPassword.js';
 
 
 // start the Stimulus application

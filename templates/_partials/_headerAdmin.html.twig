@@ -3,16 +3,21 @@
         <div>
             <h1 class="titleCustom text-white">Fitness<span class='drive'>Drive</span></h1>
         </div>
-        {# <div id="sidebarBtn" class="sidebar-btn">
+        <div id="sidebarBtn" class="sidebar-btn">
 
-            <i class="fas fa-bars"></i>
-        </div> #}
+{# JE L AI MIS DS PARTNER/INDEX.HTML.TWIG #}
+{% if app.user %}
+	<h2 class='text-light'>
+		<i class="far fa-user"></i>
+
+		{{ app.user.username }}
+	</h2>
+
+{% endif %}
+
+
+        </div>
         <ul class="icon-fas">
-            {# <li>
-                <a class="fas-fa" href="#">
-                    <i class="fas fa-search"></i>
-                </a>
-            </li> #}
             <li>
                 <a class="fas-fa" title='Déconnexion' href="{{ path('app_logout') }}">
                     <i class="fas fa-power-off"></i>
@@ -25,3 +30,4 @@
 </div>
 
 	
+

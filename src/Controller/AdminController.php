@@ -30,7 +30,7 @@ class AdminController extends AbstractController
      */
     #[Route('/', name: 'app_admin')]
     
-    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, ManagerRegistry $doctrine, PermissionRepository $permissionRepo ) : Response
+    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, ManagerRegistry $doctrine ) : Response
     {
         //Methode avec PartnerRepository => recup tt les partners
         $partners = $partnerRepo->findAllPartners();
@@ -69,7 +69,10 @@ class AdminController extends AbstractController
 
         //display the structures from partner
         $structures = $structureRepo->findAllStructuresByPartner($id);
-            dump($structures);
+        dump($structures);
+
+        
+            
             $error = 'Aucune structure associée';
             return $this->render('admin/showpartner.html.twig',[
                 'partner'=> $partner,
@@ -92,10 +95,16 @@ class AdminController extends AbstractController
     {
         $repository = $doctrine->getRepository(Structure::class);
         $structure = $repository->find($id);
-        
+
+        $permissions = $structure->getPermissions();
+            // foreach ($permissions as $permission) {
+            //     $structure->addPermission($permission);
+            // }
 
         return $this->render('admin/showstructure.html.twig',[
             'structure'=> $structure,
+            'permissions' => $permissions,
+
         ]);
 
     }

@@ -48,13 +48,13 @@
 	<section>
 		<div class="row">
 			<div class='count col-12'>
-				<div>
+				{# <div>
 				{% if app.user %}
 					<span class=''>Bienvenue
 						{{ app.user.username }}
 					</span>
 				{% endif %}
-				</div>
+				</div> #}
 				<div>
 					<span class='total'>Total :
 						{{ countPartners }} Franchises | 
@@ -68,21 +68,24 @@
 		<!-- Barre de recherche start-->
 		<nav class="row">
 			<div class="col-12">
-				<form class="search form-group ">
-					<input id="searchbar" onkeyup="search_animal()" class="form-control inputSearch me-2" type="search" placeholder="Chercher une Franchise" aria-label="Search">
-					<button class="btn btnSearch" type="submit" alt="Cliquer pour rechercher" title="Cliquer pour rechercher"><i class="fas fa-search"></i></button>
+				{# <form class="search form-group "> #}
 
-				</form>
+					<input id="searchbar"  class=" inputSearch me-2" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
+					<input id="hidden"  class=" inputSearch me-2" type="hidden"   aria-label="hidden">
+					{# <button class="btn btnSearch" type="submit" alt="Cliquer pour rechercher" title="Cliquer pour rechercher"><i class="fas fa-search"></i></button> #}
+
+				{# </form> #}
 			</div>
 		</nav>
 		<!-- Barre de recherche end-->
 	</section>
+
+
 {# A VOIR SI JE LE MET DS CARDS #}
 	<section class="searchLink">
 		<div class="row">
 			<div class="col-12">
 				<h2 class='titleIndex'> {{ titleIndex }}</h2>
-
 				<div class="items_check">
 					<a class='active item_check  check' data-name="all" alt="Affiche toutes les franchises" title="Affiche toutes les franchises" href='#'>Toutes</a>
 					<a class='item_check check' data-name="active" alt="Affiche uniquement les franchises Active" title="Affiche uniquement les franchises Active" href='#'>Active</a>

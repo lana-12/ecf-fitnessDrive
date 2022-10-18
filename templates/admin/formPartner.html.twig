@@ -39,13 +39,23 @@
 {{form_start(formpartner)}}
 {{form_rest(formpartner)}}
 
-    <button class="btn btn-success mx-auto" type="submit"> 
+{# <button class="btn btn-success mx-auto" type="submit" id='test' data-bs-toggle="modal" data-bs-target="#test"> #}
+
+<button class="btn mx-auto btnCustom" type="submit" id='test' data-bs-toggle="modal" data-bs-target="#test">
+
+
         {% if editMode %}
             Enregistrer les modifications
         {% else %}
             Ajouter
         {% endif %}
     </button>
+
+
+{{form_end(formpartner)}}
+
+
+
 
     </main> 
 {% endblock %}

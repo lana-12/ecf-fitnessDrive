@@ -4,8 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Partner;
-use App\Entity\Permission;
 use App\Entity\Structure;
+use App\Entity\Permission;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class StructureType extends AbstractType
 {
@@ -126,7 +127,7 @@ class StructureType extends AbstractType
                 ])
                 
             
-            ->add('short_description', TextType::class,[
+            ->add('short_description', TextareaType::class,[
                 'label'=> 'Courte description ',
                 'required'=> false,
                 'attr'=>[

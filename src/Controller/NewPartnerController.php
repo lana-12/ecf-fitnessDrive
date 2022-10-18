@@ -14,15 +14,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class NewPartnerController extends AbstractController
 {
-    #[Route('/newpartner', name: 'new_partner')]
-    #[Route('/partner/{id}/edit', name: 'partner_edit')]
     /**
      * For create and edit partner
-     */
+    */
+    #[Route('/newpartner', name: 'new_partner')]
+    #[Route('/partner/{id}/edit', name: 'partner_edit')]
 
-    public function formpartner(Request $request, EntityManagerInterface $entityManager,Partner $partner=null, ManagerRegistry $doctrine, ): Response
+    public function formpartner(Request $request, EntityManagerInterface $entityManager, Partner $partner=null, ManagerRegistry $doctrine, ): Response
     {  
-            
             if(!$partner){
                 $partner = new Partner();
             }
@@ -35,21 +34,24 @@ class NewPartnerController extends AbstractController
                 
             }
 
+            // Ajoute les structures aux partner
+            /**
+             * 
+             */
+            $structures = $partner->getStructures();
+            foreach ($structures as $structure) {
+                $partner->addStructure($structure);
+            }
+            
             $entityManager->persist($partner);
             $entityManager->flush();
             
-            // $this->addFlash('success', 'Message envoyé');
+            $this->addFlash('success', 'La Franchise a été créer');
             
-            return $this->render('partner/partner.html.twig',[
-                'partner'=> $partner,
+            return $this->render('admin/index.html.twig',[
+                // 'partner'=> $partner,
             ]);
             
-            // pour afficher la suite sur une autre page
-            //pour l'instant j'ai afficher
-            // return $this->render('user/index.html.twig',[
-                //     'user'=> $partner,
-                
-                // ]);
             }
 
             return $this->render('admin/formPartner.html.twig',[

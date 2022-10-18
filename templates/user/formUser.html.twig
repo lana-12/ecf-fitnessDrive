@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Création - Etape I | {{ parent() }}{% endblock %}
 
@@ -19,7 +19,6 @@ Uniquement pour le franchisé ou structure
                 
             <h1 class="tiltle_h1_form">Création d'un nouveau compte de connexion </h1>
 
-                {# color: #0b6e40 ; #}
                     <ul class="" style="list-style-type: disc; ">
                         <li>Pour chaque utilisateur</li>
                             <ul>
@@ -34,7 +33,7 @@ Uniquement pour le franchisé ou structure
         {% endif %}
 
                     <button id='test' onclick='show()' class="btn mx-auto" type="submit">test alert </button>
-
+ #}
 
     <!-- *FORMULAIRE LIER A ENTITY USER 
         *ROLE PARTNER
@@ -48,7 +47,7 @@ Uniquement pour le franchisé ou structure
         {% endfor %}
     #}
 
-    {{form_start(formUser)}}
+    {# {{form_start(formUser)}}
             <fieldset>
                 <legend> Compte de connexion</legend>
 
@@ -62,10 +61,10 @@ Uniquement pour le franchisé ou structure
 
                     <div class="form-group">
                         {{ form_row(formUser.password, {'label':'Mot de passe','attr': {'placeholder':''}}) }}
-                        {# <i class="bi bi-eye-slash"></i>             #}
+                        <i class="bi bi-eye-slash"></i>             #}
                         {# <input type="checkbox" id="togglePassword" onclick="displayPassword()">
                         Afficher le Mot de passe #}
-                    </div>         
+                    {# </div>         
                             
                     <div class="form-group">
                         {{ form_row(formUser.confirmPassword, {'label':'Confirmation de votre mot de passe','attr': {'placeholder':''}}) }}
@@ -73,7 +72,6 @@ Uniquement pour le franchisé ou structure
                     <div class="form-group">
                         {{ form_row(formUser.roles, {'attr': {'placeholder':''}}) }}
                     </div>                               
-                        {# <button class="btn btn-primary" type="submit">Générer </button>"#}
 
                     <button class="btn mx-auto" type="submit">
                         
@@ -92,4 +90,4 @@ Uniquement pour le franchisé ou structure
 {% endblock %}
 
 
-
+ #}

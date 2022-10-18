@@ -1,25 +1,49 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/index.html.twig' %}
 
-{% block title %}Hello PermissionController!{% endblock %}
+{% block title %}Hello NewPermissionController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	{% block header %}
+		{{ parent() }}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/apps/fitness-drive/src/Controller/PermissionController.php'|file_link(0) }}">src/Controller/PermissionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/apps/fitness-drive/templates/permission/index.html.twig'|file_link(0) }}">templates/permission/index.html.twig</a></code></li>
-    </ul>
-</div>
+	{% endblock %}
 
 
-{# <pre>
-    {{ dump(structure) }}
-</pre> #}
+	<main class='main-container col-12'>
+
+    
+    
+		<h2>Liste des Permissions</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-dark"></tr>
+
+                        <th scope="col">Id</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Description</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+        {% for permission in permissions %}
+
+                    <tr>
+                        <th scope="row">{{permission.id}}</th>
+                        <td>{{permission.title}}</td>
+                        <td>{{permission.Description}}</td>
+                        <td>
+                            <a type="button" class="btn-sm btn-warning" href="{{ path('app_permission_edit', {'id': permission.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                    
+    {% endfor %}
+                </tbody>
+            </table>
+
+		
+
+
+	</main>
 {% endblock %}
+

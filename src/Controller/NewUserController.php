@@ -62,11 +62,9 @@ class NewUserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             
-            // $this->addFlash('success', 'Message envoyé');
+            $this->addFlash('success', 'La compte de connexion a bien été créer');
 
-            // pour afficher la suite sur une autre page
-            //pour l'instant j'ai afficher
-            return $this->render('user/index.html.twig',[
+            return $this->render('admin/index.html.twig',[
                 'user'=> $user,
                 
             ]);
@@ -169,5 +167,3 @@ class NewUserController extends AbstractController
 
     
 }
-
-

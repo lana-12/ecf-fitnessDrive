@@ -40,17 +40,13 @@ class PermissionRepository extends ServiceEntityRepository
         }
     }
 
-    // public function findAllPermissionsByStructures(Structure $structures): ?array
-    // {
-    //     return $this->createQueryBuilder('p')
-    //         ->join('p.structures', 's')
-    //         ->where('s.permissions = :permissions')
-    //         ->setParameter('permissions', $structures->getPermissions())
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-
-
+    public function findAllPermissions(): ?array
+    {
+        return
+            $this->createQueryBuilder('p')
+            ->getQuery()
+            ->getResult();
+    }
 
     
 //    /**

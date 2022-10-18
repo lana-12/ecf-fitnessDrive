@@ -3,40 +3,37 @@
 {% block title %}Franchise | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <body>
+<body>
     {% block navbar %}  
         {% include "_partials/_navbarClient.html.twig" %} 
     {% endblock %}
 
-        <main class="container-fluid">
+    <main class="container-fluid">
 
-        {% if app.user %}
-            <h2 class=''>Bienvenue {{ app.user.username }}
-            </h2>
-        {% endif %}
-
+{# A VOIR OU JE LE MET DS NAV OU MAIN #}
+    {# {% if app.user %}
+        <h2 class=''>Bienvenue {{ app.user.username }} </h2>
+    {% endif %}
+    #}
     {% if partner %}
-    {{ dump(partner.user.id)}}
-{{ dump(partner.user.roles)}}
 
-Inserer un autre affichage et puis voila, attention supp les choses inutiles
-            <h3>Fitness Drive - {{partner.namePartner}}</h3>
+        <h3>Fitness Drive - {{partner.namePartner}}</h3>
 
-            <h4>Détail</h4>
+        <h4>Vos Structures</h4>
 
     <!-- Display the structures -->
         {% for structure in structures %}
 
+
         <!-- Display the structures du partner -->
-            {% if structure.partner.id %}
-                {% include "_partials/_liststructure.html.twig" %}
-            {% else %}
+            {# {% if structure.partner.id %} #}
+                {% include "partner/_listStructures.html.twig" %}
+            {# {% else %}
+                <div class="alert alert-success">
+                    <p> Oups une erreur est survenue !</p>
+                </div>
+            {% endif %} #}
 
-            <div class="alert alert-success">
-                <p> Oups une erreur est survenue !</p>
-            </div>
-
-            {% endif %}
         {% endfor %}
 
             <h4>Vos permissions</h4>
@@ -47,8 +44,9 @@ Inserer un autre affichage et puis voila, attention supp les choses inutiles
     {% endif %}
 
 
-        </main> 
-    </body>
+    </main> 
+
+</body>
 {% endblock %}
 
 

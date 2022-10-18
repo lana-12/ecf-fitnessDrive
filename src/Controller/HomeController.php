@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * 
+ * Page d'accueil => btn connexion qui renvoi à /login
  */
 
 #[Route('/')]
@@ -24,5 +24,3 @@ class HomeController extends AbstractController
 
 
 }
-
-
