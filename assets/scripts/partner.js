@@ -25,11 +25,9 @@ const mySearch = () => {
                 if (partners[i].innerHTML.toLowerCase().indexOf(valueInput) != -1) {
                     partners[i].classList.remove("d-none");
                     partners[i].classList.add("d-flex");
-                    
                 } else {
                     partners[i].classList.remove("d-flex");
                     partners[i].classList.add("d-none");
-                    
                 }
         }
 };

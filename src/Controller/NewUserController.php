@@ -73,11 +73,12 @@ class NewUserController extends AbstractController
      * Display list Users
     */
     #[Route('/list', name: 'app_user_list')]
-    public function index(UserRepository$userRepository ): Response
+    public function index(UserRepository $userRepository, Request $request ): Response
     {
         return $this->render('admin/user/list.html.twig',[
             'users'=> $userRepository->findAll(),
-            'users'=>$userRepository->getPaginatedUser(1),
+            'countUsers'=> $userRepository->countUsers(),
+            'users'=>$userRepository->getPaginatedUser((int)$request->query->get("page")),
         ]);
     }
     

@@ -63,7 +63,8 @@ class PartnerRepository extends ServiceEntityRepository
 
     public function getPaginatedPartner(int $page): array | Partner
     {
-        $partnerPerPage = 1;
+        $page = $_GET['page']?? 1;
+        $partnerPerPage = 2;
         $qb =  $this->createQueryBuilder('p')
             ->orderBy('p.namePartner')
             ->setFirstResult(($page -1 ) * $partnerPerPage)
@@ -71,7 +72,15 @@ class PartnerRepository extends ServiceEntityRepository
             
         return $qb->getQuery()->getResult();
     }
+
     
+    public function countPartners()
+    {
+        return $this->createQueryBuilder('p')
+                    ->select('COUNT(p.id)')
+                    ->getQuery()
+                    ->getSingleScalarResult();
+    }
 //    /**
 //     * @return Partner[] Returns an array of Partner objects
 //     */

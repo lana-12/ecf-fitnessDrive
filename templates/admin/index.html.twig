@@ -5,7 +5,11 @@
 {% block javascripts %}
 	
 	{{parent()}}
-	
+<!-- My JS -->
+{{ encore_entry_script_tags('partner') }}
+
+
+
 {% endblock %}
 
 
@@ -48,13 +52,13 @@
 	<section>
 		<div class="row">
 			<div class='count col-12'>
-				{# <div>
+				<div>
 				{% if app.user %}
 					<span class=''>Bienvenue
 						{{ app.user.username }}
 					</span>
 				{% endif %}
-				</div> #}
+				</div>
 				<div>
 					<span class='total'>Total :
 						{{ countPartners }} Franchises | 
@@ -64,6 +68,8 @@
 		</div>
 	</section>
 
+
+{% block searchBar %}
 	<section>
 		<!-- Barre de recherche start-->
 		<nav class="row">
@@ -78,7 +84,7 @@
 		</nav>
 		<!-- Barre de recherche end-->
 	</section>
-
+{% endblock %}
 
 {# A VOIR SI JE LE MET DS CARDS #}
 <section class="searchLink">
@@ -101,33 +107,39 @@
 	<section>
 			{% include "admin/partner/_listpartner.html.twig" %}
 	</section>
+	
+{% block paginated %}
 		
-	<section class='d-flex justify-content-center'>
-		<nav aria-label="Page navigation example">
-			<ul class="pagination pagination-sm">
-				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">1</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">2</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">3</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</ul>
-		</nav>
-	</section>
+		{# CHAQUE PAGE A SA PAGINATION AVEC SES LIENS #}
+<section class='d-flex justify-content-center'>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination pagination-sm">
 
+
+{# {{ path(app.request.attributes.get('_route') , app.request.attributes.get('_route_params')) }} #}
+
+			<li class="page-item">
+<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+
+{# ATTENTION CHANGER LE NBRE TROIS #}
+{% for i in 1..((countPartners/ 2) | round(0, 'ceil')) %}
+	
+			<li class="page-item">
+				<a class="page-link" href="{{ path('app_admin', {page:i})}}">{{i}}</a>
+			</li>
+{% endfor %}
+			<li class="page-item">
+				<a class="page-link" href="#" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+{% endblock %}
 
 </main>
 

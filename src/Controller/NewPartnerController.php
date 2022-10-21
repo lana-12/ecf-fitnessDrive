@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Repository\PartnerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,7 @@ class NewPartnerController extends AbstractController
     #[Route('/newpartner', name: 'new_partner')]
     #[Route('/partner/{id}/edit', name: 'partner_edit')]
 
-    public function formpartner(Request $request, EntityManagerInterface $entityManager, Partner $partner=null, ManagerRegistry $doctrine, ): Response
+    public function formpartner(Request $request, EntityManagerInterface $entityManager, Partner $partner=null, PartnerRepository $partnerRepo ): Response
     {  
             if(!$partner){
                 $partner = new Partner();
@@ -49,7 +50,8 @@ class NewPartnerController extends AbstractController
             $this->addFlash('success', 'La Franchise a été créer');
             
             return $this->render('admin/index.html.twig',[
-                // 'partner'=> $partner,
+                // 'partners'=>
+                // $partnerRepo->getPaginatedPartner((int) $request->query->get("page")),
             ]);
             
             }

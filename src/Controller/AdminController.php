@@ -12,6 +12,7 @@ use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
 use App\Repository\PermissionRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -29,7 +30,7 @@ class AdminController extends AbstractController
      */
     #[Route('/', name: 'app_admin')]
     
-    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, ManagerRegistry $doctrine ) : Response
+    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, Request $request, ManagerRegistry $doctrine ) : Response
     {
         //Methode avec PartnerRepository => recup tt les partners
         $partners = $partnerRepo->findAllPartners();
@@ -41,10 +42,10 @@ class AdminController extends AbstractController
         // $partners = $repository->findAll();
 
         // display how many partners
-        $countPartners = count($partners);
+        // $countPartners = count($partners);
+        $countPartners = $partnerRepo->countPartners();
         // display how many structures
         $countStructures = count($structures);
-
 
         return $this->render('admin/index.html.twig',[
             'titleIndex'=> 'Listes des Franchises',
@@ -52,8 +53,7 @@ class AdminController extends AbstractController
             'countStructures'=> $countStructures,
             'partners'=> $partners,
             'structures'=>$structures,
-            // 'partners'=>$partnerRepo->getPaginatedPartner(1),
-
+            'partners'=> $partnerRepo->getPaginatedPartner((int) $request->query->get("page")),
         ]);
     }
 

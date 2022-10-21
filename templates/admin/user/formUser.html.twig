@@ -2,12 +2,10 @@
 
 {% block title %}Utilisateur | {{ parent() }}{% endblock %}
 {% block javascripts %}
-	<!-- Files JavaScript -->
-	<!--Js Bootstrap--><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"> </script>
+{{parent()}}
 
-	{# <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> #}
-	<!-- My JS -->
-	{{ encore_entry_script_tags('app2') }}
+<!-- My JS -->
+{{ encore_entry_script_tags('displayPassword') }}
 
 {% endblock %}
 
@@ -88,10 +86,14 @@
                     </div>      
 
                     <div class="form-group">
-                        {{ form_row(formUser.password, {'label':'Mot de passe','attr': {'placeholder':''}}) }}
-                        {# <i class="bi bi-eye-slash"></i>             #}
-                        {# <input type="checkbox" id="togglePassword" onclick="displayPassword()">
-                        Afficher le Mot de passe #}
+                        <label for="inputPassword" class="form-label">Mot de Passe</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" autocomplete="current-password" required/>
+                            <span role="button" class="input-group-text">
+                                <i class="bi bi-eye" title="Affichez le mot de passe" alt="Affichez le mot de passe" id="togglePassword"></i>
+                    </div>
+                        {# {{ form_row(formUser.password, {'label':'Mot de passe','attr': {'placeholder':''}}) }} #}
+
                     </div>         
                             
                     <div class="form-group">
