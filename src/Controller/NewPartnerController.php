@@ -54,7 +54,7 @@ class NewPartnerController extends AbstractController
             
             }
 
-            return $this->render('admin/formPartner.html.twig',[
+            return $this->render('admin/partner/formPartner.html.twig',[
             'formpartner'=>$formPartner->createView(),
 
             //Variable in editMode

@@ -1,0 +1,44 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+	{% block header %}
+		{{ parent() }}
+
+	{% endblock %}
+
+
+	<main class='main-container col-12'>
+
+
+		<h2>Liste des structures</h2>
+		<table class="table table-hover">
+			<thead>
+				<tr class="table-dark"></tr>
+
+				<th scope="col">Id</th>
+				<th scope="col">Titre</th>
+				<th scope="col">Description</th>
+				<th scope="col"></th>
+			</thead>
+		</tr>
+	</thead>
+	<tbody>
+		{% for structure in structures %}
+
+			<tr>
+				<th scope="row">{{structure.id}}</th>
+				<td>{{structure.nameStructure}}</td>
+				<td>{{structure.city}}</td>
+				<td>
+					<a type="button" class="btn-sm btn-warning" href="{{ path('structure_edit', {'id': structure.id}) }}">Modifier</a>
+				</td>
+			</tr>
+
+		{% endfor %}
+	</tbody>
+</table>
+</main>{% endblock %}
+

@@ -67,11 +67,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setParameter('role', $role)
             ->getQuery()
             ->getResult();
-    }    
+    }
+
+    public function getPaginatedUser(int $page): array | User
+    {
+        $userPerPage = 7;
+        $qb =  $this->createQueryBuilder('u')
+            ->orderBy('u.username')
+            ->setFirstResult(($page - 1) * $userPerPage)
+            ->setMaxResults($userPerPage);
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+
+    
 /**
 * @return User[] Returns username and email
 */
-public function findByWithQueryBuilder(string $username, string $email=null): ?User
+    public function findByWithQueryBuilder(string $username, string $email=null): ?User
 {
     $queryBuilderUsername = $this->createQueryBuilder('u')
         ->where('u.username = :username')
@@ -95,18 +110,7 @@ public function findByWithQueryBuilder(string $username, string $email=null): ?U
     // return $queryUsername->getOneOrNullResult();
     
 }
-    // public function findAllUsers(): array
-    //     {        
-    //         $query = $this->getEntityManager()->createQuery("
-    //             SELECT u 
-    //             FROM App\Entity\User u 
-    //             WHERE u.roles LIKE '%ROLE_PARTNER%' 
-    //             OR u.roles LIKE '%ROLE_STRUCTURE%' 
-    //         ");
-    //         return $query->getResult();
-    //     }
     
-
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

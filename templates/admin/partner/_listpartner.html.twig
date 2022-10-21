@@ -1,0 +1,76 @@
+{# INCLUDE DS admin/index Affiche la liste Franchise #}
+{# {% if is_granted('ROLE_ADMIN') %} #}
+    
+{# <section class="searchLink">
+	<div class="row">
+		<div class="col-12">
+			<h2 class='titleIndex'>
+				{{ titleIndex }}</h2>
+			<div class="items_check">
+				<a class='active item_check  check' id="all" alt="Affiche toutes les franchises" title="Affiche toutes les franchises" href='#'>Toutes</a>
+
+				<a class='item_check check' id="active" alt="Affiche uniquement les franchises Active" title="Affiche uniquement les franchises Active" href='#'>Active</a>
+
+				<a class='item_check check' id="inactive" alt="Affiche uniquement les franchises Inactive" title="Affiche uniquement les franchises Inactive" href='#'>Inactive</a>
+			</div>
+		</div>
+	</div>
+
+</section> #}
+
+<div class="d-flex justify-content-around flex-wrap container ">
+
+
+
+
+
+{% for partner in partners %}
+{# {% if partner  %} #}
+    {# {% if partner.isIsActive  %} #}
+    <div class="card partner d-flex partner-all {{ partner.isActive ? 'partner-active' : 'partner-inActive' }}" style="width: 18rem;">
+        <div class="card-body">
+
+                <h5 class="card-title">Fitness Drive -{{partner.namePartner}}
+                </h5>
+
+                <div class="d-flex justify-content-between">
+                    <p class="text-muted">Gérer par
+                        {{partner.user.username}}
+                    </p>
+
+                <!-- Partner Active ? -->
+                <div class=" ">
+                    <p class='IsActive' >{{ partner.isActive ? 
+                            '<span class="">Active</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                            </svg>' :
+                            '<span class="inactive">InActive</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                            </svg>'}}</p>
+                </div>
+                </div>
+                <p class="card-text">
+                    <ul>
+                        <li>
+                            <a class="info" href="mailto:{{partner.user.email}} "><i class="fa fa-envelope p-2 " aria-hidden="true"></i>{{partner.user.email}}</a>
+                        </li>
+                        <li>
+                            <a class="info" href="tel:{{partner.phone}} "><i class="fa fa-phone p-2 " aria-hidden="true"></i>{{partner.phone}}</a>
+                        </li>
+                    </ul>
+                </p>
+        </div>
+        <div class="card-footer d-flex justify-content-around">
+            <a href=" {{ path( 'show-partner', {'id': partner.id}) }} " type="button" class="btn-sm btnDetail">Détail</a>
+            <div class="vr"></div>
+            <a href=" {{ path( 'partner_edit', {'id': partner.id}) }} " type="button" class="btn-sm btn-warning">Modifier</a>
+        </div>
+    </div>
+        {# {% else %}
+                    <p>Oups, une erreur est survenue !!!</p> #}
+    {% endfor %}
+{# {% endif %} #}
+</div>
+    

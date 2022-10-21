@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Structure;
 use App\Form\StructureType;
+use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,7 +55,7 @@ class NewStructureController extends AbstractController
         
         //RECUP NOM PARTNER + STRUCTURE POUR LE MODE EDIT
         $partner = $structure->getPartner();
-        return $this->render('admin/formStructure.html.twig', [
+        return $this->render('admin/structure/formStructure.html.twig', [
             'formStructure' => $formStructure->createView(),
 
             //Variable in editMode
@@ -63,4 +64,17 @@ class NewStructureController extends AbstractController
             'partner'=> $partner,
         ]);
     }
+
+    /**
+     * Display list structure
+     */
+    #[Route('/structureList', name: 'app_structureList')]
+    public function index(StructureRepository $structureRepository): Response
+    {
+        
+        return $this->render('admin/structure/list.html.twig', [
+            'structures' => $structureRepository->findAllStructures(),
+        ]);
+    }
+
 }

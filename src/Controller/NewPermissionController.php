@@ -16,15 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class NewPermissionController extends AbstractController
 {
-    #[Route('/permission', name: 'app_permission')]
-    public function index(PermissionRepository $permissionRepository): Response{
-        
-
-        return $this->render('permission/index.html.twig', [
-            'permissions' => $permissionRepository->findAllPermissions()
-        ]);
-    }
-    
     #[Route('/new', name: 'app_permission_new')]
     #[Route('/{id}/edit', name: 'app_permission_edit')]
     
@@ -45,9 +36,11 @@ class NewPermissionController extends AbstractController
             $entityManager->flush();
             
             $this->addFlash('success', 'La permission a été créer');
+
+            return $this->render('admin/permission/index.html.twig');
         }
             
-        return $this->render('permission/formPermission.html.twig', [
+        return $this->render('admin/permission/formPermission.html.twig', [
             'formPermission' => $formPermission->createView(),
 
             //Variable in editMode
@@ -56,17 +49,15 @@ class NewPermissionController extends AbstractController
         ]);
     }
 
-    
-    // public function edit(PermissionRepository $permissionRepository): Response
-    // {
-        
+    #[Route('/permission', name: 'app_permission')]
+    public function index(PermissionRepository $permissionRepository): Response
+    {
 
-    //     return $this->render('permission/index.html.twig', [
-    //         'permissions' => $permissionRepository->findAllPermissions(),
-            
-            
-    //     ]);
-    // }
+
+        return $this->render('admin/permission/index.html.twig', [
+            'permissions' => $permissionRepository->findAllPermissions()
+        ]);
+    }
 
 
     

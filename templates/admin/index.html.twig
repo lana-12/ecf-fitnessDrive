@@ -68,13 +68,12 @@
 		<!-- Barre de recherche start-->
 		<nav class="row">
 			<div class="col-12">
-				{# <form class="search form-group "> #}
 
-					<input id="searchbar"  class=" inputSearch me-2" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
+					<input id="searchbar"  class=" inputSearch p-2" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
 					<input id="hidden"  class=" inputSearch me-2" type="hidden"   aria-label="hidden">
 					{# <button class="btn btnSearch" type="submit" alt="Cliquer pour rechercher" title="Cliquer pour rechercher"><i class="fas fa-search"></i></button> #}
 
-				{# </form> #}
+				
 			</div>
 		</nav>
 		<!-- Barre de recherche end-->
@@ -82,23 +81,54 @@
 
 
 {# A VOIR SI JE LE MET DS CARDS #}
-	<section class="searchLink">
-		<div class="row">
-			<div class="col-12">
-				<h2 class='titleIndex'> {{ titleIndex }}</h2>
-				<div class="items_check">
-					<a class='active item_check  check' data-name="all" alt="Affiche toutes les franchises" title="Affiche toutes les franchises" href='#'>Toutes</a>
-					<a class='item_check check' data-name="active" alt="Affiche uniquement les franchises Active" title="Affiche uniquement les franchises Active" href='#'>Active</a>
-					<a class='item_check check' data-name="inactive" alt="Affiche uniquement les franchises Inactive" title="Affiche uniquement les franchises Inactive" href='#'>Inactive</a>
-				</div>
+<section class="searchLink">
+	<div class="row">
+		<div class="col-12">
+			<h2 class='titleIndex'>
+				{{ titleIndex }}</h2>
+			<div class="items_check">
+				<a class='active item_check  check' id="all" alt="Affiche toutes les franchises" title="Affiche toutes les franchises" href='#'>Toutes</a>
+
+				<a class='item_check check' id="active" alt="Affiche uniquement les franchises Active" title="Affiche uniquement les franchises Active" href='#'>Active</a>
+
+				<a class='item_check check' id="inactive" alt="Affiche uniquement les franchises Inactive" title="Affiche uniquement les franchises Inactive" href='#'>Inactive</a>
 			</div>
 		</div>
+	</div>
 
-	</section>
+</section>
+
 	<section>
-			{% include "_partials/_listpartner.html.twig" %}
+			{% include "admin/partner/_listpartner.html.twig" %}
 	</section>
 		
+	<section class='d-flex justify-content-center'>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="#">1</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="#">2</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="#">3</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</section>
+
+
 </main>
 
 <!-- main container end -->

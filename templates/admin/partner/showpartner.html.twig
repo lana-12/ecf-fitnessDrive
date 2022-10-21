@@ -24,7 +24,7 @@
     {% endblock  %}
 
             <h2> Détail de la Franchise de  <span class="detail"> {{ partner.namePartner}} </span> </h2>
-                {% include "_partials/_partner.html.twig" %}
+                {% include "admin/partner/_partner.html.twig" %}
 
                 <h2>Liste des structures associées</h2>
                 {# NE MARCHE PAS  #}
@@ -35,7 +35,7 @@
                 {% endif %} #}
             
         
-            {% include "_partials/_liststructure.html.twig" %}
+            {% include "admin/structure/_liststructure.html.twig" %}
 
 
             <h2>Permissions Globales</h2>

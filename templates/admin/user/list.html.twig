@@ -1,0 +1,65 @@
+{# CLIC SUR DETAIL ET ON ARRIVE ICI #}
+
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Liste  |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<body>
+		{% block header %}
+			{{parent()}}
+		{% endblock  %}
+
+		<main class='main-container col-12'>
+
+			{% block Breadcrumb %}
+				<section>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item back">
+								<a href="{{ path('app_admin') }}">Accueil</a>
+							</li>
+							<li class="breadcrumb-item active" aria-current="page">Liste des Comptes de connexion</li>
+						</ol>
+					</nav>
+				</section>
+			{% endblock  %}
+
+			<h2>Liste des Comptes de connexion</h2>
+
+<table class="table table-hover">
+	<thead>
+		<tr class="table-dark"></tr>
+
+		<th scope="col">Id</th>
+		<th scope="col">Titre</th>
+		<th scope="col">Description</th>
+		<th scope="col"></th>
+	</thead>
+</tr></thead><tbody>
+{% for user in users %}
+
+	<tr>
+		<th scope="row">{{user.id}}</th>
+		<td>{{user.username}}</td>
+		<td>{{user.email}}</td>
+		<td>
+			<a type="button" class="btn-sm btn-warning" href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
+		</td>
+	</tr>
+
+{% endfor %}</tbody></table>
+
+			
+
+		</main>
+
+	</body>
+{% endblock %}
+
+
+
+	
+

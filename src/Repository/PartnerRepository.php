@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Partner;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Expr\Cast\Array_;
 
 /**
  * @extends ServiceEntityRepository<Partner>
@@ -49,7 +50,6 @@ class PartnerRepository extends ServiceEntityRepository
         ;
     }
 
-
     public function findOneByName($name): array | Partner
     {
         return
@@ -61,6 +61,16 @@ class PartnerRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getPaginatedPartner(int $page): array | Partner
+    {
+        $partnerPerPage = 1;
+        $qb =  $this->createQueryBuilder('p')
+            ->orderBy('p.namePartner')
+            ->setFirstResult(($page -1 ) * $partnerPerPage)
+            ->setMaxResults($partnerPerPage);
+            
+        return $qb->getQuery()->getResult();
+    }
     
 //    /**
 //     * @return Partner[] Returns an array of Partner objects

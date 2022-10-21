@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Admin;
 use App\Entity\Partner;
 use App\Entity\Structure;
 use App\Entity\Permission;
@@ -52,7 +51,8 @@ class AdminController extends AbstractController
             'countPartners'=> $countPartners,
             'countStructures'=> $countStructures,
             'partners'=> $partners,
-            'structures'=>$structures
+            'structures'=>$structures,
+            // 'partners'=>$partnerRepo->getPaginatedPartner(1),
 
         ]);
     }
@@ -74,7 +74,7 @@ class AdminController extends AbstractController
         
             
             $error = 'Aucune structure associée';
-            return $this->render('admin/showpartner.html.twig',[
+            return $this->render('admin/partner/showpartner.html.twig',[
                 'partner'=> $partner,
                 'structures'=> $structures,
                 'error' => $error,
@@ -101,7 +101,7 @@ class AdminController extends AbstractController
             //     $structure->addPermission($permission);
             // }
 
-        return $this->render('admin/showstructure.html.twig',[
+        return $this->render('admin/structure/showstructure.html.twig',[
             'structure'=> $structure,
             'permissions' => $permissions,
 
@@ -109,48 +109,7 @@ class AdminController extends AbstractController
 
     }
 
-    /**
-     * Display ListAdmins + countadmins
-     *
-     * @param AdminRepository $adminRepository
-     * @return Response
-     */
-    #[Route('/listadmin', name: 'app_admin_listadmin')]
-    public function displayListAdmnins(AdminRepository $adminRepository) : Response
-    {
-
-        //Methode ds repository queryBuilder mettre ds signature (AdminRepository $adminRepository)
-        $admins = $adminRepository->findAllAdmin();
-        dump($admins);
-
-
-        // Methode display countAdmin
-        $countAdmin = count($admins);
-
-        return $this->render('admin/list_admin.html.twig',[
-            'titleList'=> 'Liste des Administrateurs',
-            'countAdmins'=> $countAdmin,
-            'admins'=> $admins,
-        ]);
-    }
-
-    /**
-     * Display one admin 
-     */
-
-    #[Route('/findadmin', name: 'app_admin_findadmin')]
-    public function findAdmninByName(AdminRepository $adminRepository) : Response
-    {
-        //Methode ds repository queryBuilder mettre ds signature (AdminRepository $adminRepository)
-        $admin = $adminRepository->findOneByName('Admin02');
-        dump($admin);
-
-        return $this->render('admin/admin.html.twig',[
-            'titleList'=> 'Admin',
-            'admin'=> $admin,
-        ]);
-
-    }
+    
 
 
 

@@ -50,7 +50,6 @@ class StructureRepository extends ServiceEntityRepository
         ;
 
     }
-//MARCHE faire la meme chose pour permissions ds son repo 
     public function findAllStructuresByPartner($id) :?array
     {
         return $this->createQueryBuilder('s')
