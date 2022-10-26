@@ -35,10 +35,7 @@ class NewPartnerController extends AbstractController
                 
             }
 
-            // Ajoute les structures aux partner
-            /**
-             * 
-             */
+            // Ajoute les structures aux partners
             $structures = $partner->getStructures();
             foreach ($structures as $structure) {
                 $partner->addStructure($structure);
@@ -49,15 +46,15 @@ class NewPartnerController extends AbstractController
             
             $this->addFlash('success', 'La Franchise a été créer');
             
-            return $this->render('admin/index.html.twig',[
+            // return $this->render('admin/index.html.twig',[
                 // 'partners'=>
                 // $partnerRepo->getPaginatedPartner((int) $request->query->get("page")),
-            ]);
+            // ]);
             
             }
 
             return $this->render('admin/partner/formPartner.html.twig',[
-            'formpartner'=>$formPartner->createView(),
+                'formpartner'=>$formPartner->createView(),
 
             //Variable in editMode
             'editMode'=> $partner->getId() !== null,

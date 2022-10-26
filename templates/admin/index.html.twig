@@ -5,14 +5,11 @@
 {% block javascripts %}
 	
 	{{parent()}}
+
 <!-- My JS -->
-{{ encore_entry_script_tags('partner') }}
-
-
+	{{ encore_entry_script_tags('partner') }}
 
 {% endblock %}
-
-
 
 {% block body %} 
 <body >
@@ -36,14 +33,14 @@
 
 		{% block aside %}
 
-		{% include "_partials/_sidebarAdmin.html.twig" %}
-
+			{% include "_partials/_sidebarAdmin.html.twig" %}
 
 		{% endblock %}
 <!-- sidebar end -->
 
 	</div>
 <!-- wrapper end -->
+
 	<!-- main container start -->
 {% endblock %}
 
@@ -52,99 +49,95 @@
 	<section>
 		<div class="row">
 			<div class='count col-12'>
-				<div>
-				{% if app.user %}
-					<span class=''>Bienvenue
-						{{ app.user.username }}
-					</span>
-				{% endif %}
-				</div>
-				<div>
-					<span class='total'>Total :
-						{{ countPartners }} Franchises | 
-						{{ countStructures }} Structures
-					</span>
+				<span class='total'>Total :
+					{{ countPartners }} Franchises | 
+					{{ countStructures }} Structures
+				</span>
 			</div>
 		</div>
 	</section>
 
-
+	<!-- SearchBar start-->
 {% block searchBar %}
 	<section>
-		<!-- Barre de recherche start-->
 		<nav class="row">
-			<div class="col-12">
+			<div class="col-12 search">
 
-					<input id="searchbar"  class=" inputSearch p-2" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
-					<input id="hidden"  class=" inputSearch me-2" type="hidden"   aria-label="hidden">
-					{# <button class="btn btnSearch" type="submit" alt="Cliquer pour rechercher" title="Cliquer pour rechercher"><i class="fas fa-search"></i></button> #}
+				<input id="searchbar"  class=" inputSearch mx-auto" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
+				<input id="hidden"  class=" inputSearch me-2" type="hidden"   aria-label="hidden">
+					
 
-				
 			</div>
 		</nav>
-		<!-- Barre de recherche end-->
 	</section>
 {% endblock %}
+	<!-- SearchBar end-->
 
-{# A VOIR SI JE LE MET DS CARDS #}
-<section class="searchLink">
-	<div class="row">
-		<div class="col-12">
-			<h2 class='titleIndex'>
-				{{ titleIndex }}</h2>
-			<div class="items_check">
-				<a class='active item_check  check' id="all" alt="Affiche toutes les franchises" title="Affiche toutes les franchises" href='#'>Toutes</a>
 
-				<a class='item_check check' id="active" alt="Affiche uniquement les franchises Active" title="Affiche uniquement les franchises Active" href='#'>Active</a>
+	<!-- Search all/active/Inactive Start-->
+{% block searchLink %}
+	<section class="searchLink">
+		<div class="row">
+			<div class="col-12">
+				<h2 class='titleIndex'>{{ titleIndex }}</h2>
+				<div class="items_check">
+					<a class='active item_check  check' id="all" alt="Affichez toutes les franchises" title="Affichez toutes les franchises" href='#'>Toutes</a>
 
-				<a class='item_check check' id="inactive" alt="Affiche uniquement les franchises Inactive" title="Affiche uniquement les franchises Inactive" href='#'>Inactive</a>
+					<a class='item_check check' id="active" alt="Affichez uniquement les franchises Active" title="Affichez uniquement les franchises Active" href='#'>Active</a>
+
+					<a class='item_check check' id="inactive" alt="Affichez uniquement les franchises Inactive" title="Affichez uniquement les franchises Inactive" href='#'>Inactive</a>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
+{% endblock %}
+<!-- Search all/active/Inactive end-->
 
-</section>
+
 
 	<section>
 			{% include "admin/partner/_listpartner.html.twig" %}
 	</section>
 	
+
+
+	
 {% block paginated %}
 		
 		{# CHAQUE PAGE A SA PAGINATION AVEC SES LIENS #}
-<section class='d-flex justify-content-center'>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination pagination-sm">
+	<section class='d-flex justify-content-center'>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
 
 
-{# {{ path(app.request.attributes.get('_route') , app.request.attributes.get('_route_params')) }} #}
+	{# {{ path(app.request.attributes.get('_route') , app.request.attributes.get('_route_params')) }} #}
 
-			<li class="page-item">
-<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span>
-				</a>
-			</li>
+				<li class="page-item">
+	<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
 
-{# ATTENTION CHANGER LE NBRE TROIS #}
-{% for i in 1..((countPartners/ 2) | round(0, 'ceil')) %}
-	
-			<li class="page-item">
-				<a class="page-link" href="{{ path('app_admin', {page:i})}}">{{i}}</a>
-			</li>
-{% endfor %}
-			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-</section>
+	{# ATTENTION CHANGER LE NBRE TROIS #}
+	{% for i in 1..((countPartners/ 2) | round(0, 'ceil')) %}
+		
+				<li class="page-item">
+					<a class="page-link" href="{{ path('app_admin', {page:i})}}">{{i}}</a>
+				</li>
+	{% endfor %}
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</section>
 
 {% endblock %}
 
-</main>
 
 <!-- main container end -->
-
+	</main>
 </body>
 {% endblock %}
 

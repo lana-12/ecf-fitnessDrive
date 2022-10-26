@@ -52,9 +52,6 @@ class UserType extends AbstractType
                 'label'=> 'Mot de passe',
                 'required'=> true, 
                 'row_attr' => ['class' => '', 'id' => 'id_password'],                
-                'attr' => [
-                    'autocomplete' => 'new-password'
-                ],
                 'constraints'=> [
                         new NotBlank(['message'=> 'Veuillez saisir un mot de passe!']),
                         new Length([
@@ -65,6 +62,7 @@ class UserType extends AbstractType
             ->add('confirmPassword', PasswordType::class,[
                 'label'=> 'Confirmation du mot de passe',
                 'required'=> true, 
+                
                 'row_attr' => ['class' => '', 'id' => 'mdpUser'],                
                 'constraints'=> [
                         new NotBlank(['message'=> 'Veuillez saisir le même mot de passe!']),
@@ -107,9 +105,9 @@ class UserType extends AbstractType
         //vers quel objet le form va être lié
         $resolver->setDefaults([
             'data_class' => User::class,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id' => 'user_item',
+            // 'csrf_protection' => true,
+            // 'csrf_field_name' => '_token',
+            // 'csrf_token_id' => 'user_item',
         ]);
     }
 }

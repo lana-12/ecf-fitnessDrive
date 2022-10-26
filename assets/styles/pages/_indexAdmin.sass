@@ -5,24 +5,14 @@
         margin-bottom: 10px
     & .search
         display: flex
-        margin: 10px
+        margin-top: 10px
         & .inputSearch 
             background-color: $green
-        & .btnSearch
+            height: 50px
+            width: 240px
+            text-align: center
             transition: 0.3s
-            transition-property: color, background, border-radius
-            &:hover
-                color: #fff
-                background-color: $green
-                border-radius: 50%
-
-.titleIndex
-    // text-shadow: 1px 1px 2px black, 0 0 0.2em $green, 0 0 0 $green
-    color: #000
-    font-weight: 700
-    margin: 10px
-    font-size: 2em
-    text-align: center
+            transition-property: width
 
 .searchLink
     & .items_check
@@ -39,6 +29,13 @@
             color: $greenDark
 
 
+/********MEDIA QUERY POUR ECRAN 576PX  ***********/
+/******min-width 576px**************/
+@include media($sm)
+    .main-container
+        & .search 
+            & .inputSearch 
+                width: 450px
 
 
 /********MEDIA QUERY POUR ECRAN 768PX  ***********/
@@ -50,6 +47,17 @@
         padding-left: 10px
         // padding-right: 10px
         padding-top: 10px
+        & .search 
+            & .inputSearch 
+                width: 550px
 
+
+/********MEDIA QUERY POUR ECRAN 1200PX  ***********/
+/******min-width 1200px**************/
+@include media($xl)
+    .main-container
+        & .search 
+            & .inputSearch 
+                width: 750px
 
         

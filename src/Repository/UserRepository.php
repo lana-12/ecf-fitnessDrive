@@ -72,7 +72,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function getPaginatedUser(int $page): array | User
     {
         $page = $_GET['page']?? 1;
-        $userPerPage = 9;
+        $userPerPage = 30;
         $qb =  $this->createQueryBuilder('u')
             ->orderBy('u.username')
             ->setFirstResult(($page - 1) * $userPerPage)

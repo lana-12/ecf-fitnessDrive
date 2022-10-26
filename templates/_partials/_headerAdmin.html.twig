@@ -3,32 +3,32 @@
         <div>
             <h1 class="titleCustom text-white">Fitness<span class='drive'>Drive</span></h1>
         </div>
-        <div id="sidebarBtn" class="sidebar-btn">
-
-{# JE L AI MIS DS PARTNER/INDEX.HTML.TWIG #}
-        {# {% if app.user %}
-            <h2 class='text-light'>
-                <i class="far fa-user"></i>
-
-                {{ app.user.username }}
-            </h2>
-
-        {% endif %} #}
-
-
-        </div>
-
-        <ul class="icon-fas">
+        <ul class="icon-fas d-flex flex-column flex-sm-row  ">
             <li>
                 <a class="fas-fa" title='Déconnexion' href="{{ path('app_logout') }}">
                     <i class="fas fa-power-off"></i>
                 </a>
             </li>
+            <li>
+            {% if app.user %}
+                <a class='fas-fa text-white' alt="Vous êtes connecté en tant que {{ app.user.username }}" title="Vous êtes connecté en tant que {{ app.user.username }}"><i class="fas fa-user-circle text-dark"></i>
+                <p class='d-none d-sm-block textConnected'>{{ app.user.username }}</p>
+                </a>
+            {% endif %}
+            </li>
         </ul>
-
-
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
 
 	
 

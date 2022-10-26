@@ -76,7 +76,7 @@ class StructureType extends AbstractType
             ->add('address', TextType::class,[
                 'label'=> 'Adresse de la structure ',
                 'attr'=>[
-                'placeholder'=>'3 avenur de la mer',
+                'placeholder'=>'3 avenue de la mer',
                 ],
                 'required'=> true, 
                 'constraints'=> [

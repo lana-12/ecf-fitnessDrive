@@ -29,10 +29,10 @@ class SecurityController extends AbstractController
         // if($form->isSubmitted() && $form->isValid()){
 
         // }
+
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername, 
             'error' => $error,
-            // 'form'=> $form->createView(),
         ]);
     }
 

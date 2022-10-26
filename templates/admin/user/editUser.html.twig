@@ -1,0 +1,46 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+	Utilisateur |
+	{{ parent() }}
+{% endblock %}
+{% block javascripts %}
+	{{parent()}}
+
+	<!-- My JS -->
+	{# {{ encore_entry_script_tags('displayPassword') }} #}
+
+{% endblock %}
+
+{% block body %}
+	{% block header %}
+		{{parent()}}
+	{% endblock  %}
+
+	<main class="main-container col-12">
+
+		{% block Breadcrumb %}
+			<section>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_user_list') }}">Liste des Utilisateurs</a>
+						</li>
+						
+						<li class="breadcrumb-item active" aria-current="page">Modifier un Utilisateur</li>
+					</ol>
+				</nav>
+			</section>
+		{% endblock  %}
+
+		<h2 class="">Modifier un compte de connexion</h2>
+
+
+
+		{{ include ("admin/user/_formUser.html.twig", {'button_label': 'Modifier'}) }}
+        
+		<a href='{{ path('app_user_list')}}' class="back">Retour à la liste</a>
+
+	</main>
+{% endblock %}
+

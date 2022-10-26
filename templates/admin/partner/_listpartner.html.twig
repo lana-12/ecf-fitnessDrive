@@ -1,39 +1,14 @@
-{# INCLUDE DS admin/index Affiche la liste Franchise #}
-{# {% if is_granted('ROLE_ADMIN') %} #}
-    
-{# <section class="searchLink">
-	<div class="row">
-		<div class="col-12">
-			<h2 class='titleIndex'>
-				{{ titleIndex }}</h2>
-			<div class="items_check">
-				<a class='active item_check  check' id="all" alt="Affiche toutes les franchises" title="Affiche toutes les franchises" href='#'>Toutes</a>
-
-				<a class='item_check check' id="active" alt="Affiche uniquement les franchises Active" title="Affiche uniquement les franchises Active" href='#'>Active</a>
-
-				<a class='item_check check' id="inactive" alt="Affiche uniquement les franchises Inactive" title="Affiche uniquement les franchises Inactive" href='#'>Inactive</a>
-			</div>
-		</div>
-	</div>
-
-</section> #}
-
 <div class="d-flex justify-content-around flex-wrap container ">
-
-
-
-
-
 {% for partner in partners %}
 {# {% if partner  %} #}
     {# {% if partner.isIsActive  %} #}
-    <div class="card partner d-flex partner-all {{ partner.isActive ? 'partner-active' : 'partner-inActive' }}" style="width: 18rem;">
-        <div class="card-body">
+    <div class="card partner d-flex partner-all {{ partner.isActive ? 'partner-active' : 'partner-inActive' }}" >
+        <div class="card-body ">
 
-                <h5 class="card-title">Fitness Drive -{{partner.namePartner}}
+                <h5 class="card-title text-center">FitnessDrive - {{partner.namePartner}}
                 </h5>
 
-                <div class="d-flex justify-content-between">
+                <div class=" textMuted">
                     <p class="text-muted">Gérer par
                         {{partner.user.username}}
                     </p>

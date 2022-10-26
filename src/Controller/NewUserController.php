@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +20,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class NewUserController extends AbstractController
 {
     #[Route('/new', name: 'user_new')]
-    #[Route('/{id}/edit', name: 'user_edit')]
 
     /**
      * For create and Edit NewUser 
@@ -32,6 +32,44 @@ class NewUserController extends AbstractController
         }
         $form = $this->createForm(UserType::class, $user);
         
+        $form->handleRequest($request);
+        
+        //S'assure de la validité du form et que les valaurs sont cohérentes
+        if ($form->isSubmitted() && $form->isValid()){
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+
+                    // pour modifier son mot de passe
+                    //récup les données saisies par l'utilisateur.
+                    $form->get('password')->getData()
+                )
+            );
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
+            $this->addFlash('success', 'Le compte de connexion a bien été créé');
+
+        }
+        
+        return $this->render('admin/user/userNew.html.twig',[
+            'titlePage'=> 'Créer un nouvel Utilisateur',
+            'formUser'=>$form->createView(),
+        ]);
+    }
+
+    
+    /**
+     * For Edit NewUser 
+     */
+    
+    #[Route('/{id}/edit', name: 'user_edit')]
+    public function editUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null, ): Response
+    {
+        if(!$user){
+            $user = new User();
+        }
+        $form = $this->createForm(UserType::class, $user);
         
         $form->handleRequest($request);
         
@@ -52,15 +90,11 @@ class NewUserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             
-            $this->addFlash('success', 'La compte de connexion a bien été créer');
+            $this->addFlash('success', 'Le compte de connexion a bien été modifié');
 
-            return $this->render('admin/user/list.html.twig',[
-                'user'=> $user,
-                
-            ]);
         }
         
-        return $this->render('admin/user/formUser.html.twig',[
+        return $this->render('admin/user/editUser.html.twig',[
             'formUser'=>$form->createView(),
 
             //Variable in editMode
@@ -71,14 +105,18 @@ class NewUserController extends AbstractController
 
     /**
      * Display list Users
-    */
+     */
+    #[Security("is_granted('ROLE_ADMIN')", statusCode: 403)]
     #[Route('/list', name: 'app_user_list')]
-    public function index(UserRepository $userRepository, Request $request ): Response
+    public function index(UserRepository $userRepository, Request $request): Response
     {
-        return $this->render('admin/user/list.html.twig',[
-            'users'=> $userRepository->findAll(),
-            'countUsers'=> $userRepository->countUsers(),
-            'users'=>$userRepository->getPaginatedUser((int)$request->query->get("page")),
+        $users = $userRepository->getPaginatedUser((int)$request->query->get("page"));
+        
+        return $this->render('admin/user/index.html.twig', [
+            'titlePage'=> 'Liste de Compte de connexion',
+            'users' => $userRepository->findAll(),
+            'countUsers' => $userRepository->countUsers(),
+            'users' => $users,
         ]);
     }
     

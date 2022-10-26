@@ -1,22 +1,25 @@
 .card
     background-color: $green
-    margin: 20px
+    margin: 5px
+    margin-top: 20px
+    margin-bottom: 20px
     border: solid 1px #000
     box-shadow: 10px 10px 5px $backGHS
-
-.btnDetail
-    background-color: $greenDark
-    color: #000 
-    transition: 0.3s
-    transition-property: color
-    &:hover 
-        color: #fff
-
-.btn-warning
-    transition: 0.3s
-    transition-property: color
-    &:hover 
-        color: #fff
-
+    width: 18em
+    
+.info
+    font-size: 0.8em
 .info:hover
     color: #fff
+    
+
+/********MEDIA QUERY POUR ECRAN 400PX/********
+/********min-width 400px/********
+@include media($sx2)
+    .textMuted
+        display: flex
+        justify-content: space-between
+    .info
+        font-size: 1em
+
+

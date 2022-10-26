@@ -1,0 +1,45 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Structure |
+	{{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+	{% block header %}
+		{{parent()}}
+	{% endblock  %}
+
+	<main class="main-container col-12">
+
+		{% block Breadcrumb %}
+			<section>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+                            <a href="{{ path('app_structureList') }}">Accueil</a>
+
+						</li>
+						<li class="breadcrumb-item active" aria-current="page">Modifier une Structure
+						</li>
+
+					</ol>
+				</nav>
+			</section>
+		{% endblock  %}
+
+			<h1 class="  ">Modifier la Structure de
+				<span>{{ structure.nameStructure }}</span>
+			</h1>
+
+
+        {{ include ("admin/structure/_formStructure.html.twig", {'button_label': 'Modifier'}) }}
+
+        <a href='{{ path('app_structureList')}}'>Retour à la liste</a>
+
+
+
+
+	</main>
+{% endblock %}
+

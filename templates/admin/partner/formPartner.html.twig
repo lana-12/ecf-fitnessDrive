@@ -5,6 +5,8 @@
 
 {% block body %}
 
+
+
 {% block header %} {{parent()}} {% endblock  %}  
 
     <main class="main-container col-12">
@@ -28,11 +30,23 @@
         </section>
     {% endblock  %} 
 
+    {% for message in app.flashes('success') %}
+    
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+
 
         {% if editMode %}
+            
+
             <h1 class="  ">Modifier la Franchise de<span>{{ partner.namePartner }}</span>
             </h1>
         {% else %}
+
             <h1>Créer la Franchise</h1>
         {% endif %}
 
