@@ -46,10 +46,9 @@ class StructureRepository extends ServiceEntityRepository
         return
         $this->createQueryBuilder('s')
             ->getQuery()
-            ->getResult()
-        ;
-
+            ->getResult();
     }
+    
     public function findAllStructuresByPartner($id) :?array
     {
         return $this->createQueryBuilder('s')
@@ -58,6 +57,15 @@ class StructureRepository extends ServiceEntityRepository
                     ->orderBy('s.nameStructure')
                     ->getQuery()
                     ->getResult();
+    }
+    public function findOneByName($name): array | Structure
+    {
+        return
+            $this->createQueryBuilder('s')
+            ->andWhere('s.nameStructure = :nameStructure')
+            ->setParameter('nameStructure', $name)
+            ->getQuery()
+            ->getResult();
     }
 
     // public function findAllPermissionsByStructures(Permission $permission): ?array

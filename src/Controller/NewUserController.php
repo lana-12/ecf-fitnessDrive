@@ -45,6 +45,17 @@ class NewUserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            // Ajoute des partners aux user
+            $partners = $user->getPartner();
+            foreach ($partners as $partner) {
+                $user->addPartner($partner);
+            }
+            // Ajoute des structures aux user
+            $structures = $user->getStructure();
+            foreach ($structures as $structure) {
+                $user->addStructure($structure);
+            }
+            
             $entityManager->persist($user);
             $entityManager->flush();
             
@@ -87,6 +98,18 @@ class NewUserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            // Ajoute des partners aux user
+            $partners = $user->getPartner();
+            foreach ($partners as $partner) {
+                $user->addPartner($partner);
+            }
+
+            // Ajoute des structures aux user
+            $structures = $user->getStructure();
+            foreach ($structures as $structure) {
+                $user->addStructure($structure);
+            }
+            
             $entityManager->persist($user);
             $entityManager->flush();
             

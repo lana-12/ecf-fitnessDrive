@@ -45,9 +45,7 @@ class PartnerRepository extends ServiceEntityRepository
         return
         $this->createQueryBuilder('p')
             ->getQuery()
-            ->getResult()
-
-        ;
+            ->getResult();
     }
 
     public function findOneByName($name): array | Partner
@@ -57,8 +55,7 @@ class PartnerRepository extends ServiceEntityRepository
             ->andWhere('p.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
 
     public function getPaginatedPartner(int $page): array | Partner
@@ -73,7 +70,6 @@ class PartnerRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    
     public function countPartners()
     {
         return $this->createQueryBuilder('p')
@@ -81,6 +77,15 @@ class PartnerRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getSingleScalarResult();
     }
+    
+    public function  findUser()
+    {
+        return $this->createQueryBuilder('p')
+                    ->select('p.user')
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return Partner[] Returns an array of Partner objects
 //     */

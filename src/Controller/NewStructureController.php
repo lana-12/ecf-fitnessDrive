@@ -39,16 +39,11 @@ class NewStructureController extends AbstractController
                     $structure->addPermission($permission);
                 }
         
-            // $entityManager->persist($structure);
-            // $entityManager->flush();
+            $entityManager->persist($structure);
+            $entityManager->flush();
 
             $this->addFlash('success', 'La structure a bien été créé');
             
-            // return $this->render('admin/index.html.twig', [
-            //     'structure'=> $structure,
-            //     'permissions'=> $structure->getPermissions(),
-
-            // ]);
         }
         
         //RECUP NOM PARTNER + STRUCTURE POUR LE MODE EDIT
@@ -87,8 +82,8 @@ class NewStructureController extends AbstractController
                     $structure->addPermission($permission);
                 }
         
-            // $entityManager->persist($structure);
-            // $entityManager->flush();
+            $entityManager->persist($structure);
+            $entityManager->flush();
 
             $this->addFlash('success', 'La structure a bien été modifier');
             

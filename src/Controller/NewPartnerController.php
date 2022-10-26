@@ -44,7 +44,7 @@ class NewPartnerController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
             
-            $this->addFlash('success', 'La Franchise a été créer');
+            $this->addFlash('success', 'La Franchise a bien été créer');
             
             // return $this->render('admin/index.html.twig',[
                 // 'partners'=>

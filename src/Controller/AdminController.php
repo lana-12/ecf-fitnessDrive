@@ -37,10 +37,6 @@ class AdminController extends AbstractController
         //Methode avec StructureRepository => recup tt les structures
         $structures = $structureRepo->findAllStructures();
 
-        //Methode avec ManagerRegistry => recup tt les partners
-        // $repository = $doctrine->getRepository(Partner::class);
-        // $partners = $repository->findAll();
-
         // display how many partners
         // $countPartners = count($partners);
         $countPartners = $partnerRepo->countPartners();

@@ -3,17 +3,7 @@
 
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><h1>Fitness Drive</h1></a>
-    {# JE L AI MIS DS PARTNER/INDEX.HTML.TWIG #}
-    {% if app.user %}
-        <h2 class='text-light'>
-            <i class="far fa-user"></i>
-
-            {{ app.user.username }}
-        </h2>
-
-    {% endif %}
-
-
+    
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,7 +11,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+{% if is_granted('ROLE_PARTNER') %}
+
+<a class="nav-link " href="#">Home</a>
+
+{% endif %}
+{% if is_granted('ROLE_STRUCTURE') %}
+<a class="nav-link " href="#">Home</a>
+
+
+
+{% endif %}
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>

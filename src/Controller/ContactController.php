@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Contact;
+use App\Entity\Partner;
+use App\Entity\Structure;
 use App\Form\ContactType;
 use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -23,16 +26,18 @@ class ContactController extends AbstractController
      */
 
     #[Route('/contact', name: 'app_contact')]
-    public function index(EntityManagerInterface $manager, Request $request, MailerInterface $mailer): Response
+    public function index(ManagerRegistry $doctrine, EntityManagerInterface $manager, Request $request, MailerInterface $mailer): Response
     {
-        
+
+
         $contact = new Contact();
 
-
-        // if ($this->getUser()) {
-        //     $contact->setName($this->getUser()->getUsername())
-        //             ->setEmail($this->getUser()->getEmail());
-        // }
+        // $repositoryStructure = $doctrine->getRepository(Structure::class);
+        // $structure = $repositoryStructure->find($id);
+        if ($this->getUser()) {
+            $contact->setName($this->getUser()->getUsername())
+                    ->setEmail($this->getUser()->getEmail());
+        }
 
 
             $form = $this->createForm(ContactType::class, $contact);
@@ -70,6 +75,8 @@ class ContactController extends AbstractController
         
         return $this->render('contact/index.html.twig', [
             'formContact'=> $form->createView(),
+            // 'structure'=>$structure,
+            
             
         ]);
     }

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Fitness Drive
+                {# {{structure.partner.namePartner}} #}
+                -
+                {{structure.namestructure}}
+            </h5>
+
+            <div class="d-flex justify-content-between">
+                <p class="text-muted">Gérer par
+                    {{structure.user.username}}
+                </p>
+                {# {% endif %} #}
+                <!-- Structure Active ? -->
+                <p>{{ structure.isActive ? 
+                '<span class="p-2">Active</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>' :'<span class="p-2">InActive</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>'}}
+                </p>
+            </div>
+
+            <p class="card-text">
+                <ul>
+                    <li>
+                        <a class='info' href="mailto:{{structure.user.email}} ">
+                            <i class="fa fa-envelope p-2" aria-hidden="true"></i>
+                            {{structure.user.email}}</a>
+                    </li>
+                    <li>
+                        <a class='info' href="tel:{{structure.phone}} ">
+                            <i class="fa fa-phone p-2" aria-hidden="true"></i>
+                            {{structure.phone}}</a>
+                    </li>
+                </ul>
+                            
+            </p>
+                    
+        </div>
+    </div>
+</div>
+
+<section>
+
+    <h4>Vos permissions</h4>
+
+    {% for permission in permissions %}
+        <p>
+            {{permission.title}}
+        </p>
+    {% endfor %}
+
+</section>
+        
