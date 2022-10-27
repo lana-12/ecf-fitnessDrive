@@ -66,7 +66,6 @@
 				<input id="searchbar"  class=" inputSearch mx-auto" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
 				<input id="hidden"  class=" inputSearch me-2" type="hidden"   aria-label="hidden">
 					
-
 			</div>
 		</nav>
 	</section>
@@ -93,8 +92,6 @@
 {% endblock %}
 <!-- Search all/active/Inactive end-->
 
-
-
 	<section>
 			{% include "admin/partner/_listpartner.html.twig" %}
 	</section>
@@ -106,9 +103,7 @@
 		<nav aria-label="Page navigation example">
 			<ul class="pagination pagination-sm">
 
-
 	{% for i in 1..((countPartners/ 30) | round(0, 'ceil')) %}
-		
 				<li class="page-item">
 					<a class="page-link" href="{{ path('app_admin', {page:i})}}">{{i}}</a>
 				</li>
@@ -121,8 +116,7 @@
 {% endblock %}
 <!-- main container end -->
 
-	<a class="rocket back" href='{{ path('app_admin')}}'>
-		<i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
+	<a class="rocket back" href='{{ path('app_admin')}}'><i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
 	</a>
 
 	</main>

@@ -4,6 +4,18 @@
 	</div>
 
 {% endfor %}
+{% for message in app.flashes('send') %}
+	<div class="alert alert-success mt-4">
+		{{ message }}
+	</div>
+
+{% endfor %}
+{% for message in app.flashes('send2') %}
+	<div class="alert alert-success mt-4">
+		{{ message }}
+	</div>
+
+{% endfor %}
 
 
 {{form_start(formStructure)}}

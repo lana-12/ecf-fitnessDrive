@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+	<body>
+
+		<h1>Activation de votre Compte</h1>
+
+		<p>Bonjour, et <strong>Bienvenue</strong>
+
+			{% if partner.name is defined %}
+				{{ partner.name }}
+			{% endif %}
+		</p>
+
+		<p>Nous sommes heureux et fier que vous ayez rejoint notre entreprise. Nous sommes persuadés que vos compétences et votre expérience nous seront utiles pour aider au développement de l’entreprise.
+		</p>
+		<p>Lors de votre première connexion, merci de changer votre mot de passe</p>
+		<ul>
+			<li> Votre adresse email est : 
+			{% if partner.name is defined %}
+				{{ partner.user.email }}
+
+			{% endif %}
+			</li>
+			<li> Votre Mot de passe est : 
+			{% if partner.name is defined %}
+				<p>{{ partner.name }} deux fois, en minuscule et sans espace. </p>
+				<p>Pour des raison de sécurité, merci de le changer lors de votre première connexion.</p>
+
+			{% endif %}
+			</li>
+		</ul>
+
+
+		<p>Au nom de tous les salariés de l’entreprise, nous vous souhaitons la bienvenue !</p>
+		<p>Sportivement</p>
+		<p>La team de FitnessDrive</p>
+		
+
+
+	</body>
+
+</html>
+

@@ -1,8 +1,8 @@
 security:
     role_hierarchy:
-        ROLE_STRUCTURE: ROLE_STRUCTURE
+        ROLE_STRUCTURE: [ROLE_STRUCTURE]
         ROLE_PARTNER : [ROLE_PARTNER]
-        ROLE_ADMIN : [ROLE_ADMIN]
+        ROLE_ADMIN : [ROLE_ADMIN, ROLE_PARTNER, ROLE_STRUCTURE]
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
@@ -43,8 +43,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/partner, roles: ROLE_ADMIN }
-        - { path: ^/structure, roles: ROLE_ADMIN }
+        # - { path: ^/partner, roles: ROLE_ADMIN }
+        # - { path: ^/structure, roles: ROLE_ADMIN }
         - { path: ^/partner, roles: ROLE_PARTNER}
         - { path: ^/structure, roles: ROLE_STRUCTURE }
 

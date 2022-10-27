@@ -90,7 +90,14 @@ class PartnerRepository extends ServiceEntityRepository
                     ->getSingleScalarResult();
     }
     
-
+    public function findIsActive($isActive)
+    {
+        return $this->createQueryBuilder('p')
+                    ->select('p.isActive =:isActive')
+                    ->setParameter('isActive', $isActive)
+                    ->getQuery()
+                    ->getResult();
+    }
     
     // public function  findUser()
     // {

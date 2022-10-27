@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\MailService;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -23,7 +24,7 @@ class NewUserController extends AbstractController
      * For create and Edit NewUser 
      */
 
-    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null, ): Response
+    public function formUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null, MailService $mail): Response
     {
         if(!$user){
             $user = new User();
@@ -54,10 +55,22 @@ class NewUserController extends AbstractController
                 $user->addStructure($structure);
             }
             
-            // $entityManager->persist($user);
-            // $entityManager->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
             
             $this->addFlash('success', 'Le compte de connexion a bien été créé');
+
+            //sendEmail
+            $mail->sendEmail(
+                'fitnessDrive@outlook.fr',
+                $user->getEmail(),
+                'Activation de votre compte',
+                'registerUser',
+                compact('user')
+
+            );
+
+            $this->addFlash('send', 'Email d\'Activation a bien été envoyé');
 
         }
         
@@ -73,7 +86,7 @@ class NewUserController extends AbstractController
      */
     
     #[Route('/{id}/edit', name: 'user_edit')]
-    public function editUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null, ): Response
+    public function editUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null, MailService $mail ): Response
     {
         if(!$user){
             $user = new User();
@@ -112,6 +125,16 @@ class NewUserController extends AbstractController
             $entityManager->flush();
             
             $this->addFlash('success', 'Le compte de connexion a bien été modifié');
+
+            $mail->sendEmail(
+                'fitnessDrive@outlook.fr',
+                $user->getEmail(),
+                'Modification de votre compte',
+                'editUser',
+                compact('user')
+
+            );
+            $this->addFlash('send', 'Email de modification a bien été envoyé');
 
         }
         
