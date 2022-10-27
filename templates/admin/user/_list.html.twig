@@ -1,6 +1,6 @@
 <section>
 {% for user in users %}
-    <div class="border">
+    <div class="border user ">
         <h5 ><strong>{{user.username}}</strong></h5>
         <p class="">{{user.email}}
             <a type="button" class="btn-sm  btn-warning right" alt="Modifier le compte de connexion" title="Modifier le compte de connexion" href="{{ path('user_edit', {'id': user.id}) }}">Modifier
@@ -10,6 +10,4 @@
     
 {% endfor %}
 </section>
-
-
 

@@ -23,7 +23,10 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{ path('app_user_list') }}">Accueil</a>
+                    <a href="{{ path('app_admin') }}">Accueil</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_user_list') }}">Liste des Utilisateurs</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Créer un Utilisateur</li>
             </ol>
@@ -31,7 +34,8 @@
     </section>
 {% endblock  %}
 
-<h2 class="text-center">{{titlePage}}</h2>
+	<h2 class="titleIndex">{{titlePage}}</h2>
+
 
 	<div class="boxUser">
 		<ul style="list-style-type: disc; ">
@@ -50,8 +54,9 @@
 
 		{% include "admin/user/_formUser.html.twig" %}
 
-<a  class="rocket back" href='{{ path('app_user_list')}}'>
-	<i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i></a>
+	<a  class="rocket back" href='{{ path('app_user_list')}}'>
+		<i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
+	</a>
 
 
     </main>

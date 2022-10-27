@@ -56,9 +56,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     /**
      * recuperate Role
-     *
-     * @param [type] $role
-     * @return array|null
      */
     public function findByRole($role): ?array
     {
@@ -69,6 +66,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult();
     }
 
+    /**
+     * Pagination User
+     */
     public function getPaginatedUser(int $page): array | User
     {
         $page = $_GET['page']?? 1;
@@ -80,6 +80,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Return count User
+     */
     public function countUsers()
     {
         return $this->createQueryBuilder('u')
@@ -88,6 +92,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getSingleScalarResult();
     }
 
+    /**
+     * Return all user
+     */
     public function findAllUser(): ?array
     {
         return
@@ -96,46 +103,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult();
     }
 
-
-    
-    // public function findAllUserByPartner($id): ?array
-    // {
-    //     return $this->createQueryBuilder('u')
-    //         ->where('u.partner = :id')
-    //         ->setParameter('id', $id)
-    //         ->orderBy('s.nameStructure')
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-
-    
-/**
-* @return User[] Returns username and email
-*/
-    public function findByWithQueryBuilder(string $username, string $email=null): ?User
-{
-    $queryBuilderUsername = $this->createQueryBuilder('u')
-        ->where('u.username = :username')
-        ->setParameter('username', $username)
-        ->orderBy('u.id', 'DESC')
-        ->setMaxResults(10)
-    ;
-    if($email !== null){
-        $queryBuilderUsername
-        ->andWhere('u.email = :email')
-        ->setParameter('email',$email)
-        ;
-    } 
-// getQuery=> recupere en objet
-    $queryUsername = $queryBuilderUsername->getQuery();
-
-//getResult= collection entity = vide ou 1 à n
-//getOneOrNullresult = 1 ou aucun resultat
-//getSingleresult = 1 seul resultat si 0 une exception lancé
-    return $queryUsername->getResult();
-    // return $queryUsername->getOneOrNullResult();
-    
-}
     
 //    /**
 //     * @return User[] Returns an array of User objects

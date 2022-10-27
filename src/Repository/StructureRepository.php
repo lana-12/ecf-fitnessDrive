@@ -41,6 +41,9 @@ class StructureRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Return all structures
+     */
     public function findAllStructures(): ?array
     {
         return
@@ -49,6 +52,9 @@ class StructureRepository extends ServiceEntityRepository
             ->getResult();
     }
     
+    /**
+     * Return all structures by partner
+     */
     public function findAllStructuresByPartner($id) :?array
     {
         return $this->createQueryBuilder('s')
@@ -58,6 +64,10 @@ class StructureRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    /**
+     * Return Structure with name
+     */
     public function findOneByName($name): array | Structure
     {
         return
@@ -68,15 +78,31 @@ class StructureRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // public function findAllPermissionsByStructures(Permission $permission): ?array
-    // {
-    //     return $this->createQueryBuilder('s')
-    //         ->join('s.permissions', 'p')
-    //         ->where('p.structures = :structures')
-    //         ->setParameter('structures', $permission->getStructures())
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+    /**
+     * Pagination structure
+     */
+    public function getPaginatedStructure(int $page): array | Structure
+    {
+        $page = $_GET['page'] ?? 1;
+        $structurePerPage = 30;
+        $qb =  $this->createQueryBuilder('s')
+            ->orderBy('s.nameStructure')
+            ->setFirstResult(($page - 1) * $structurePerPage)
+            ->setMaxResults($structurePerPage);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Return count Structure
+     */
+    public function countStructures()
+    {
+        return $this->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
     
 //    /**

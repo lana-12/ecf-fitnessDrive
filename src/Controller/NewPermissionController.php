@@ -13,11 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-
 class NewPermissionController extends AbstractController
 {
     #[Route('/new', name: 'app_permission_new')]
-    #[Route('/{id}/edit', name: 'app_permission_edit')]
+
+    /**
+     * For create Permission 
+     */
     
     public function newPermission(Request $request, EntityManagerInterface $entityManager, Permission $permission = null, ManagerRegistry $doctrine): Response
     {
@@ -35,12 +37,12 @@ class NewPermissionController extends AbstractController
             $entityManager->persist($permission);
             $entityManager->flush();
             
-            $this->addFlash('success', 'La permission a été créer');
+            $this->addFlash('success', 'La permission a été créé');
 
-            return $this->render('admin/permission/index.html.twig');
         }
             
-        return $this->render('admin/permission/formPermission.html.twig', [
+        return $this->render('admin/permission/newPermission.html.twig', [
+            'titlePage' => 'Créer une nouvelle Permission',
             'formPermission' => $formPermission->createView(),
 
             //Variable in editMode
@@ -49,16 +51,59 @@ class NewPermissionController extends AbstractController
         ]);
     }
 
-    #[Route('/permission', name: 'app_permission')]
-    public function index(PermissionRepository $permissionRepository): Response
+
+    /**
+     * For edit Permission 
+     */
+    
+    #[Route('/{id}/edit', name: 'app_permission_edit')]
+    
+    public function editPermission(Request $request, EntityManagerInterface $entityManager, Permission $permission = null, ManagerRegistry $doctrine): Response
     {
+        if (!$permission) {
+            $permission = new Permission();
+        }
+        $formPermission = $this->createForm(PermissionType::class, $permission);
+        $formPermission->handleRequest($request);
 
+        if ($formPermission->isSubmitted() && $formPermission->isValid()) {
+            if(!$permission->getId()){
+            
+            }
 
-        return $this->render('admin/permission/index.html.twig', [
-            'permissions' => $permissionRepository->findAllPermissions()
+            $entityManager->persist($permission);
+            $entityManager->flush();
+            
+            $this->addFlash('success', 'La permission a été modifié');
+
+        }
+            
+        return $this->render('admin/permission/editPermission.html.twig', [
+            'formPermission' => $formPermission->createView(),
+            'titlePage' => 'Modifier une nouvelle Permission',
+
+            //Variable in editMode
+            'editMode' => $permission->getId() !== null,
+            'permission' => $permission,
         ]);
     }
 
+    /**
+     * display list Permission
+     */
 
-    
+    #[Route('/permission', name: 'app_permission')]
+    public function index(PermissionRepository $permissionRepository, Request $request): Response
+    {
+        $countPermissions = $permissionRepository->countPermissions();
+        
+
+        return $this->render('admin/permission/index.html.twig', [
+            'titlePage' => 'Liste des permissions',
+            'permissions' => $permissionRepository->findAllPermissions(),
+            'countPermissions' => $countPermissions,
+            'permissions' => $permissionRepository->getPaginatedPermission((int) $request->query->get("page")),
+            
+        ]);
+    }
 }

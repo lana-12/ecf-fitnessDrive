@@ -40,6 +40,9 @@ class PartnerRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Return allPartner
+     */
     public function findAllPartners(): ?array
     {
         return
@@ -48,6 +51,9 @@ class PartnerRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Return partner with name
+     */
     public function findOneByName($name): array | Partner
     {
         return
@@ -58,10 +64,13 @@ class PartnerRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Pagination partner
+     */
     public function getPaginatedPartner(int $page): array | Partner
     {
         $page = $_GET['page']?? 1;
-        $partnerPerPage = 2;
+        $partnerPerPage = 30;
         $qb =  $this->createQueryBuilder('p')
             ->orderBy('p.namePartner')
             ->setFirstResult(($page -1 ) * $partnerPerPage)
@@ -70,6 +79,9 @@ class PartnerRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Return count Partner
+     */
     public function countPartners()
     {
         return $this->createQueryBuilder('p')
@@ -78,13 +90,15 @@ class PartnerRepository extends ServiceEntityRepository
                     ->getSingleScalarResult();
     }
     
-    public function  findUser()
-    {
-        return $this->createQueryBuilder('p')
-                    ->select('p.user')
-                    ->getQuery()
-                    ->getOneOrNullResult();
-    }
+
+    
+    // public function  findUser()
+    // {
+    //     return $this->createQueryBuilder('p')
+    //                 ->select('p.user')
+    //                 ->getQuery()
+    //                 ->getOneOrNullResult();
+    // }
 
 //    /**
 //     * @return Partner[] Returns an array of Partner objects

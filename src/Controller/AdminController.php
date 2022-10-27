@@ -2,15 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Partner;
 use App\Entity\Structure;
-use App\Entity\Permission;
-use App\Repository\UserRepository;
-use App\Repository\AdminRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
-use App\Repository\PermissionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,11 +15,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin')]
 
-
 class AdminController extends AbstractController
 {
     /**
-     * HomePage for Administrator
+     * HomePage for Administrator 
      * 
      * @return list partner + count partner+structure
      */
@@ -38,7 +32,6 @@ class AdminController extends AbstractController
         $structures = $structureRepo->findAllStructures();
 
         // display how many partners
-        // $countPartners = count($partners);
         $countPartners = $partnerRepo->countPartners();
         // display how many structures
         $countStructures = count($structures);
@@ -53,39 +46,29 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * Detail partner
+     */
     #[Route('/showpartner/{id<\d+>}', name: 'show-partner')]
     public function showPartner(ManagerRegistry $doctrine, int $id, StructureRepository $structureRepo) : Response
     {
         $repository = $doctrine->getRepository(Partner::class);
         $partner = $repository->find($id);
         
-
-        //avec cette method mettre ds twig que id==
-            // $structures = $structureRepo->findAllStructures();
-
         //display the structures from partner
         $structures = $structureRepo->findAllStructuresByPartner($id);
         dump($structures);
 
-        
-            
-            $error = 'Aucune structure associée';
             return $this->render('admin/partner/showpartner.html.twig',[
                 'partner'=> $partner,
                 'structures'=> $structures,
-                'error' => $error,
-            ]);
-            
-        // } else{
-        //     $error = 'Aucune structure associée';
-        //     return $this->render('admin/showpartner.html.twig',[
-        //         'partner'=> $partner,
-        //         'error' => $error,
-        //     ]);
-        // }
-        
+            ]);        
 
     }
+
+    /**
+     * Detail structure
+     */
     #[Route('/showstructure/{id<\d+>}', name: 'show-structure')]
     public function showStructure(ManagerRegistry $doctrine, int $id) : Response
     {
@@ -93,9 +76,6 @@ class AdminController extends AbstractController
         $structure = $repository->find($id);
 
         $permissions = $structure->getPermissions();
-            // foreach ($permissions as $permission) {
-            //     $structure->addPermission($permission);
-            // }
 
         return $this->render('admin/structure/showstructure.html.twig',[
             'structure'=> $structure,
@@ -104,10 +84,5 @@ class AdminController extends AbstractController
         ]);
 
     }
-
-    
-
-
-
     
 }

@@ -3,6 +3,17 @@
 {% block title %}
 {% endblock %}
 
+{% block javascripts %}
+
+	{{parent()}}
+
+	<!-- My JS -->
+	{{ encore_entry_script_tags('structure') }}
+
+{% endblock %}
+
+
+
 {% block body %}
 	{% block header %}
 		{{ parent() }}
@@ -12,33 +23,102 @@
 
 	<main class='main-container col-12'>
 
+	{% block Breadcrumb %}
+		<section>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="{{ path('app_admin') }}">Accueil</a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">Liste Structures
+					</li>
 
-		<h2>Liste des structures</h2>
-		<table class="table table-hover">
-			<thead>
-				<tr class="table-dark"></tr>
+				</ol>
+			</nav>
+		</section>
+	{% endblock  %}
+	<!-- SearchBar start-->
+	{% block searchBar %}
+		<section>
+			<nav class="row">
+				<div class="col-12 search">
 
-				<th scope="col">Id</th>
-				<th scope="col">Titre</th>
-				<th scope="col">Description</th>
-				<th scope="col"></th>
-			</thead>
-		</tr>
-	</thead>
-	<tbody>
-		{% for structure in structures %}
+					<input id="searchbarStructure" class=" inputSearch mx-auto" type="text" placeholder="Chercher une Structure" aria-label="Search">
+					<input id="hidden" class=" inputSearch me-2" type="hidden" aria-label="hidden">
 
-			<tr>
-				<th scope="row">{{structure.id}}</th>
-				<td>{{structure.nameStructure}}</td>
-				<td>{{structure.city}}</td>
-				<td>
-					<a type="button" class="btn-sm btn-warning" href="{{ path('structure_edit', {'id': structure.id}) }}">Modifier</a>
-				</td>
-			</tr>
 
-		{% endfor %}
-	</tbody>
-</table>
-</main>{% endblock %}
+				</div>
+			</nav>
+		</section>
+	{% endblock %}
+	<!-- SearchBar end-->
+
+
+<!-- Search all/active/Inactive Start-->
+{% block searchLink %}
+	<section class="searchLink">
+		<div class="row">
+			<div class="col-12">
+				<h2 class='titleIndex'>{{ titlePage }}</h2>
+				<div class="items_check">
+					<a class='active item_check  check' id="all-structure" alt="Affichez toutes les structures" title="Affichez toutes les structures" href='#'>Toutes</a>
+
+					<a class='item_check check' id="active-structure" alt="Affichez uniquement les structures Active" title="Affichez uniquement les structures Active" href='#'>Active</a>
+
+					<a class='item_check check' id="inactive-structure" alt="Affichez uniquement les structures Inactive" title="Affichez uniquement les structures Inactive" href='#'>Inactive</a>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+<!-- Search all/active/Inactive end-->
+
+
+
+		{# <h2 class='titleIndex'>{{ titlePage }}</h2> #}
+
+		<section>
+			{% for structure in structures %}
+				<div class="border structure structure-all {{ structure.isActive ? 'structure-active' : 'structure-inActive' }}">
+					<h5 >Géré par : 
+						<strong>{{structure.nameStructure}}</strong>
+					</h5>
+					<p class="">{{structure.city}}
+						<a type="button" class="btn-sm mx-auto btn-warning right" alt="Modifier la structure" title="Modifier la structure" href="{{ path('structure_edit', {'id': structure.id}) }}">Modifier
+						</a>
+					</p>
+				</div>
+
+			{% endfor %}
+		</section>
+
+{% block paginated %}
+
+	{# CHAQUE PAGE A SA PAGINATION AVEC SES LIENS #}
+	<section class='d-flex justify-content-center'>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+
+
+				{% for i in 1..((countStructures/ 30) | round(0, 'ceil')) %}
+
+					<li class="page-item">
+						<a class="page-link" href="{{ path('app_structureList', {page:i})}}">{{i}}</a>
+					</li>
+				{% endfor %}
+
+			</ul>
+		</nav>
+	</section>
+
+{% endblock %}
+
+		
+	<a class="rocket back" href='{{ path('app_user_list')}}'>
+		<i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
+	</a>
+
+		
+	</main>
+{% endblock %}
 

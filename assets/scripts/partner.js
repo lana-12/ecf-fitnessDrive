@@ -1,5 +1,4 @@
 window.onload= () => {
-console.log('test');
 
 // Init constance
 
@@ -34,9 +33,7 @@ const mySearch = () => {
 inputsearch.addEventListener("change", mySearch); 
 
 
-
 //functions display on click
-
 function displayAll(){
     for (i = 0; i < partners.length; i++) {
         partners[i].classList.remove("d-none");

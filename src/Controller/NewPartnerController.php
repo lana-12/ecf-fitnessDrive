@@ -16,12 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class NewPartnerController extends AbstractController
 {
     /**
-     * For create and edit partner
+     * For create partner
     */
     #[Route('/newpartner', name: 'new_partner')]
-    #[Route('/partner/{id}/edit', name: 'partner_edit')]
 
-    public function formpartner(Request $request, EntityManagerInterface $entityManager, Partner $partner=null, PartnerRepository $partnerRepo ): Response
+    public function formNewPartner(Request $request, EntityManagerInterface $entityManager, Partner $partner=null ): Response
     {  
             if(!$partner){
                 $partner = new Partner();
@@ -44,7 +43,49 @@ class NewPartnerController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
             
-            $this->addFlash('success', 'La Franchise a bien été créer');
+            $this->addFlash('success', 'La Franchise a bien été créé');
+            
+            }
+
+            return $this->render('admin/partner/newPartner.html.twig',[
+                'formpartner'=>$formPartner->createView(),
+
+                //Variable in editMode
+                'editMode'=> $partner->getId() !== null,
+                'partner' => $partner,
+
+        ]);
+    }
+    
+    /**
+     * For edit partner
+    */
+    #[Route('/partner/{id}/edit', name: 'partner_edit')]
+
+    public function formEditPartner(Request $request, EntityManagerInterface $entityManager, Partner $partner=null, PartnerRepository $partnerRepo ): Response
+    {  
+            if(!$partner){
+                $partner = new Partner();
+            }
+            $formPartner = $this->createForm(PartnerType::class, $partner);
+            $formPartner->handleRequest($request);
+
+        //S'assure de la validité du form et que les valaurs sont cohérentes
+        if ($formPartner->isSubmitted() && $formPartner->isValid()){
+            if(!$partner->getId()){
+                
+            }
+
+            // Ajoute les structures aux partners
+            $structures = $partner->getStructures();
+            foreach ($structures as $structure) {
+                $partner->addStructure($structure);
+            }
+            
+            $entityManager->persist($partner);
+            $entityManager->flush();
+            
+            $this->addFlash('success', 'La Franchise a bien été créé');
             
             // return $this->render('admin/index.html.twig',[
                 // 'partners'=>
@@ -53,12 +94,12 @@ class NewPartnerController extends AbstractController
             
             }
 
-            return $this->render('admin/partner/formPartner.html.twig',[
+            return $this->render('admin/partner/editPartner.html.twig',[
                 'formpartner'=>$formPartner->createView(),
 
-            //Variable in editMode
-            'editMode'=> $partner->getId() !== null,
-            'partner' => $partner,
+                //Variable in editMode
+                'editMode'=> $partner->getId() !== null,
+                'partner' => $partner,
 
         ]);
     }

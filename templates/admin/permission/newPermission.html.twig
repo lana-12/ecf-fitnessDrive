@@ -1,0 +1,45 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Permission | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{% block header %}
+		{{ parent() }}
+
+	{% endblock %}
+
+
+	<main class='main-container col-12'>
+
+    {% block Breadcrumb %}
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_admin') }}">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_permission') }}">Liste des permissions</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Créer une permission</li>
+                </ol>
+            </nav>
+        </section>
+    {% endblock  %}
+
+
+        <h2 class="titleIndex">{{titlePage}}</h2>
+
+{% include "admin/permission/_formPermission.html.twig" %}
+
+
+		
+
+    <a class="rocket back" href='{{ path('app_permission')}}'>
+        <i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
+    </a>
+
+	</main>
+{% endblock %}
+

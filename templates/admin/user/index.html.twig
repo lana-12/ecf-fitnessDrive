@@ -36,8 +36,9 @@
 		<section>
 			<!-- Barre de recherche start-->
 			<nav class="row">
-				<div class="col-12">
-					<input id="searchbarUser" class=" inputSearch p-2" type="text" placeholder="Chercher un compte de connexion" aria-label="Search">
+				<div class="col-12 search">
+
+					<input id="searchbarUser" class=" inputSearch mx-auto" type="text" placeholder="Chercher un Utilisateur " aria-label="Search">
 					<input
 					id="hidden" class=" inputSearch me-2" type="hidden" aria-label="hidden">
 				</div>
@@ -59,11 +60,6 @@
 		<section class='d-flex justify-content-center'>
 			<nav aria-label="Page navigation example">
 				<ul class="pagination pagination-sm">
-					<li class="page-item ">
-						<a class="page-link " href=" " aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
 
 			{% for i in 1..((countUsers/30) | round(0, 'ceil')) %}
 					<li class="page-item">
@@ -71,17 +67,15 @@
 					</li>
 			{% endfor %}
 
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
 				</ul>
 			</nav>
 		</section>
 
 	{% endblock  %}
 
+		<a class="rocket back" href='{{ path('app_user_list')}}'>
+			<i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
+		</a>
 
 
 	</main>

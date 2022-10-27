@@ -5,9 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,8 +54,8 @@ class NewUserController extends AbstractController
                 $user->addStructure($structure);
             }
             
-            $entityManager->persist($user);
-            $entityManager->flush();
+            // $entityManager->persist($user);
+            // $entityManager->flush();
             
             $this->addFlash('success', 'Le compte de connexion a bien été créé');
 

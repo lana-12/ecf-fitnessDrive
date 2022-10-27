@@ -25,7 +25,7 @@ class PartnerType extends AbstractType
             ->add('user', EntityType::class,[
                 'class'=> User::class,
                 'label'=> 'Selectionner un compte',
-                'placeholder'=>'Choisissez le compte de connexion',
+                'placeholder'=>'Choisissez ...',
                 'choice_label'=> function (User $user){
                     return $user->getUsername();
                 },
@@ -38,6 +38,20 @@ class PartnerType extends AbstractType
 
             ])
 
+            ->add('name', TextType::class,[
+                'label'=> 'Nom du franchisé',
+                'attr'=>[
+                'placeholder'=>'Son nom',
+                ],
+                'required'=> true,
+                
+                'constraints'=> [
+                    new NotBlank(['message'=> 'Le champ ne peut pas être vide !']),
+                    new Length([
+                        'min'=> 5, 'max'=> 100, 'minMessage' =>'Le champ doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' =>'Le champ doit faire entre {{ limit }} et {{ limit }} caractères']),
+                    ]       
+                ])  
+                
             ->add('namePartner', TextType::class,[
                 'label'=> 'Nom de la franchise',
                 'attr'=>[

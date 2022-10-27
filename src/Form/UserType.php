@@ -51,7 +51,8 @@ class UserType extends AbstractType
             ->add('password', PasswordType::class,[
                 'label'=> 'Mot de passe',
                 'required'=> true, 
-                'row_attr' => ['class' => '', 'id' => 'id_password'],                
+                'row_attr' => ['class' => '', 'id' => 'inputPassword'],                
+                // 'row_attr' => ['class' => '', 'id' => 'id_password'],                
                 'constraints'=> [
                         new NotBlank(['message'=> 'Veuillez saisir un mot de passe!']),
                         new Length([
@@ -95,9 +96,6 @@ class UserType extends AbstractType
                         return explode(', ', $rolesAsString);
                 }
             ));
-                    
-
-        
     }
 
     public function configureOptions(OptionsResolver $resolver)

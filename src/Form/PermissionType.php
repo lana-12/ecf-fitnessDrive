@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Permission;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +20,7 @@ class PermissionType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Nom de la Permission',
                 'attr' => [
-                    'placeholder' => 'Gérer les planning',
+                    'placeholder' => 'ex: Gérer les planning',
                 ],
                 'required' => true,
 
@@ -37,7 +36,7 @@ class PermissionType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description de la Permission',
                 'attr' => [
-                    'placeholder' => 'Gérer les planning',
+                    'placeholder' => 'Logiciel pour gérer les planning,...',
                 ],
                 'required' => true,
 

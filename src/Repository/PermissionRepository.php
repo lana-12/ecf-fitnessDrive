@@ -40,6 +40,9 @@ class PermissionRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Return all Permissions
+     */
     public function findAllPermissions(): ?array
     {
         return
@@ -48,6 +51,31 @@ class PermissionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Pagination Permission
+     */
+    public function getPaginatedPermission(int $page): array | Permission
+    {
+        $page = $_GET['page'] ?? 1;
+        $permissionPerPage = 20;
+        $qb =  $this->createQueryBuilder('p')
+            ->orderBy('p.title')
+            ->setFirstResult(($page - 1) * $permissionPerPage)
+            ->setMaxResults($permissionPerPage);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Return count Permissions
+     */
+    public function countPermissions()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
     
 //    /**
 //     * @return Permission[] Returns an array of Permission objects

@@ -23,6 +23,9 @@
 			<section>
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
+						<li class="breadcrumb-item back">
+							<a href="{{ path('app_admin') }}" alt="Retour liste Franchise | Accueil" title="Retour liste Franchise | Accueil">Accueil</a>
+						</li>
 						<li class="breadcrumb-item">
 							<a href="{{ path('app_user_list') }}">Liste des Utilisateurs</a>
 						</li>
@@ -33,14 +36,15 @@
 			</section>
 		{% endblock  %}
 
-		<h2 class="">Modifier un compte de connexion</h2>
-
-
+		<h2 class="titleIndex">Modifier un compte de connexion</h2>
 
 		{{ include ("admin/user/_formUser.html.twig", {'button_label': 'Modifier'}) }}
-        
-		<a href='{{ path('app_user_list')}}' class="back">Retour à la liste</a>
 
+		<a class="rocket back" href='{{ path('app_user_list')}}'>
+			<i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
+		</a>
 	</main>
 {% endblock %}
+
+
 

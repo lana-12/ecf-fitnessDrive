@@ -26,20 +26,10 @@
             <h2> Détail de la Franchise de  <span class="detail"> {{ partner.namePartner}} </span> </h2>
                 {% include "admin/partner/_partner.html.twig" %}
 
-                <h2>Liste des structures associées</h2>
-                {# NE MARCHE PAS  #}
-                {# {% if error %}
-                    <div class="alert alert-danger">
-                        {{ error }}
-                    </div>
-                {% endif %} #}
-            
+            <h2>Liste des structures associées</h2>
+                
         
-            {% include "admin/structure/_liststructure.html.twig" %}
-
-
-            <h2>Permissions Globales</h2>
-
+                {% include "admin/structure/_liststructure.html.twig" %}
 
     </main>
 

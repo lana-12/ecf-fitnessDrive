@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Table(name: '`partners`')]
 #[UniqueEntity(fields:'namePartner', message:'Le nom que vous avez indiqué existe déjà')]
 #[UniqueEntity(fields:'phone', message:'Le numéro de téléphone que vous avez indiqué existe déjà ')]
+#[UniqueEntity(fields:'name', message: 'Le nom que vous avez indiqué existe déjà')]
 
 
 class Partner
@@ -37,7 +38,7 @@ class Partner
     #[ORM\ManyToOne(inversedBy: 'partner', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique:true)]
     private ?string $name = null;
 
     public function __construct()

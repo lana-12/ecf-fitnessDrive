@@ -28,7 +28,7 @@ class StructureType extends AbstractType
                 'class'=> Partner::class,
                 'required'=> true,
                 'label'=> 'Selectionner une franchise',
-                'placeholder'=>'Choisissez la Franchise',
+                'placeholder'=>'Choisissez...',
                 'choice_label'=> function (Partner $partner){
                     return $partner->getNamePartner();
                 },
@@ -46,7 +46,7 @@ class StructureType extends AbstractType
                 'label'=> 'Selectionner un compte de connexion',
                 'class'=> User::class,
                 'required'=> true,
-                'placeholder'=>'Choisissez le compte ',
+                'placeholder'=>'Choisissez...',
                 'choice_label'=> function (User $user){
                     return $user->getUsername();
                 },
@@ -63,7 +63,7 @@ class StructureType extends AbstractType
             ->add('nameStructure', TextType::class,[
                 'label'=> 'Nom de la structure',
                 'attr'=>[
-                'placeholder'=>'Mettre le nom du gérant de la structure ex Dupond',
+                'placeholder'=>'Nom du gérant de la structure',
                 ],
                 'required'=> true,
                 'constraints'=> [

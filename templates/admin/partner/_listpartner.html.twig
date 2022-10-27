@@ -1,7 +1,5 @@
 <div class="d-flex justify-content-around flex-wrap container ">
 {% for partner in partners %}
-{# {% if partner  %} #}
-    {# {% if partner.isIsActive  %} #}
     <div class="card partner d-flex partner-all {{ partner.isActive ? 'partner-active' : 'partner-inActive' }}" >
         <div class="card-body ">
 
@@ -43,9 +41,5 @@
             <a href=" {{ path( 'partner_edit', {'id': partner.id}) }} " type="button" class="btn-sm btn-warning">Modifier</a>
         </div>
     </div>
-        {# {% else %}
-                    <p>Oups, une erreur est survenue !!!</p> #}
-    {% endfor %}
-{# {% endif %} #}
 </div>
     

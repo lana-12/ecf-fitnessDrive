@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Partner;
 use App\Entity\Structure;
 use App\Form\StructureType;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class NewStructureController extends AbstractController
 {
     /**
-     * For create and edit structure
+     * For create structure
     */
     #[Route('/new_structure', name: 'new_structure')]
     public function formNewStructure(Request $request, EntityManagerInterface $entityManager, Structure $structure=null,): Response
@@ -59,7 +57,9 @@ class NewStructureController extends AbstractController
     }
 
 
-    
+    /**
+     * For edit structure
+     */
     #[Route('/structure/{id}/edit', name: 'structure_edit')]
     
     public function formEditStructure(Request $request, EntityManagerInterface $entityManager, Structure $structure=null,): Response
@@ -85,13 +85,8 @@ class NewStructureController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La structure a bien été modifier');
+            $this->addFlash('success', 'La structure a bien été modifié');
             
-            // return $this->render('admin/index.html.twig', [
-            //     'structure'=> $structure,
-            //     'permissions'=> $structure->getPermissions(),
-
-            // ]);
         }
         
         //RECUP NOM PARTNER + STRUCTURE POUR LE MODE EDIT
@@ -107,14 +102,20 @@ class NewStructureController extends AbstractController
     }
 
     /**
-     * Display list structure
+     * Display list structures
      */
     #[Route('/structureList', name: 'app_structureList')]
-    public function index(StructureRepository $structureRepository): Response
+    public function index(StructureRepository $structureRepository, Request $request): Response
     {
+        // display how many structures
+        $countStructures = $structureRepository->countStructures();
         
         return $this->render('admin/structure/list.html.twig', [
+            'titlePage' => 'Liste des structures',
             'structures' => $structureRepository->findAllStructures(),
+            'countStructures' => $countStructures,
+            'structures'=> $structureRepository->getPaginatedStructure((int) $request->query->get("page")),
+
         ]);
     }
 

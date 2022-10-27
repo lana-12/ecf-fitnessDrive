@@ -1,0 +1,17 @@
+{% for message in app.flashes('success') %}
+	<div class="alert alert-success mt-4">
+		{{ message }}
+	</div>
+
+{% endfor %}
+
+	{{ form_start(formPermission) }}
+	{{ form_rest(formPermission) }}
+
+<button class="btn btnCustom mx-auto m-5">{{ button_label|default('Enregistrer')}}</button>
+
+	{{ form_end(formPermission) }}
+
+
+
+	
