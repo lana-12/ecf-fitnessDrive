@@ -22,39 +22,52 @@
         </section>
     {% endblock  %}
 
-            <h2> Détail de la Structure <span class="detail">{{structure.nameStructure}}</span> </h2>
-        
-        {% include "admin/structure/_structure.html.twig" %}
+        <section>
+            <h2 class="titleIndex mt-4" id="detailS"> Détail de la Structure <span >{{structure.nameStructure}}</span></h2>
+            {% include "admin/structure/_structure.html.twig" %}
+        </section>
 
+<hr class="separator">
 
-            <h2>Liste des permissions</h2>
+        <section>
+            <h2 class="titleIndex mt-4">Liste des permissions</h2>
 
+            {% for permission in permissions %}
+            <div class="perms">
+                <h5>
+                    <strong>{{permission.title}}</strong>
+                </h5>
+                <p>
+                {% if structure.isActive %}
+                    <span class="">Active</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-primary " viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+                {% else %}
+                    <span class="">InActive</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+                {% endif %}
+                </p>
+            </div>
 
-{% for permission in permissions %}
-	<p class='permissions'>
-		{{permission.title}}
-        {% if structure.isActive %}
-<span class="p-2">Active</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+            {% else %}
+            <div class="alert alert-success text-center">
+                <p>Vous n'avez aucune permission !</p>
+            </div>
+            {% endfor %}
+        </section>
 
-
-        {% else %}
-<span class="p-2">InActive</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
-
-
-        {% endif %}
-
-    </p>
-	{% endfor %}
-
-
-
+        <a class="rocket back" href='#detailS'>
+            <i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
+        </a>
     </main>
 
 </body>
 {% endblock %}
     
+
+
+
+
+
         
     
 

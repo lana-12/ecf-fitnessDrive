@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block body %} 
-<body >
+<body>
 
 {% block header %}
 <!-- wrapper end -->
@@ -44,82 +44,79 @@
 	<!-- main container start -->
 {% endblock %}
 
-<main class='main-container col-12'>
+		<main class='main-container col-12'>
 
-	<section>
-		<div class="row">
-			<div class='count col-12'>
-				<span class='total'>Total :
-					{{ countPartners }} Franchises | 
-					{{ countStructures }} Structures
-				</span>
-			</div>
-		</div>
-	</section>
-
-	<!-- SearchBar start-->
-{% block searchBar %}
-	<section>
-		<nav class="row">
-			<div class="col-12 search">
-
-				<input id="searchbar"  class=" inputSearch mx-auto" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
-				<input id="hidden"  class=" inputSearch me-2" type="hidden"   aria-label="hidden">
-					
-			</div>
-		</nav>
-	</section>
-{% endblock %}
-	<!-- SearchBar end-->
-
-
-	<!-- Search all/active/Inactive Start-->
-{% block searchLink %}
-	<section class="searchLink">
-		<div class="row">
-			<div class="col-12">
-				<h2 class='titleIndex'>{{ titleIndex }}</h2>
-				<div class="items_check">
-					<a class='active item_check  check' id="all" alt="Affichez toutes les franchises" title="Affichez toutes les franchises" href='#'>Toutes</a>
-
-					<a class='item_check check' id="active" alt="Affichez uniquement les franchises Active" title="Affichez uniquement les franchises Active" href='#'>Active</a>
-
-					<a class='item_check check' id="inactive" alt="Affichez uniquement les franchises Inactive" title="Affichez uniquement les franchises Inactive" href='#'>Inactive</a>
+			<section>
+				<div class="row">
+					<div class='count col-12'>
+						<span class='total'>Total :
+							{{ countPartners }} Franchises | 
+							{{ countStructures }} Structures
+						</span>
+					</div>
 				</div>
-			</div>
-		</div>
-	</section>
-{% endblock %}
-<!-- Search all/active/Inactive end-->
+			</section>
 
-	<section>
-			{% include "admin/partner/_listpartner.html.twig" %}
-	</section>
-	
-{% block paginated %}
-		
-		{# CHAQUE PAGE A SA PAGINATION AVEC SES LIENS #}
-	<section class='d-flex justify-content-center'>
-		<nav aria-label="Page navigation example">
-			<ul class="pagination pagination-sm">
+			<!-- SearchBar start-->
+		{% block searchBar %}
+			<section>
+				<nav class="row">
+					<div class="col-12 search">
+						<input id="searchbar"  class=" inputSearch mx-auto" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
+						<input id="hidden"  class=" inputSearch me-2" type="hidden"   aria-label="hidden">
+							
+					</div>
+				</nav>
+			</section>
+		{% endblock %}
+			<!-- SearchBar end-->
 
-	{% for i in 1..((countPartners/ 30) | round(0, 'ceil')) %}
-				<li class="page-item">
-					<a class="page-link" href="{{ path('app_admin', {page:i})}}">{{i}}</a>
-				</li>
-	{% endfor %}
+
+			<!-- Search all/active/Inactive Start-->
+		{% block searchLink %}
+			<section class="searchLink">
+				<div class="row">
+					<div class="col-12">
+						<h2 class='titleIndex'>{{ titleIndex }}</h2>
+						<div class="items_check">
+							<a class='active item_check  check' id="all" alt="Affichez toutes les franchises" title="Affichez toutes les franchises" href='#'>Toutes</a>
+
+							<a class='item_check check' id="active" alt="Affichez uniquement les franchises Active" title="Affichez uniquement les franchises Active" href='#'>Active</a>
+
+							<a class='item_check check' id="inactive" alt="Affichez uniquement les franchises Inactive" title="Affichez uniquement les franchises Inactive" href='#'>Inactive</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		{% endblock %}
+		<!-- Search all/active/Inactive end-->
+
+			<section>
+					{% include "admin/partner/_listpartner.html.twig" %}
+			</section>
+			
+		{% block paginated %}
 				
-			</ul>
-		</nav>
-	</section>
+			<section class='d-flex justify-content-center mt-5'>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination pagination-sm">
+				{% for i in 1..((countPartners/ 30) | round(0, 'ceil')) %}
+						<li class="page-item">
+							<a class="page-link" href="{{ path('app_admin', {page:i})}}">{{i}}</a>
+						</li>
+				{% endfor %}
+						
+					</ul>
+				</nav>
+			</section>
 
-{% endblock %}
-<!-- main container end -->
+		{% endblock %}
+		<!-- main container end -->
 
-	<a class="rocket back" href='{{ path('app_admin')}}'><i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
-	</a>
+			<a class="rocket back" href='{{ path('app_admin')}}'><i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
+			</a>
 
-	</main>
+		</main>
 </body>
 {% endblock %}
 

@@ -36,9 +36,11 @@
 			</section>
 		{% endblock  %}
 
-		<h2 class="titleIndex">Modifier un compte de connexion</h2>
+		<h2 class="titleIndex m-5 ">Modifier un compte de connexion</h2>
 
-		{{ include ("admin/user/_formUser.html.twig", {'button_label': 'Modifier'}) }}
+		<section class="form">
+			{{ include ("admin/user/_formUser.html.twig", {'button_label': 'Modifier'}) }}
+		</section>
 
 		<a class="rocket back" href='{{ path('app_user_list')}}'>
 			<i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>

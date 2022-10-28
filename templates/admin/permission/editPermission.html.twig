@@ -13,26 +13,28 @@
 
 	<main class='main-container col-12'>
 
-		{% block Breadcrumb %}
-			<section>
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item">
-							<a href="{{ path('app_admin') }}">Accueil</a>
-						</li>
-						<li class="breadcrumb-item">
-							<a href="{{ path('app_permission') }}">Liste des permissions</a>
-						</li>
-						<li class="breadcrumb-item active" aria-current="page">Modifier une permission</li>
-					</ol>
-				</nav>
-			</section>
-		{% endblock  %}
+	{% block Breadcrumb %}
+		<section>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="{{ path('app_admin') }}">Accueil</a>
+					</li>
+					<li class="breadcrumb-item">
+						<a href="{{ path('app_permission') }}">Liste des permissions</a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">Modifier une permission</li>
+				</ol>
+			</nav>
+		</section>
+	{% endblock  %}
 
 
-		<h2 class="titleIndex">{{titlePage}}</h2>
+		<h2 class="titleIndex mt-4">{{titlePage}}</h2>
 
-		{{include ("admin/permission/_formPermission.html.twig", {'button_label': 'Modifier'}) }}
+		<section class="form">
+			{{include ("admin/permission/_formPermission.html.twig", {'button_label': 'Modifier'}) }}
+		</section>
 
 
 		<a class="rocket back" href='{{ path('app_permission')}}'>

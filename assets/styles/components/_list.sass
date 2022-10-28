@@ -1,0 +1,52 @@
+// STYLE USERLIST - STRUCTURELIST - PERMLIST START
+.border
+    background-color: $green
+    border: solid white 2px
+    border-radius: 10px
+    box-shadow: 10px 10px 5px $backGHS
+    color: #000
+    padding: 10px
+    padding-bottom: 50px
+    font-size: 0.8em
+    margin: 20px
+    padding-top: 20px
+.right
+    float: right 
+    margin: 10px
+// STYLE USERLIST - STRUCTURELIST - PERMLIST END
+
+
+// STYLE PERM VIEW STRUCTURE STAR
+.perms
+    background-color: $green
+    border: solid white 1px
+    border-radius: 10px
+    box-shadow: 10px 10px 5px $backGHS
+    max-width: 350px
+    height:  80px
+    text-align: center
+    padding-top: 5px
+    padding-bottom: 5px
+    margin: auto
+    margin-top: 20px
+
+// STYLE PERM VIEW STRUCTURE END
+
+
+/********MEDIA QUERY POUR ECRAN 768PX  ***********/
+/******min-width 768px**************/
+@include media($md)
+    .perms
+        max-width: 450px
+
+/********MEDIA QUERY POUR ECRAN 992PX  ***********/
+/******min-width 992px**************/
+@include media($lg)
+    .perms
+        max-width: 550px
+
+/********MEDIA QUERY POUR ECRAN 1200PX  ***********/
+/******min-width 1200px**************/
+@include media($xl)
+    .perms
+        max-width: 650px

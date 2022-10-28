@@ -44,48 +44,40 @@
         <section>
             <nav class="row">
                 <div class="col-12 search">
-
                     <input id="searchbarPerm" class=" inputSearch mx-auto" type="text" placeholder="Chercher une permission" aria-label="Search">
                     <input id="hidden" class=" inputSearch me-2" type="hidden" aria-label="hidden">
-
-
                 </div>
             </nav>
         </section>
     {% endblock %}
     <!-- SearchBar end-->
 
-		<h2 class="titleIndex">{{ titlePage }}</h2>
-
+		<h2 class="titleIndex m-4">{{ titlePage }}</h2>
         <section>
             {% for permission in permissions %}
                 <div class="border perm ">
-                    <h5>{{permission.id}} - 
-                        <strong>{{permission.title}}</strong>
-                    </h5>
+                    <h5><strong>{{permission.title}}</strong></h5>
                     <p class="">{{permission.description}}</p>
                         <a type="button" class="btn-sm mx-auto  btn-warning right" alt="Modifier la permission" title="Modifier la permission" href="{{ path('app_permission_edit', {'id': permission.id}) }}">Modifier
                         </a>
                 </div>
-
+            {% else %}
+                <div class="alert alert-success text-center">
+                    <p>Oups une erreur est survenue !</p>
+                </div>
             {% endfor %}
         </section>
 
 {% block paginated %}
 
-	{# CHAQUE PAGE A SA PAGINATION AVEC SES LIENS #}
-	<section class='d-flex justify-content-center'>
+	<section class='d-flex justify-content-center mt-5'>
 		<nav aria-label="Page navigation example">
 			<ul class="pagination pagination-sm">
-
-
 				{% for i in 1..((countPermissions/ 20) | round(0, 'ceil')) %}
-
 					<li class="page-item">
 						<a class="page-link" href="{{ path('app_permission', {page:i})}}">{{i}}</a>
 					</li>
 				{% endfor %}
-
 			</ul>
 		</nav>
 	</section>

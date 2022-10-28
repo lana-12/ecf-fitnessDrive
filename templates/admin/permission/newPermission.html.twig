@@ -28,17 +28,15 @@
         </section>
     {% endblock  %}
 
+        <h2 class="titleIndex mt-4">{{titlePage}}</h2>
 
-        <h2 class="titleIndex">{{titlePage}}</h2>
+        <section class="form">
+            {% include "admin/permission/_formPermission.html.twig" %}
+        </section>
 
-{% include "admin/permission/_formPermission.html.twig" %}
-
-
-		
-
-    <a class="rocket back" href='{{ path('app_permission')}}'>
-        <i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
-    </a>
+        <a class="rocket back" href='{{ path('app_permission')}}'>
+            <i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
+        </a>
 
 	</main>
 {% endblock %}

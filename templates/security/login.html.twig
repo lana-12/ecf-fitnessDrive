@@ -17,12 +17,12 @@
     <header class='header_login'>
     {% block navbar %} 
         <nav class="navbar navbar- bg- nav_login">
-                <div>
-                    <img class="logo image-fluid" src="{{ asset('asset/images/logo.png')}}" width="80px" height="80px" alt="Logo FitnessDrive" title="Logo FitnessDrive" srcset="">
-                </div>
-                <div>
-                    <h1 class="titleCustom" >Fitness <span class="drive">Drive</span></h1>
-                </div>
+            <div>
+                <img class="logo image-fluid" src="{{ asset('asset/images/logo.png')}}" width="80px" height="80px" alt="Logo FitnessDrive" title="Logo FitnessDrive" srcset="">
+            </div>
+            <div>
+                <h1 class="titleCustom" >Fitness <span class="drive">Drive</span></h1>
+            </div>
         </nav>
     {% endblock %}
     </header>
@@ -30,9 +30,6 @@
     <main class='main_login'>
         <div class='row'>
             <div class='col-12'>
-                {# <p class="pHome">Veuillez vous identifier pour accéder à votre compte !!</p> #}
-
-
                 <form action="" method="post">
                     {% if error %}
                         <div class="alert alert-danger">
@@ -62,7 +59,6 @@
                         
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     </div>
-
                 </form>
             </div>
         </div>

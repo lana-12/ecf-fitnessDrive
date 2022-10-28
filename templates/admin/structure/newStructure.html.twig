@@ -12,32 +12,34 @@
 
 	<main class="main-container col-12">
 
-		{% block Breadcrumb %}
-			<section>
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item">
-							<a href="{{ path('app_admin') }}">Accueil</a>
-						</li>
-						<li class="breadcrumb-item">
-							<a href="{{ path('app_structureList') }}">Liste Structures</a>
-						</li>
-						<li class="breadcrumb-item active" aria-current="page">Créer une Structure
-						</li>
+	{% block Breadcrumb %}
+		<section>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="{{ path('app_admin') }}">Accueil</a>
+					</li>
+					<li class="breadcrumb-item">
+						<a href="{{ path('app_structureList') }}">Liste Structures</a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">Créer une Structure
+					</li>
 
-					</ol>
-				</nav>
-			</section>
-		{% endblock  %}
+				</ol>
+			</nav>
+		</section>
+	{% endblock  %}
 
 		
-			<h1 class=" titleIndex ">Créer une Structure</h1>
+		<h1 class=" titleIndex mt-4 ">Créer une Structure</h1>
 
-{{ include ("admin/structure/_formStructure.html.twig", {'button_label': 'Enregistrer'}) }}
+		<section class="form">
+			{{ include ("admin/structure/_formStructure.html.twig", {'button_label': 'Enregistrer'}) }}
+		</section>
         
-	<a class="rocket back" href='{{ path('app_structureList')}}'>
-		<i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
-	</a>
+		<a class="rocket back" href='{{ path('app_structureList')}}'>
+			<i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
+		</a>
 
 	</main>
 {% endblock %}

@@ -12,8 +12,6 @@
 
 {% endblock %}
 
-
-
 {% block body %}
 	{% block header %}
 		{{ parent() }}
@@ -59,7 +57,7 @@
 	<section class="searchLink">
 		<div class="row">
 			<div class="col-12">
-				<h2 class='titleIndex'>{{ titlePage }}</h2>
+				<h2 class='titleIndex m-4'>{{ titlePage }}</h2>
 				<div class="items_check">
 					<a class='active item_check  check' id="all-structure" alt="Affichez toutes les structures" title="Affichez toutes les structures" href='#'>Toutes</a>
 
@@ -73,51 +71,44 @@
 {% endblock %}
 <!-- Search all/active/Inactive end-->
 
-
-
-		{# <h2 class='titleIndex'>{{ titlePage }}</h2> #}
-
-		<section>
-			{% for structure in structures %}
-				<div class="border structure structure-all {{ structure.isActive ? 'structure-active' : 'structure-inActive' }}">
-					<h5 >Géré par : 
-						<strong>{{structure.nameStructure}}</strong>
-					</h5>
-					<p class="">{{structure.city}}
-						<a type="button" class="btn-sm mx-auto btn-warning right" alt="Modifier la structure" title="Modifier la structure" href="{{ path('structure_edit', {'id': structure.id}) }}">Modifier
-						</a>
-					</p>
-				</div>
-
-			{% endfor %}
-		</section>
+	<section>
+		{% for structure in structures %}
+			<div class="border structure structure-all {{ structure.isActive ? 'structure-active' : 'structure-inActive' }}">
+				<h5 >Gérant : 
+					<strong>{{structure.nameStructure}}</strong>
+				</h5>
+				<p class="">{{structure.city}}
+					<a type="button" class="btn-sm mx-auto btn-warning right" alt="Modifier la structure" title="Modifier la structure" href="{{ path('structure_edit', {'id': structure.id}) }}">Modifier
+					</a>
+				</p>
+			</div>
+		{% else %}
+			<div class="alert alert-success text-center">
+				<p>Oups une erreur est survenue !</p>
+			</div>
+		{% endfor %}
+	</section>
 
 {% block paginated %}
 
 	{# CHAQUE PAGE A SA PAGINATION AVEC SES LIENS #}
-	<section class='d-flex justify-content-center'>
+	<section class='d-flex justify-content-center mt-5'>
 		<nav aria-label="Page navigation example">
 			<ul class="pagination pagination-sm">
-
-
-				{% for i in 1..((countStructures/ 30) | round(0, 'ceil')) %}
-
-					<li class="page-item">
-						<a class="page-link" href="{{ path('app_structureList', {page:i})}}">{{i}}</a>
-					</li>
-				{% endfor %}
-
+			{% for i in 1..((countStructures/ 30) | round(0, 'ceil')) %}
+				<li class="page-item">
+					<a class="page-link" href="{{ path('app_structureList', {page:i})}}">{{i}}</a>
+				</li>
+			{% endfor %}
 			</ul>
 		</nav>
 	</section>
 
 {% endblock %}
 
-		
-	<a class="rocket back" href='{{ path('app_user_list')}}'>
-		<i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
-	</a>
-
+		<a class="rocket back" href='{{ path('app_user_list')}}'>
+			<i class="fa fa-rocket" alt="Retour à la liste" title="Retour à la liste"></i>
+		</a>
 		
 	</main>
 {% endblock %}

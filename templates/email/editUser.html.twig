@@ -5,38 +5,30 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
-
 	<body>
-
 		<h1>Modification de votre Compte</h1>
-
 		<p>Bonjour,
 			{% if user.username is defined %}
 				{{ user.username }}
 			{% endif %}
 		</p>
-
 		<p>Nous avons détecter des changements sur votre compte</p>
 		<p>Vous pouvez vous connecter pour voir ses changements !!</p>
 		<ul>
-			<p>
-				Pour Rappel votre identifiant de connection est :
+			<p>Pour Rappel votre identifiant de connection est : </p>
 				<li>
 					{% if user.username is defined %}
 						{{ user.email }}
 
 					{% endif %}
 				</li>
-			</p>
+			<p>Votre Mot de passe est :</p>
+				<li>Vous avez dû le noté</li>
 		</ul>
-		<p>
-			Votre Mot de passe est : Vous avez dû le noté
-		</p>
-
 		<p>Si vous avez des difficultés à vous connecter, veuillez nous contacter.</p>
-
+		<hr>
 		<p>Sportivement</p>
 		<p>La team de FitnessDrive</p>
 	</body>
-</html></body></html>
+</html>
 

@@ -8,7 +8,6 @@
 	<!-- My JS -->
 	{{ encore_entry_script_tags('user') }}
 
-
 {% endblock %}
 
 
@@ -37,7 +36,6 @@
 			<!-- Barre de recherche start-->
 			<nav class="row">
 				<div class="col-12 search">
-
 					<input id="searchbarUser" class=" inputSearch mx-auto" type="text" placeholder="Chercher un Utilisateur " aria-label="Search">
 					<input
 					id="hidden" class=" inputSearch me-2" type="hidden" aria-label="hidden">
@@ -48,16 +46,13 @@
 	{% endblock %}
 
 		<section>
-
-			<h2 class='titleIndex'>{{ titlePage }}</h2>
-
+			<h2 class='titleIndex titleListUser '>{{ titlePage }}</h2>
 				{% include "admin/user/_list.html.twig" %}
-			
 		</section>
 
 	{% block paginated %}
 
-		<section class='d-flex justify-content-center'>
+		<section class='d-flex justify-content-center mt-5 '>
 			<nav aria-label="Page navigation example">
 				<ul class="pagination pagination-sm">
 

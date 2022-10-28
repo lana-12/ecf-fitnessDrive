@@ -2,7 +2,7 @@
 
 {% extends 'admin/index.html.twig' %}
 
-{% block title %}Liste  | {{ parent() }} {% endblock %}
+{% block title %}Détail  | {{ parent() }} {% endblock %}
 
 {% block body %} 
 <body>
@@ -17,19 +17,27 @@
                     <li class="breadcrumb-item back">
                         <a href="{{ path('app_admin') }}">Accueil</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Détail de la Franchise</li>
+                    <li class="breadcrumb-item active" aria-current="page">Détail de la Franchise
+                    </li>
                 </ol>
             </nav>
         </section>
     {% endblock  %}
 
-            <h2> Détail de la Franchise de  <span class="detail"> {{ partner.namePartner}} </span> </h2>
+            <h2 class="titleIndex mt-4" id="detail"> Détail de la Franchise de  <span > {{ partner.namePartner}} </span> </h2>
+
                 {% include "admin/partner/_partner.html.twig" %}
 
-            <h2>Liste des structures associées</h2>
+<hr class="separator">
+
+            <h2 class="titleIndex mt-4">Liste des structures associées</h2>
                 
         
                 {% include "admin/structure/_liststructure.html.twig" %}
+
+        <a class="rocket back" href='#detail'>
+            <i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
+        </a>
 
     </main>
 

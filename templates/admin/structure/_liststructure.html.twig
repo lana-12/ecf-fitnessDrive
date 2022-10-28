@@ -1,28 +1,16 @@
-{# Include ds admin/showpartner and  #}
-
 <div class="d-flex justify-content-center flex-wrap container mt-5"> 
     {% for structure in structures %}
-
-    {# permet de display uniquement les structures du partner avec twig #}
-        {# {% if structure.partner.id is same as partner.id %} #}
-        <div class="card" style="width: 18rem;">
+        <div class="card" >
             <div class="card-body">
-    {# {{ dump(structure.isIsActive)}}
-    {{ dump(structure.id)}}
-    {{ dump(structure.partner.namePartner)}}
-    {{ dump(structure.partner.id)}} #}
-
-            {# {% if structure %}                #}
-                <h5 class="card-title">Fitness Drive -  
+                <h5 class="card-title text-center mb-3">FitnessDrive -  
                     {{structure.partner.namePartner}} - 
                     {{structure.nameStructure}}  
                 </h5>
-                <div class="d-flex justify-content-between">
-                    <p class="text-muted">Gérer par {{structure.user.username}} </p>
-                    {# {% endif %} #}
+                <div class="d-block d-sm-flex justify-content-sm-between">
+                    <p class="text-muted">Gérant : {{structure.user.username}} </p>
                     
                     <!-- Structure Active ? -->
-                    <p class='IsActive'>{{ structure.isActive ? '<span class="p-2">Active</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>' : '<span class="p-2">InActive</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>'}}</p>
+                    <p class='IsActive'>{{ structure.isActive ? '<span class="p-2">Active</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>' : '<span class="p-2">InActive</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>'}}</p>
                 </div>
                 <p class="card-text"> 
                     <ul class='info'>
@@ -42,7 +30,7 @@
             </div>
         </div>
     {% else %}
-        <div class="alert alert-success">
+        <div class="alert alert-success text-center">
             <p>
                 Vous n'avez aucune structure !</p>
         </div>

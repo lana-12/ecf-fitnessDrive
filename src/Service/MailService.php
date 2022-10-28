@@ -10,7 +10,6 @@ class MailService
 {
     public function __construct(private MailerInterface $mailer){}
 
-    
     public function sendEmail(string $from, string $to, string $subject, string $template, array $context ) :void
     {
         $email = (new TemplatedEmail())

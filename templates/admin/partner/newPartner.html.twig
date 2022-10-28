@@ -26,9 +26,11 @@
         </section>
     {% endblock  %} 
 
-            <h1 class=" titleIndex ">Créer la Franchise</h1>
+            <h1 class=" titleIndex mt-5 ">Créer la Franchise</h1>
 
+        <section class="form">
     {{ include ("admin/partner/_formPartner.html.twig", {'button_label': 'Enregister'}) }}
+        </section>
 
 
     <a class="rocket back" href='{{ path('app_admin')}}'>

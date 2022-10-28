@@ -5,7 +5,7 @@
 {% block body %}
     <body class="body_home">
 
-        <header class="header_home">
+        <header class="header_home ">
         {% block navbar %} 
             <nav class="navbar navbar-dark shadow-5-strong navHome ">
                 <div>
@@ -13,24 +13,11 @@
                 </div>
                 
                 <div class="titleHome">
-                    <h1 class="navbar-brand titleCustom">Fitness <span class="drive">Drive</span></h1>
+                    <h1 class="navbar-brand titleCustom">Fitness<span class="drive">Drive</span></h1>
                 </div>    
             </nav>
         {% endblock %}
         </header>
-{# <pre>
-    {{ dump(app.user.id) }}
-</pre> #}
-
-{# {% for user in users %}
-    {{ dump(user) }}
-    
-{% endfor %} #}
-
-{# <pre>
-    {{ dump(partner) }}
-</pre> #}
-
 
     <main class="" >
         <div class="row">
@@ -41,37 +28,31 @@
 
         <div class="row">
             <div class="col-12">
-        
+
     {% if app.user %}
                 <h3 class=''>Bienvenue {{ app.user.username }}</h3>
 
         {% if is_granted('ROLE_ADMIN') %}
-<p>je suis un admin</p>
-                <a class="" title='' href="{{ path('app_admin') }}">Cliquez ici pour accéder au Panel Administrateur</a>
+                <a class="btn btnHome btn-sm " role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_admin') }}">Connexion</a>
         {% endif %}
 
 
         {% if is_granted('ROLE_PARTNER') %}
-<p>je suis un partner</p>
             {% for partner in partners %}
                 
-                <a class="" title='' href="{{ path('app_partner_show', {'id': partner.id}) }}"> Cliquez ici pour accéder à votre compte </a>
+                <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_partner_show', {'id': partner.id}) }}">Connexion  </a>
                 
             {% endfor %}
         {% endif %}
-{# mercredi 26 octobre 23:41 =>ok #}
 
         {% if is_granted('ROLE_STRUCTURE') %}
-<p>je suis structure</p>
             {% for structure in structures %}
 
-                <a class="" title='' href="{{ path('app_structure_show', {'id': structure.id}) }}">Cliquez ici pour accéder à votre compte</a>
+                <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_structure_show', {'id': structure.id}) }}">Connexion</a>
             {% endfor %}
         {% endif %}
 
-
-{% endif %} 
-
+    {% endif %} 
             </div>
         </div>  
     </main>

@@ -1,23 +1,21 @@
+<div class="d-flex justify-content-center flex-wrap container   ">
+
 {% for partner in partners %}
-{# <div class="d-flex justify-content-around flex-wrap container "> #}
-<div class="d-flex justify-content-around flex-wrap container  partner d-flex partner-all {{ partner.isActive ? 'partner-active' : 'partner-inActive' }}">
 
-
-        <div class="card " style="width: 18rem;">
+    <div class="partner d-flex  partner-all {{ partner.isActive ? 'partner-active' : 'partner-inActive' }}">
+        <div class="card "  >
             <div class="card-body ">
-
-                <h5 class="card-title text-center">FitnessDrive - {{partner.namePartner}}
+                <h5 class="card-title text-center mb-3">FitnessDrive - {{partner.namePartner}}
                 </h5>
                 <div class="d-block d-sm-flex justify-content-sm-between">
-                    <p class="text-muted">Gérer par
+                    <p class="text-muted">Gérant :
                         {{partner.user.username}}
                     </p>
-
                     <!-- Partner Active ? -->
                     <p class='IsActive'>{{ partner.isActive ? 
                             '<span class="p-2">Active</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>' :
-                            '<span class="p-2">InActive</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>'}}</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>' :
+                            '<span class="p-2">InActive</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>'}}</p>
                 </div>
                 <p class="card-text">
                     <ul>
@@ -30,8 +28,6 @@
                     </ul>
                 </p>
             </div>
-
-
             <div class="card-footer d-flex justify-content-around">
                 <a href=" {{ path( 'show-partner', {'id': partner.id}) }} " type="button" class="btn-sm btnDetail">Détail</a>
                 <div class="vr"></div>
@@ -39,7 +35,14 @@
             </div>
         </div>
     </div>
-{# </div> #}
 
-{% endfor %}
+    {% else %}
+
+    <div class="alert alert-success text-center">
+        <p>Oups une erreur est survenue !</p>
+    </div>
+
+    {% endfor %}
+</div>
+
     

@@ -1,18 +1,18 @@
 {% for message in app.flashes('success') %}
-	<div class="alert alert-success mt-4">
+	<div class="alert alert-success mt-4 text-center">
 		{{ message }}
 	</div>
 
 {% endfor %}
 {% for message in app.flashes('send') %}
-	<div class="alert alert-success mt-4">
+	<div class="alert alert-success mt-4 text-center">
 		{{ message }}
 	</div>
 
 {% endfor %}
 
     {{form_start(formUser, { 'attr': {'id': 'user'} })}}
-
+    
                     <div class="form-group">
                         {{ form_row(formUser.username,{'label':'Nom','attr': {'placeholder':'Nom de l\'utilisateur'}}) }}
                     </div>   

@@ -1,6 +1,6 @@
 .logo
-    border-radius: 30%
-    box-shadow: 1px 1px 2px black, 0 0 0.5em white, 0 0 0.2em white
+    border-radius: 20%
+    box-shadow: 1px 1px 2px black, 0 0 0.5em white, 0 0 0.5em white
 
 .main-container
     width: auto
@@ -11,8 +11,16 @@
     padding-top: 10px
 
 // STYLE BTN start
-.btnCustom
+.btnHome
     background-color: $green
+    color: #fff 
+    transition: 0.3s
+    transition-property: color
+    &:hover 
+        color: #000
+
+.btnCustom
+    background-color: $greenDark
     color: #fff 
     font-weight: 800
     transition: 0.3s
@@ -23,6 +31,7 @@
     align-items: center
     &:hover 
         color: #000
+
 
 .btnDetail
     background-color: $greenDark
@@ -58,5 +67,27 @@
 // STYLE TITLE end
 
 
+// STYLE FORM START
+.form
+    margin: 0 15px
+    margin-top: 40px
+    padding: 20px
+    border: solid black 2px
+    border-radius: 5px
+    box-shadow: 10px 10px 5px $backGHS
+    background-color: $green
+
+// STYLE FORM END
+
+// STYLE SEPARATOR START
+.separator
+    height: 3px
+    width: 50%
+    border: none
+    box-shadow: none
+    margin: auto
+    margin-top: 30px
+    margin-bottom: 30px
+// STYLE SEPARATOR END
 
 

@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>
-{% block title %}Contact | FitnessDrive{% endblock %}
+			{% block title %}Contact | FitnessDrive{% endblock %}
         </title>
 
 		<!--Favicon -->
@@ -39,48 +39,46 @@
 	</head>
 
 	{% block body %}
-		<body>
-{% block navbar %}
-	{% include "_partials/_navbarClient.html.twig" %}
-{% endblock %}
+	<body>
+		{% block navbar %}
+			{% include "_partials/_navbarClient.html.twig" %}
+		{% endblock %}
 
 
         {% for message in app.flashes('success') %}
-        <div class="alert alert-success mt-4">
+        <div class="alert alert-success mt-4 text-center">
             {{ message }}
         </div>
             
         {% endfor %}
 
+		<h2 class="titleIndex mt-3">Formulaire de contact</h2>
 
-		<h2>Formulaire de contact</h2>
-{{form_start(formContact, { 'attr': {'id': 'contact'} })}}
+		<section class="form">
+			
+			{{form_start(formContact, { 'attr': {'id': 'contact'} })}}
 
+			<div class="form-group">
+				{{ form_row(formContact.name) }}
+			</div>   
 
+			<div class="form-group">
+				{{ form_row(formContact.email) }}
+			</div>
 
+			<div class="form-group">
+				{{ form_row(formContact.subject) }}
+			</div>
 
-	<div class="form-group">
-		{{ form_row(formContact.name) }}
-    </div>   
+			<div class="form-group">
+				{{ form_row(formContact.message) }}
+			</div>
+			
+			<button class="btn btnCustom mx-auto" type="submit"> Envoyer</button>
 
-    <div class="form-group">
-        {{ form_row(formContact.email) }}
-	</div>
+			{{form_end(formContact)}}
 
-    <div class="form-group">
-        {{ form_row(formContact.subject) }}
-	</div>
-
-    <div class="form-group">
-        {{ form_row(formContact.message) }}
-	</div>
-
-	
-		<button class="btn btnCustom mx-auto" type="submit"> Envoyer</button>
-
-{{form_end(formContact)}}
-
-
+		</section>
 
 	</body>
 	{% endblock %}

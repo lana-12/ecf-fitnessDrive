@@ -14,26 +14,26 @@
 
 	<main class="main-container col-12">
 
-		{% block Breadcrumb %}
-			<section>
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item">
-							<a href="{{ path('app_admin') }}">Accueil</a>
-						</li>
+	{% block Breadcrumb %}
+		<section>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="{{ path('app_admin') }}">Accueil</a>
+					</li>
 
-						<li class="breadcrumb-item active" aria-current="page">Modifier une Franchise
-						</li>
+					<li class="breadcrumb-item active" aria-current="page">Modifier une Franchise
+					</li>
 
-					</ol>
-				</nav>
-			</section>
-		{% endblock  %}
-            <h1 class=" titleIndex ">Modifier la Franchise : <span>{{ partner.namePartner }}</span>
-            </h1>
+				</ol>
+			</nav>
+		</section>
+	{% endblock  %}
+		<h1 class=" titleIndex mt-5">Modifier la Franchise : <span>{{ partner.namePartner }}</span></h1>
 
-
+		<section class="form">
 		{{ include ("admin/partner/_formPartner.html.twig", {'button_label': 'Modifier'}) }}
+		</section>
 
 
 		<a class="rocket back" href='{{ path('app_admin')}}'>
