@@ -1,74 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Struture| {{ parent() }}{% endblock %}
-
-
+{% block title %}Struture | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <header>
+<body class="bgStructure">
+
         {% block navbar %} 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-	<div class="container-fluid">
-		<a class="navbar-brand" href="#">
-			<h1>Fitness Drive</h1>
-		</a>
-
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">	
-						{# <a class="nav-link " href="#">Home</a> #}
-						<a class="nav-link " href="{{ path('app_structure_show', {'id': structure.id})}}">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{ path('app_logout') }}" class="nav-link">Déconnection</a>
-				</li>
-			</ul>
-
-		</div>
-
-
-
-	</div>
-</nav>
-
+			{% include "_partials/_navbarClient.html.twig" %}
         {% endblock %}
-    </header>
 
-
-    <main class="container">
+    <main class="container-fluid " id='backS'>
 
     {% if app.user %}
         <div class="d-flex justify-content-end align-item-center">
-            <a class=' text-dark' alt="Vous êtes connecté en tant que {{ app.user.username }}" title="Vous êtes connecté en tant que {{ app.user.username }}"><i class="fas fa-user-circle text-dark"></i>{{ app.user.username }}</a>
+            <a class=' textGreen' alt="Vous êtes connecté en tant que {{ app.user.username }}" title="Vous êtes connecté en tant que {{ app.user.username }}"><i class="fas fa-user-circle  p-1"></i>{{ app.user.username }}</a>
         </div>
     {% endif %}
 
-
         <div class="row">
             <div class="col-12">
-                <h2>Votre Structure</h2>
-                <h3>Fitness Drive -
-                    {{structure.nameStructure}}</h3>
+                <h2 class=" mb-4 mt-4 titleStructure">Fitness Drive <br>
+                    {{structure.nameStructure}}</h2>
             </div>
         </div>
 
-{% include "structure/_show.html.twig" %}
-<pre>
-    {{ dump(structure) }}
-</pre>
+		{% include "structure/_show.html.twig" %}
 
-        {# <p>Voici vos permissions</p>
-    #}
+		<a class="rocket textGreen back" href='#backS'>
+			<i class="fa fa-rocket " alt="Retour en haut" title="Retour en haut"></i>
+		</a>
 
     </main> 
+</body>
 {% endblock %}
 
 

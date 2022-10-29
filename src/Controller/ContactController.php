@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Contact;
-use App\Entity\Partner;
-use App\Entity\Structure;
 use App\Form\ContactType;
-use Symfony\Component\Mime\Email;
+use App\Repository\PartnerRepository;
+use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -20,64 +18,53 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
-
-    /**
-     * @var UserEntity
-     */
-
+    
     #[Route('/contact', name: 'app_contact')]
-    public function index(ManagerRegistry $doctrine, EntityManagerInterface $manager, Request $request, MailerInterface $mailer): Response
+    public function index(ManagerRegistry $doctrine, EntityManagerInterface $manager, Request $request, MailerInterface $mailer, PartnerRepository $partnerRepo, StructureRepository $structureRepo ): Response
     {
 
-
         $contact = new Contact();
-
-        // $repositoryStructure = $doctrine->getRepository(Structure::class);
-        // $structure = $repositoryStructure->find($id);
         if ($this->getUser()) {
             $contact->setName($this->getUser()->getUsername())
                     ->setEmail($this->getUser()->getEmail());
         }
-
-
             $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contact= $form->getData();
             // dd($form->getData());
-
+            
+            
             $manager->persist($contact);
             $manager->flush();
-
+            
+            // Send Email by contact
             $email = (new TemplatedEmail())
                 ->from($contact->getEmail())
                 ->to('fitnessDrive@outlook.fr')
                 ->subject($contact->getSubject())
-
                 // path of the Twig template to render
                 ->htmlTemplate('email/contact.html.twig')
-
                 // pass variables (name => value) to the template
                 ->context([
                     'contact' => $contact
-                    
                 ]);
 
             $mailer->send($email);
-
-
-
             $this->addFlash('success', 'Votre message a été envoyé avec succès !');
             
         }
-        
+        //Recup Partner.name === User.username
+        $partner = $partnerRepo->findOneByName($this->getuser()->getUsername());
+        //Recup Structure.name === User.username
+        $structure = $structureRepo->findOneByName($this->getuser()->getUsername());
         
         return $this->render('contact/index.html.twig', [
             'formContact'=> $form->createView(),
-            // 'structure'=>$structure,
-            
-            
+            'contact'=>$contact,
+            'partners'=>$partner,               
+            'structures'=>$structure,               
         ]);
     }
     

@@ -15,15 +15,18 @@
 		<p>Nous avons détecter des changements sur votre compte</p>
 		<p>Vous pouvez vous connecter pour voir ses changements !!</p>
 		<ul>
-			<p>Pour Rappel votre identifiant de connection est : </p>
 				<li>
-					{% if structure.nameStructure is defined %}
-						{{ structure.user.email }}
-					{% endif %}
+					<p>Pour Rappel votre identifiant de connection est : <br>
+							{% if structure.nameStructure is defined %}
+								{{ structure.user.email }}
+							{% endif %}
+					</p>
 				</li>
-			<p>Votre Mot de passe est :</p>
+
 				<li>
-					Vous avez dû le noté
+					<p>Votre Mot de passe est :<br>
+							Vous avez dû le noté
+					</p>
 				</li>
 		</ul>
 		<p>Si vous avez des difficultés à vous connecter, veuillez nous contacter.</p>

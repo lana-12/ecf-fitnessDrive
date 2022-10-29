@@ -6,15 +6,6 @@
     background-repeat: no-repeat
     color: #fff
     text-align: center
-
-.header_login
-    box-shadow: 1px 1px 2px black, 0 0 0.5em $green, 0 0 0.2em $green
-    // display: flex
-    & .nav_login
-        margin: 0px 20px
-        display: flex
-        justify-content: space-around
-        align-items: center
     
 .main_login
     display: flex
@@ -45,6 +36,14 @@
         text-shadow: 1px 1px 2px black, 0 0 1em $green, 0 0 0.2em $green
         font-size: 1.8em
         padding-top: 20px
+
+
+    
+/********MEDIA QUERY POUR ECRAN 400PX/********
+/********min-width 400px/********
+@include media($sx2)
+    .titleHome
+        padding-left: 20px
 
 /********MEDIA QUERY POUR ECRAN 576PX/********
 /********min-width 576px/********

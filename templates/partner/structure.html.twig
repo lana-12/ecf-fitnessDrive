@@ -1,41 +1,39 @@
-{# <showStructure include ds admin/showStructure #}
 {% extends 'partner/index.html.twig' %}
 
-{% block title %}Structure |
+{% block title %}Détail |
 	{{ parent() }} {% endblock %}
 
 {% block body %}
-<body>
+<body class="bgPartner">
 	{% block navbar %}
 		{{ parent() }}
 	{% endblock %}
 
     <main class="container-fluid">
+    {% if app.user %}
+        <div class="d-flex justify-content-end align-item-center">
+            <a class=' textGreen' alt="Vous êtes connecté en tant que {{ app.user.username }}" title="Vous êtes connecté en tant que {{ app.user.username }}">
+                <i class="fas fa-user-circle "></i>
+                {{ app.user.username }}</a>
+        </div>
+    {% endif %}
 
-    {# {% if app.user %}
-        <h2 class=''>Bienvenue
-            {{ app.user.username }}
-        </h2>
-    {% endif %} #}
-        <h3>Fitness Drive -
+    
+        <h3 class="titleStructure mb-4">FitnessDrive <br>
             {{structure.nameStructure}}</h3>
 
-        <h4>Détail</h4>
+        <h4 class="titlePart"><u>Détail</u> :</h4>
 
-        <div class="d-flex justify-content-center mt-5">    
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
+        <div class="d-flex justify-content-center">    
+            <div class="card" >
+                <div class="card-body">        
+                    <h5 class="card-title text-center mb-3">FitnessDrive {{structure.partner.namePartner}} <br> {{structure.namestructure}} </h5>
 
-        {# {% if structure %} #}
-        
-                    <h5 class="card-title">Fitness Drive {{structure.partner.namePartner}} - {{structure.namestructure}} </h5>
-
-                    <div class="d-flex justify-content-between">
+                    <div class="d-block d-sm-flex justify-content-sm-between">
                         <p class="text-muted">Gérer par {{structure.user.username}} </p>
-        {# {% endif %} #}
                     <!-- Structure Active ? -->
                         <p>{{ structure.isActive ? 
-                            '<span class="p-2">Active</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>' :'<span class="p-2">InActive</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>'}}
+                            '<span class="p-2">Active</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-primary" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>' :'<span class="p-2">InActive</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>'}}
                         </p>
                     </div>
 
@@ -50,23 +48,40 @@
                         </ul>
                     </p>
                 </div> 
-
-                {# <div class="card-footer d-flex justify-content-center">
-                
-                </div> #}
             </div>
         </div>
 
         <section>
 
-            <h4>Vos permissions</h4>
+            <h4 class="mt-4 titlePart"><u>Vos permissions</u> :</h4>
 
-            {% for permission in permissions %}
-                <p> {{permission.title}} </p>
-            {% endfor %}
+        {% for permission in permissions %}
+            <div class="perms">
+                <h5>
+                    <strong>{{permission.title}}</strong>
+                </h5>
+                <p>
+                    {% if structure.isActive %}
+                        <span class="">Active</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-primary " viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+                    {% else %}
+                        <span class="">InActive</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-circle-fill text-danger" viewbox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+                    {% endif %}
+                </p>
+            </div>
 
-        <section>
+        {% else %}
+            <div class="alert alert-success text-center">
+                <p>Vous n'avez aucune permissions !</p>
+            </div>
+        {% endfor %}
 
+        </section>
+
+        <a class="rocket back textGreen" href='#back'>
+            <i class="fa fa-rocket" alt="Retour en haut" title="Retour en haut"></i>
+        </a>
     </main>
 
 </body>

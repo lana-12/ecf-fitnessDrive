@@ -1,0 +1,55 @@
+{% for message in app.flashes('success') %}
+	<div class="alert alert-success mt-4 text-center">
+		{{ message }}
+	</div>
+
+{% endfor %}
+{% for message in app.flashes('send') %}
+	<div class="alert alert-success mt-4 text-center">
+		{{ message }}
+	</div>
+
+{% endfor %}
+
+    {{form_start(formUser, { 'attr': {'id': 'user'} })}}
+    
+                    {# <div class="form-group">
+                        {{ form_row(formUser.username,{'label':'Nom','attr': {'placeholder':'Nom de l\'utilisateur'}}) }}
+                    </div>    #}
+
+                    <div class="form-group">
+                        {{ form_row(formUser.email, {'label':'Email','attr': {'placeholder':'Email de l\'utilisateur'}}) }}
+                    </div>    
+                    
+                    <div class="form-group  ">
+                        {{ form_row(formUser.password,{'attr': {'placeholder':' '}}) }}
+                        
+                    </div>      
+
+                    <div class="form-group">
+                        {{ form_row(formUser.confirmPassword, {'label':'Confirmation de votre mot de passe','attr': {'placeholder':'Confirmez le mot de passe'}}) }}
+                    </div>                         
+
+                {% if is_granted("ROLE_ADMIN") %}
+                    <div class="form-group">
+                        {{ form_row(formUser.roles, {'attr': {'placeholder':''}}) }}
+                    </div>    
+                    {% else %}
+                    <div class="form-group d-none">
+                        {{ form_row(formUser.roles, {'attr': {'placeholder':''}}) }}
+                        {{ form_row(formUser.username,{'label':'Nom','attr': {'placeholder':'Nom de l\'utilisateur'}}) }}
+
+                    </div>    
+                                        
+                {% endif %}
+
+                    <button class="btn btnCustom mx-auto m-5">{{ button_label|default('Enregistrer')}}</button>
+
+
+    {{form_rest(formUser)}}
+
+
+        
+
+
+

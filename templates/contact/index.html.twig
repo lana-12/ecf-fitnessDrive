@@ -38,25 +38,97 @@
 
 	</head>
 
-	{% block body %}
-	<body>
-		{% block navbar %}
-			{% include "_partials/_navbarClient.html.twig" %}
-		{% endblock %}
+<body class="bgContact">
+	<header>
+	{% block navbar %}
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#"><h1 class="titleCustom text-white">Fitness<span class="drive">Drive</span></h1>
+				</a>
 
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+				{# BACK HOME #}
+					{% if is_granted('ROLE_PARTNER') %}
+						{% for partner in partners %}
+							<a class="nav-link " href="{{ path( 'app_partner_show', {'id': partner.id}) }} ">Accueil</a>
+						{% else %}
+							<div class="alert alert-success text-center">
+								<p>Oups une erreur est survenue !</p>
+							</div>
+						{% endfor %}
+					{% endif %}
 
-        {% for message in app.flashes('success') %}
-        <div class="alert alert-success mt-4 text-center">
-            {{ message }}
-        </div>
-            
-        {% endfor %}
+					{% if is_granted('ROLE_STRUCTURE') %}
+						{% for structure in structures %}
+							<a class="nav-link " href="{{ path( 'app_structure_show', {'id': structure.id}) }}">Accueil</a>
+						{% else %}
+							<div class="alert alert-success text-center">
+								<p>Oups une erreur est survenue !</p>
+							</div>
+						{% endfor %}
+					{% endif %}
+						</li>
+
+					{# CHANGE ID + MDP #}
+						<li class="nav-item">
+					{% if is_granted('ROLE_PARTNER') %}
+						{% for partner in partners %}
+							<a class="nav-link " href="{{ path( 'app_partner_edit', {'id': partner.id}) }}">Profil</a>{% else %}
+							<div class="alert alert-success text-center">
+								<p>Oups une erreur est survenue !</p>
+							</div>
+						{% endfor %}
+					{% endif %}
+					{% if is_granted('ROLE_STRUCTURE') %}
+						{% for structure in structures %}
+							<a class="nav-link " href="{{ path( 'app_structure_edit', {'id': structure.id}) }}">Profil</a>{% else %}
+							<div class="alert alert-success text-center">
+								<p>Oups une erreur est survenue !</p>
+							</div>
+						{% endfor %}
+					{% endif %}
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ path('app_logout') }}" class="nav-link">Déconnection</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	{% endblock %}
+	</header>
+
+			
+	<main class="container-fluid mb-5" id='back'>
+
+	{% if app.user %}
+		<div class="d-flex justify-content-end align-item-center">
+			<a class=' text-dark' alt="Vous êtes connecté en tant que {{ app.user.username }}" title="Vous êtes connecté en tant que {{ app.user.username }}">
+				<i class="fas fa-user-circle text-dark"></i>
+				{{ app.user.username }}</a>
+		</div>
+	{% endif %}
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success mt-4 text-center">
+			{{ message }}
+		</div>
+	{% endfor %}
 
 		<h2 class="titleIndex mt-3">Formulaire de contact</h2>
 
 		<section class="form">
-			
-			{{form_start(formContact, { 'attr': {'id': 'contact'} })}}
+		
+		{{form_start(formContact, { 'attr': {'id': 'contact'} })}}
 
 			<div class="form-group">
 				{{ form_row(formContact.name) }}
@@ -76,12 +148,11 @@
 			
 			<button class="btn btnCustom mx-auto" type="submit"> Envoyer</button>
 
-			{{form_end(formContact)}}
+		{{form_end(formContact)}}
 
 		</section>
 
-	</body>
-	{% endblock %}
-
+	</main>
+</body>
 </html>
 

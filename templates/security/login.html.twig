@@ -14,15 +14,15 @@
 {% block body %}
 <body class='body_login'>
 
-    <header class='header_login'>
+    <header class='headerLoginHome'>
     {% block navbar %} 
-        <nav class="navbar navbar- bg- nav_login">
+        <nav class="navbar navbar-dark shadow-5-strong navLoginHome">
             <div>
-                <img class="logo image-fluid" src="{{ asset('asset/images/logo.png')}}" width="80px" height="80px" alt="Logo FitnessDrive" title="Logo FitnessDrive" srcset="">
+                <img class="logo image-fluid" src="{{ asset('build/images/logo.png')}}" width="80px" height="80px" alt="Logo FitnessDrive" title="Logo FitnessDrive" srcset="">
             </div>
-            <div>
-                <h1 class="titleCustom" >Fitness <span class="drive">Drive</span></h1>
-            </div>
+            <div class="titleHome">
+                    <h1 class="navbar-brand titleCustom">Fitness<span class="drive">Drive</span></h1>
+                </div>    
         </nav>
     {% endblock %}
     </header>

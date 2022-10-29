@@ -2,16 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserType;
 use App\Entity\Partner;
 use App\Entity\Structure;
-use App\Entity\User;
+use App\Service\MailService;
+use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
-use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 /**
@@ -22,10 +27,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PartnerController extends AbstractController
 {
-    // #[Route('/show', name: 'app_partner_show')]
     #[Route('/show/{id<\d+>}', name: 'app_partner_show')]
 
-    public function index(ManagerRegistry $doctrine, int $id, Partner $partner): Response
+    public function index(ManagerRegistry $doctrine, int $id, Partner $partner, PartnerRepository $partnerRepo): Response
     {
         // Method with ManagerRegistry => recup all the partner {$id}
         $repositoryPartner = $doctrine->getRepository(Partner::class);
@@ -35,28 +39,97 @@ class PartnerController extends AbstractController
         //avec StructureRepository
         // $structures = $structureRepository->findAllStructuresByPartner($id);
         $structures= $partner->getStructures();
-        
-        
 
+    
             return $this->render('partner/index.html.twig',[
                 'partner'=> $partner,
                 'structures' => $structures,
             ]);
     }
 
-    #[Route('/structure/show/{id}', name: 'app_structure/show')]
+    #[Route('/structure/show/{id<\d+>}', name: 'app_partner_structure_show')]
     public function showStructure(ManagerRegistry $doctrine, int $id) : Response
     {
-            $repository = $doctrine->getRepository(Structure::class);
-            $structure = $repository->find($id);
-            $permissions = $structure->getPermissions();
+        $repositoryS = $doctrine->getRepository(Structure::class);
+        $structure = $repositoryS->find($id);
+        
+        $partner = $structure->getPartner();
+    //     <pre>
+    //     {{ dump(partner.name) }}
+    // </pre>
+        $permissions = $structure->getPermissions();
 
         return $this->render('partner/structure.html.twig',[
+            'partner'=> $partner,
             'structure' => $structure,
             'permissions' => $permissions,
-
         ]);
-
     }
+    
+    /**
+     * Change Email + MDP 
+     */
+    #[Route('/edit/{id<\d+>}/', name: 'app_partner_edit')]
+    public function editPartner(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user = null, MailService $mail, PartnerRepository $partnerRepo) : Response
+    {
+        if (!$user) {
+        }
+        $form = $this->createForm(UserType::class, $user);
 
+        $form->handleRequest($request);
+
+        //S'assure de la validité du form et que les valaurs sont cohérentes
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$user->getId()) {
+            }
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+
+                    // pour modifier son mot de passe
+                    //récup les données saisies par l'utilisateur.
+                    $form->get('password')->getData()
+                )
+            );
+            // Ajoute des partners aux user
+            $partners = $user->getPartner();
+            foreach ($partners as $partner) {
+                $user->addPartner($partner);
+            }
+
+            // Ajoute des structures aux user
+            $structures = $user->getStructure();
+            foreach ($structures as $structure) {
+                $user->addStructure($structure);
+            }
+            
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre compte de connexion a bien été modifié');
+
+            $mail->sendEmail(
+                'fitnessDrive@outlook.fr',
+                $user->getEmail(),
+                'Modification de votre compte',
+                'editUser',
+                compact('user')
+
+            );
+            $this->addFlash('send', 'Email de modification a bien été envoyé');
+        }
+        //Recup Partner.name === User.username
+        // $partner = $partnerRepo->findOneByName($user->getUsername());
+        $partner = $partnerRepo->findOneByName($this->getUser()->getUsername());
+        
+        return $this->render('partner/user/editUser.html.twig',[
+            'formUser' => $form->createView(),
+            
+            //Variable in editMode
+            'editMode' => $user->getId() !== null,
+            'h1Edit' => $user->getUsername() !== null,
+            'partners' => $partner,
+            
+        ]);
+    }
 }
