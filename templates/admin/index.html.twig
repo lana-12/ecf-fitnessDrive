@@ -43,46 +43,95 @@
 
 	<!-- main container start -->
 {% endblock %}
-		<main class='main-container col-12'>
+	<main class='main-container col-12'>
 
-			<section>
-				<div class="row">
-					<div class='count col-12'>
-						<span class='total'>Total :
-							{{ countPartners }} Franchises | 
-							{{ countStructures }} Structures
-						</span>
-					</div>
+		<section>
+			<div class="row">
+				<div class='count col-12'>
+					<span class='total'>Total :
+						{{ countPartners }} Franchises | 
+						{{ countStructures }} Structures
+					</span>
 				</div>
-			</section>
+			</div>
+		</section>
 
-		<h2 class="titleIndex titleListUser">{{titlePage}}</h2>
+		<h2 class="titleIndex titleListAdmin" id="accueil">{{titlePage}}</h2>
 
-		<div class="boxUser ">
-			<p class=''>Chaque Franchise ou structure doit avoir
-				<strong>un compte de connexion</strong>
+		<div class="boxSummary d-flex justify-content-center mx-auto">
+			<ul>
+				<li>
+					<i class="fas fa-user pb-0 "></i>
+					<a href="#summaryUser" class=""  alt="Lien vers mode d'emploi compte de connexion " title="Lien vers mode d'emploi compte de connexion ">Compte Utilisateur</a>
+				</li>
+				<li>
+					<i class="fa-regular fa-address-book pb-0"></i><a href="#summaryPartner" class=""   alt="Lien vers mode d'emploi franchise " title="Lien vers mode d'emploi franchise "> Franchise</a>
+				</li>
+				<li>
+					<i class="fa-regular fa-address-card"></i><a href="#summaryStructure" class="" alt="Lien vers mode d'emploi structure " title="Lien vers mode d'emploi structure "> Structure</a></li>
+				<li>
+					<i class="fa fa-cog"></i><a href="#summaryPerm" class="" alt="Lien vers mode d'emploi permission " title="Lien vers mode d'emploi permission "> Permission</a></li>
+			</ul>
+		</div>
+			
+		<div class="boxAdmin mx-auto " id="summaryUser">
+			<h3  class="titleManual"><i class="fas fa-user pb-0"></i> Compte Utilisateur</h3>
+			<p>
+				La création d'un compte de connexion est <u>obligatoire</u> pour pourvoir créer la <span>Franchise</span> ou la <span>Structure</span> mais aussi pour qu'elles puissent se connecter à leur compte.
+			</p>
+			<p>
+				Un email leur sera envoyé automatiquement avec leur identifiant et leur mot de passe.
+			</p>
+			<p>Vous pouvez </p>
+				<ul class='list'>
+					<li class="text-justify mx-auto"><strong>Créer</strong> en cliquant sur le + ou Ajouter</li>
+					<li class="text-justify mx-auto"><strong>Modifier</strong> dans liste Utilisateur et sélectionner le compte</li>
+				</ul>
+		</div>
+
+		<div class="boxAdmin mx-auto " id="summaryPartner">
+			<h3  class="titleManual"><i class="fa-regular fa-address-book"></i> Franchise</h3>
+			<p>
+				Après avoir créé le compte de connexion, vous pouvez </p>
+				<ul class='list'>
+					<li class="text-justify mx-auto"><strong>Créer une franchise</strong> en cliquant sur le + ou Ajouter</li>
+					<li class="text-justify mx-auto"><strong>Modifier</strong> dans liste des Franchises et sélectionner le compte</li>
+				</ul>
+			<p >
+				Un email sera envoyé automatiquement lors de la création ou de la modification de la fanchise.
 			</p>
 		</div>
 
-		<div class="boxUser ">
-			<p class="">
-				La création d'un compte de connexion est
-				<u>obligatoire</u>
-				pour pourvoir créer la
-				<span>Franchise</span>
-				ou la
-				<span>Structure</span>
-				mais aussi pour qu'elles puissent se connecter à leur compte.</p>
+		<div class="boxAdmin mx-auto " id="summaryStructure">
+			<h3  class="titleManual"><i class="fa-regular fa-address-book"></i> Structure</h3>
 			<p>
-				Un email leur sera envoyé automatiquement avec leur id et mpd.</p>
+				Après avoir créé le compte de connexion et la franchise, vous pouvez </p>
+				<ul class='list'>
+					<li class="text-justify mx-auto"><strong>Créer une structure</strong> en cliquant sur le + ou Ajouter</li>
+					<li class="text-justify mx-auto"><strong>Modifier</strong> dans liste des Structures et sélectionner le compte</li>
+				</ul>
+			<p >
+				Un email sera envoyé automatiquement à la strutures et la franchise lors de la création ou de la modification de la structure.
+			</p>
 		</div>
 
-
+		<div class="boxAdmin mx-auto " id="summaryPerm">
+			<h3  class="titleManual"><i class="fa fa-cog"></i> Permission</h3>
+			<p>
+				Après avoir créé le compte de connexion, la franchise et la structure vous pouvez </p>
+				<ul class='list'>
+					<li class="text-justify mx-auto"><strong>Modifier</strong> les permissions de chaque structures en cliquant sur liste des structures <i class="fa fa-bars "></i> et sélectionner la structure.</li>
+					<li class="text-justify mx-auto"><strong>Créer une permission</strong> en cliquant sur le + ou Ajouter</li>
+				</ul>
+			<p >
+				Un email sera envoyé automatiquement à la strutures et la franchise lors de la modification des permissions.
+			</p>
+		</div>
 
 			<a class="rocket back" href='#accueil'><i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
 			</a>
 
-		</main>
+	</main>
 </body>
 {% endblock %}
 

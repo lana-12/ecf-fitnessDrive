@@ -1,21 +1,37 @@
-.boxUser
+.boxSummary
     background-color: $greenL
     border: solid black 2px
     border-radius: 5px
-    margin: 20px
     box-shadow: 10px 10px 5px $backGHS
     padding: 10px
-    text-align: center
     line-height: 2em
-    
+    max-width:  350px
+    text-align: justify
+    margin: 0 20px
 
-.titleListUser
-    margin: 30px
+.boxAdmin
+    background-color: $greenL
+    border: solid black 2px
+    border-radius: 5px
+    box-shadow: 10px 10px 5px $backGHS
+    padding: 10px
+    line-height: 2em
+    text-align: center
+    max-width: 700px
+    margin-top: 40px 
+    & .list
+        list-style: circle
+        text-align: left
+.titleListAdmin
+    margin: 20px 20px
+
+.titleManual
+    font-size: 1.2em
+    text-align: center
 
 
 
 /********MEDIA QUERY POUR ECRAN 768PX  ***********/
 /******min-width 768px**************/
 @include media($md)
-    .titleListUser
-        margin: 40px
+    

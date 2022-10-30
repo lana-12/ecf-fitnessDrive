@@ -22,7 +22,7 @@ class AdminController extends AbstractController
     /**
      * HomePage for Administrator 
      * 
-     * @return  count partner+structure
+     * @return  count partner+structure+manual
      */
     #[Route('admin/{id<\d+>}', name: 'app_admin')]
     public function index(PartnerRepository $partnerRepo, int $id, StructureRepository $structureRepo, Request $request, ManagerRegistry $doctrine): Response
@@ -41,7 +41,7 @@ class AdminController extends AbstractController
         $countStructures = count($structures);
 
         return $this->render('admin/index.html.twig', [
-            'titlePage'=> 'Accueil Administrateur',
+            'titlePage'=> 'Mode d\'emploi',
             'admin' => $admin,
             'countPartners' => $countPartners,
             'countStructures'=> $countStructures,

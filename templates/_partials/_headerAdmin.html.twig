@@ -11,7 +11,7 @@
             </li>
             <li>
             {% if app.user %}
-                <a class='fas-fa text-white'  alt="Vous êtes connecté en tant que {{ app.user.username }}" title="Vous êtes connecté en tant que {{ app.user.username }}"><i class="fas fa-user-circle text-dark"></i>
+                <a class='fas-fa text-white' href='{{ path('app_admin', {'id': app.user.id}) }}'  alt="Retour accueil et Vous êtes connecté en tant que {{ app.user.username }}" title="Retour accueil et Vous êtes connecté en tant que {{ app.user.username }}"><i class="fas fa-user-circle text-dark"></i>
                 <p class='d-none d-sm-block textConnected'>{{ app.user.username }}</p>
                 </a>
             {% endif %}
