@@ -13,9 +13,9 @@
 {# BACK PAGE HOME #} 
         {% if is_granted('ROLE_PARTNER') %}
             <a class="nav-link " href="{{ path( 'app_partner_show', {'id': partner.id}) }}">Accueil</a>
-        {% endif %}
+        {# {% endif %} #}
         
-        {% if is_granted('ROLE_STRUCTURE') %}
+        {% elseif is_granted('ROLE_STRUCTURE') %}
             <a class="nav-link " href="{{ path( 'app_structure_show', {'id': structure.id}) }}">Accueil</a>
         {% endif %}
                 </li>
@@ -23,9 +23,9 @@
 {# CHANGE ID + MDP #}
         {% if is_granted('ROLE_PARTNER') %}
             <a class="nav-link " href="{{ path( 'app_partner_edit', {'id': partner.id}) }}">Profil</a>
-        {% endif %}
+        {# {% endif %} #}
         
-        {% if is_granted('ROLE_STRUCTURE') %}
+        {% elseif is_granted('ROLE_STRUCTURE') %}
             <a class="nav-link " href="{{ path( 'app_structure_edit', {'id': structure.id}) }}">Profil</a>
         {% endif %}
                 </li>

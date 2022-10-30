@@ -8,9 +8,9 @@
         <header class="headerLoginHome ">
         {% block navbar %} 
             <nav class="navbar navbar-dark shadow-5-strong navLoginHome ">
-                <div>
-                    <img class="logo image-fluid" src="{{ asset('build/images/logo.png')}}" width="80px" height="80px" alt="Logo FitnessDrive" title="Logo FitnessDrive" srcset="">
-                </div>
+                {# <div>
+                    <img class="logo image-fluid" src="{{ asset('images/logo.png')}}" width="80px" height="80px" alt="Logo FitnessDrive" title="Logo FitnessDrive" srcset="">
+                </div> #}
                 
                 <div class="titleHome">
                     <h1 class="navbar-brand titleCustom">Fitness<span class="drive">Drive</span></h1>
@@ -33,7 +33,7 @@
                 <h3 class=''>Bienvenue {{ app.user.username }}</h3>
 
         {% if is_granted('ROLE_ADMIN') %}
-                <a class="btn btnHome btn-sm " role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_admin') }}">Connexion</a>
+                <a class="btn btnHome btn-sm " role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_admin', {'id':id}) }}">Connexion</a>
         
 
 

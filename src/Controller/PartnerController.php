@@ -40,7 +40,6 @@ class PartnerController extends AbstractController
         // $structures = $structureRepository->findAllStructuresByPartner($id);
         $structures= $partner->getStructures();
 
-    
             return $this->render('partner/index.html.twig',[
                 'partner'=> $partner,
                 'structures' => $structures,
@@ -54,9 +53,7 @@ class PartnerController extends AbstractController
         $structure = $repositoryS->find($id);
         
         $partner = $structure->getPartner();
-    //     <pre>
-    //     {{ dump(partner.name) }}
-    // </pre>
+
         $permissions = $structure->getPermissions();
 
         return $this->render('partner/structure.html.twig',[
@@ -72,6 +69,10 @@ class PartnerController extends AbstractController
     #[Route('/edit/{id<\d+>}/', name: 'app_partner_edit')]
     public function editPartner(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user = null, MailService $mail, PartnerRepository $partnerRepo) : Response
     {
+        /**
+         * @var User $user 
+         */
+        $user = $this->getUser();
         if (!$user) {
         }
         $form = $this->createForm(UserType::class, $user);
@@ -118,9 +119,9 @@ class PartnerController extends AbstractController
             );
             $this->addFlash('send', 'Email de modification a bien été envoyé');
         }
+        
         //Recup Partner.name === User.username
-        // $partner = $partnerRepo->findOneByName($user->getUsername());
-        $partner = $partnerRepo->findOneByName($this->getUser()->getUsername());
+        $partner = $partnerRepo->findOneByName($user->getUsername());
         
         return $this->render('partner/user/editUser.html.twig',[
             'formUser' => $form->createView(),

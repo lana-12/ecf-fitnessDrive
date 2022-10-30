@@ -84,7 +84,6 @@ class NewUserController extends AbstractController
     /**
      * For Edit NewUser 
      */
-    
     #[Route('/{id<\d+>}/edit', name: 'user_edit')]
     public function editUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user=null, MailService $mail ): Response
     {

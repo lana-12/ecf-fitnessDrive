@@ -37,11 +37,11 @@ class HomeController extends AbstractController
             $status = $structureRepository->findOneByName($user->getUsername());
             $id = $status[0]->getId();
         }
+        if (in_array('ROLE_ADMIN', $user->getRoles()) ){
+            // $status = $user->getUsername();
+            $id = $user->getId();
+        }
             
-
-        
-        // mercredi 26 octobre 23:41 =>ok role
-        // dd($user->getUsername());
         
         return $this->render('home/index.html.twig',[
             'user'=> $user,

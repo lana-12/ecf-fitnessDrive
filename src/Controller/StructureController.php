@@ -45,8 +45,6 @@ class StructureController extends AbstractController
             'structure'=> $structure,
             'permissions' => $permissions,
 
-            // 'user'=> $userId,
-            // 'partner'=> $partner
         ]);
     }
     /**
@@ -55,6 +53,10 @@ class StructureController extends AbstractController
     #[Route('/edit/{id<\d+>}/', name: 'app_structure_edit')]
     public function editUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, User $user = null, MailService $mail, StructureRepository $structureRepo): Response
     {
+        /**
+         * @var User $user 
+         */
+        $user = $this->getUser();
         if (!$user) {
             $user = new User();
         }
@@ -102,7 +104,7 @@ class StructureController extends AbstractController
             );
             $this->addFlash('send', 'Email de modification a bien été envoyé');
         }
-        $structure = $structureRepo->findOneByName($this->getUser()->getUsername());
+        $structure = $structureRepo->findOneByName($user->getUsername());
 
         return $this->render('structure/user/editUser.html.twig', [
             'formUser' => $form->createView(),

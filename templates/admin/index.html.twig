@@ -7,7 +7,7 @@
 	{{parent()}}
 
 <!-- My JS -->
-	{{ encore_entry_script_tags('partner') }}
+	{# {{ encore_entry_script_tags('partner') }} #}
 
 {% endblock %}
 
@@ -43,7 +43,6 @@
 
 	<!-- main container start -->
 {% endblock %}
-
 		<main class='main-container col-12'>
 
 			<section>
@@ -57,63 +56,30 @@
 				</div>
 			</section>
 
-			<!-- SearchBar start-->
-		{% block searchBar %}
-			<section>
-				<nav class="row">
-					<div class="col-12 search">
-						<input id="searchbar"  class=" inputSearch mx-auto" type="text"  placeholder="Chercher une Franchise" aria-label="Search">
-						<input id="hidden"  class=" inputSearch me-2" type="hidden"   aria-label="hidden">
-							
-					</div>
-				</nav>
-			</section>
-		{% endblock %}
-			<!-- SearchBar end-->
+		<h2 class="titleIndex titleListUser">{{titlePage}}</h2>
+
+		<div class="boxUser ">
+			<p class=''>Chaque Franchise ou structure doit avoir
+				<strong>un compte de connexion</strong>
+			</p>
+		</div>
+
+		<div class="boxUser ">
+			<p class="">
+				La création d'un compte de connexion est
+				<u>obligatoire</u>
+				pour pourvoir créer la
+				<span>Franchise</span>
+				ou la
+				<span>Structure</span>
+				mais aussi pour qu'elles puissent se connecter à leur compte.</p>
+			<p>
+				Un email leur sera envoyé automatiquement avec leur id et mpd.</p>
+		</div>
 
 
-			<!-- Search all/active/Inactive Start-->
-		{% block searchLink %}
-			<section class="searchLink">
-				<div class="row">
-					<div class="col-12">
-						<h2 class='titleIndex'>{{ titleIndex }}</h2>
-						<div class="items_check">
-							<a class='active item_check  check' id="all" alt="Affichez toutes les franchises" title="Affichez toutes les franchises" href='#'>Toutes</a>
 
-							<a class='item_check check' id="active" alt="Affichez uniquement les franchises Active" title="Affichez uniquement les franchises Active" href='#'>Active</a>
-
-							<a class='item_check check' id="inactive" alt="Affichez uniquement les franchises Inactive" title="Affichez uniquement les franchises Inactive" href='#'>Inactive</a>
-						</div>
-					</div>
-				</div>
-			</section>
-		{% endblock %}
-		<!-- Search all/active/Inactive end-->
-
-			<section>
-					{% include "admin/partner/_listpartner.html.twig" %}
-			</section>
-			
-		{% block paginated %}
-				
-			<section class='d-flex justify-content-center mt-5'>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination pagination-sm">
-				{% for i in 1..((countPartners/ 30) | round(0, 'ceil')) %}
-						<li class="page-item">
-							<a class="page-link" href="{{ path('app_admin', {page:i})}}">{{i}}</a>
-						</li>
-				{% endfor %}
-						
-					</ul>
-				</nav>
-			</section>
-
-		{% endblock %}
-		<!-- main container end -->
-
-			<a class="rocket back" href='{{ path('app_admin')}}'><i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
+			<a class="rocket back" href='#accueil'><i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
 			</a>
 
 		</main>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Partner;
 use App\Entity\Structure;
 use App\Repository\PartnerRepository;
@@ -17,14 +18,43 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
 {
+
     /**
      * HomePage for Administrator 
      * 
-     * @return list partner + count partner+structure
+     * @return  count partner+structure
      */
-    #[Route('/', name: 'app_admin')]
+    #[Route('admin/{id<\d+>}', name: 'app_admin')]
+    public function index(PartnerRepository $partnerRepo, int $id, StructureRepository $structureRepo, Request $request, ManagerRegistry $doctrine): Response
+    {
+
+        $repository = $doctrine->getRepository(User::class);
+        $admin = $repository->find($id);
+
+        //Methode avec PartnerRepository => recup tt les partners
+        $partners = $partnerRepo->findAllPartners();
+        //Methode avec StructureRepository => recup tt les structures
+        $structures = $structureRepo->findAllStructures();
+        // display how many partners
+        $countPartners = $partnerRepo->countPartners();
+        // display how many structures
+        $countStructures = count($structures);
+
+        return $this->render('admin/index.html.twig', [
+            'titlePage'=> 'Accueil Administrateur',
+            'admin' => $admin,
+            'countPartners' => $countPartners,
+            'countStructures'=> $countStructures,
+
+        ]);
+    }
+
+    /**
+     * Liste partner
+     */
+    #[Route('/listPartner', name: 'app_admin_partnerList')]
     
-    public function index(PartnerRepository $partnerRepo, StructureRepository $structureRepo, Request $request, ManagerRegistry $doctrine ) : Response
+    public function ListPartner(PartnerRepository $partnerRepo, StructureRepository $structureRepo, Request $request, ManagerRegistry $doctrine ) : Response
     {
         //Methode avec PartnerRepository => recup tt les partners
         $partners = $partnerRepo->findAllPartners();
@@ -33,13 +63,10 @@ class AdminController extends AbstractController
 
         // display how many partners
         $countPartners = $partnerRepo->countPartners();
-        // display how many structures
-        $countStructures = count($structures);
 
-        return $this->render('admin/index.html.twig',[
+        return $this->render('admin/partner/index.html.twig',[
             'titleIndex'=> 'Listes des Franchises',
             'countPartners'=> $countPartners,
-            'countStructures'=> $countStructures,
             'partners'=> $partners,
             'structures'=>$structures,
             'partners'=> $partnerRepo->getPaginatedPartner((int) $request->query->get("page")),
@@ -52,16 +79,19 @@ class AdminController extends AbstractController
     #[Route('/showpartner/{id<\d+>}', name: 'show-partner')]
     public function showPartner(ManagerRegistry $doctrine, int $id, StructureRepository $structureRepo) : Response
     {
+        $repository = $doctrine->getRepository(User::class);
+        $admin = $repository->find($id);
+
         $repository = $doctrine->getRepository(Partner::class);
         $partner = $repository->find($id);
         
         //display the structures from partner
         $structures = $structureRepo->findAllStructuresByPartner($id);
-        dump($structures);
-
+        
             return $this->render('admin/partner/showpartner.html.twig',[
                 'partner'=> $partner,
                 'structures'=> $structures,
+                'admin'=> $admin,
             ]);        
 
     }

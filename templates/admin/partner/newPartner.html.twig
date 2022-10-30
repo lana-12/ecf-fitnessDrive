@@ -15,7 +15,7 @@
         <section>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Accueil</a>
+                    <li class="breadcrumb-item"><a href="{{ path('app_admin_partnerList') }}">Liste franchises</a>
                     </li>
 
                     <li class="breadcrumb-item active" aria-current="page">Créer une Franchise
@@ -26,14 +26,14 @@
         </section>
     {% endblock  %} 
 
-            <h1 class=" titleIndex mt-5 ">Créer la Franchise</h1>
+            <h1 class=" titleIndex mt-5 " >Créer la Franchise</h1>
 
         <section class="form">
     {{ include ("admin/partner/_formPartner.html.twig", {'button_label': 'Enregister'}) }}
         </section>
 
 
-    <a class="rocket back" href='{{ path('app_admin')}}'>
+    <a class="rocket back" href='{{ path('app_admin_partnerList')}}'>
         <i class="fa fa-rocket" alt="Retour à la liste" title="Retour "></i>
     </a>
 

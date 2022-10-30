@@ -23,17 +23,21 @@ class ContactController extends AbstractController
     public function index(ManagerRegistry $doctrine, EntityManagerInterface $manager, Request $request, MailerInterface $mailer, PartnerRepository $partnerRepo, StructureRepository $structureRepo ): Response
     {
 
+    /**
+     * @var User $user 
+     */
+    $user = $this->getUser();    
+    
         $contact = new Contact();
         if ($this->getUser()) {
-            $contact->setName($this->getUser()->getUsername())
-                    ->setEmail($this->getUser()->getEmail());
+            $contact->setName($user->getUsername())
+                    ->setEmail($user->getEmail());
         }
             $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contact= $form->getData();
-            // dd($form->getData());
             
             
             $manager->persist($contact);
@@ -56,9 +60,9 @@ class ContactController extends AbstractController
             
         }
         //Recup Partner.name === User.username
-        $partner = $partnerRepo->findOneByName($this->getuser()->getUsername());
+        $partner = $partnerRepo->findOneByName($user->getUsername());
         //Recup Structure.name === User.username
-        $structure = $structureRepo->findOneByName($this->getuser()->getUsername());
+        $structure = $structureRepo->findOneByName($user->getUsername());
         
         return $this->render('contact/index.html.twig', [
             'formContact'=> $form->createView(),
