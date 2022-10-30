@@ -26,7 +26,7 @@ class PermissionRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function save(Permission $entity, bool $flush = false): void
+    public function add(Permission $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 

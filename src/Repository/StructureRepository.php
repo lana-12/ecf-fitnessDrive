@@ -27,7 +27,7 @@ class StructureRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function save(Structure $entity, bool $flush = false): void
+    public function add(Structure $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 

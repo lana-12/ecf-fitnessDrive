@@ -35,9 +35,9 @@ class NewStructureController extends AbstractController
             // }
             // Ajoute des permissions aux structures
             $permissions = $structure->getPermissions();
-                foreach ($permissions as $permission){
-                    $structure->addPermission($permission);
-                }
+                // foreach ($permissions as $permission){
+                //     $structure->addPermission($permission);
+                // }
         
             $entityManager->persist($structure);
             $entityManager->flush();
