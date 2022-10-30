@@ -58,6 +58,6 @@ class NewAdminController extends AbstractController
                 'user01'=> $admin01,
                 'user02'=> $admin02,
         ]);
-        }
-
     }
+    
+}

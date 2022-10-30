@@ -20,7 +20,11 @@ class PartnerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Partner::class);
     }
-
+    
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
     public function add(Partner $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -29,7 +33,11 @@ class PartnerRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
     public function remove(Partner $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

@@ -23,6 +23,10 @@ class StructureRepository extends ServiceEntityRepository
         parent::__construct($registry, Structure::class);
     }
 
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
     public function save(Structure $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -31,7 +35,10 @@ class StructureRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
     public function remove(Structure $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
