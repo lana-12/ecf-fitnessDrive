@@ -25,7 +25,7 @@ class Partner
     #[ORM\Column(length: 50, unique:true)]
     private ?string $namePartner = null;
 
-    #[ORM\Column(unique:true)]
+    #[ORM\Column(length: 50,unique:true)]
     private ?string $phone = null;
 
     #[ORM\Column]
@@ -38,7 +38,7 @@ class Partner
     #[ORM\ManyToOne(inversedBy: 'partner', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\Column(length: 255, unique:true)]
+    #[ORM\Column(length: 150, unique:true)]
     private ?string $name = null;
 
     public function __construct()

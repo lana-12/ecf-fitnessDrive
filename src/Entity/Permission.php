@@ -17,10 +17,10 @@ class Permission
     private ?int $id = null;
     
     
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 150)]
     private ?string $title = null;
     
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 150)]
     private ?string $description = null;
     
     #[ORM\Column]

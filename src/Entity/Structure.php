@@ -33,16 +33,16 @@ class Structure
     #[ORM\Column(length: 50)]
     private ?string $city = null;
 
-    #[ORM\Column(unique:true)]
+    #[ORM\Column(length: 50,unique:true)]
     private ?string $phone = null;
 
     #[ORM\Column]
     private ?bool $is_active = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $full_description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $short_description = null;
 
     #[ORM\ManyToOne(inversedBy: 'structures')]
