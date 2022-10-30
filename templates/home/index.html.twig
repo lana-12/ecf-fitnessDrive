@@ -34,16 +34,16 @@
 
         {% if is_granted('ROLE_ADMIN') %}
                 <a class="btn btnHome btn-sm " role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_admin') }}">Connexion</a>
-        {% endif %}
+        
 
 
-        {% if is_granted('ROLE_PARTNER') %}
+        {% elseif is_granted('ROLE_PARTNER') %}
 
                 <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_partner_show', {'id': id}) }}">Connexion  </a>
                 
-        {% endif %}
 
-        {% if is_granted('ROLE_STRUCTURE') %}
+
+        {% elseif is_granted('ROLE_STRUCTURE') %}
 
                 <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_structure_show', {'id': id}) }}">Connexion</a>
         {% endif %}
