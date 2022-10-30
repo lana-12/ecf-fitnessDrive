@@ -25,22 +25,30 @@ class HomeController extends AbstractController
 
         // $repository = $doctrine->getRepository(Structure::class);
         // $structures = $repository->findAll();
+/**
+ * @var User $user 
+ */
+        $user= $this->getUser();
+        if (in_array('ROLE_PARTNER', $user->getRoles()) ){
+            $status = $partnerRepository->findOneByName($user->getUsername());
+            $id = $status[0]->getId();
+        }
+        if (in_array('ROLE_STRUCTURE', $user->getRoles()) ){
+            $status = $structureRepository->findOneByName($user->getUsername());
+            $id = $status[0]->getId();
+        }
+            
 
-        $users= $this->getUser();
-        
-        $partner = $partnerRepository->findOneByName($this->getUser()->getUsername());
-
-        $structure = $structureRepository->findOneByName($this->getUser()->getUsername());
         
         // mercredi 26 octobre 23:41 =>ok role
-
+        // dd($user->getUsername());
         
         return $this->render('home/index.html.twig',[
-            'user'=> $users,
+            'user'=> $user,
             // 'partner'=> $partners,
             // 'structure'=> $structures,
-            'partners'=> $partner,
-            'structures'=> $structure
+            'id'=> $id,
+            
         ]);
     }
 

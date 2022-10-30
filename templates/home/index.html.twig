@@ -38,18 +38,14 @@
 
 
         {% if is_granted('ROLE_PARTNER') %}
-            {% for partner in partners %}
+
+                <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_partner_show', {'id': id}) }}">Connexion  </a>
                 
-                <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_partner_show', {'id': partner.id}) }}">Connexion  </a>
-                
-            {% endfor %}
         {% endif %}
 
         {% if is_granted('ROLE_STRUCTURE') %}
-            {% for structure in structures %}
 
-                <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_structure_show', {'id': structure.id}) }}">Connexion</a>
-            {% endfor %}
+                <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_structure_show', {'id': id}) }}">Connexion</a>
         {% endif %}
 
     {% endif %} 
