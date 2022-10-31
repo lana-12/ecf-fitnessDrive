@@ -1,4 +1,4 @@
-#FitnessDrive
+FitnessDrive
 Réalisé pour mes évaluations de fin d'études pour le Titre Professionnel Développeur web et web mobile.
 Ce projet est une application web développé avec Symfony, Bootstrap et JavaScript.
 
@@ -21,9 +21,7 @@ Voir la liste de toutes les Permissions
 Recherche dynamique pour trouver un Utilisateur, une Franchise et une structure
 Visualiser all/active/inactive
 
-Ressources:
-Pour le choix des couleurs : 
-    je me suis inspiré du design Dark mode avec des couleurs plus vives
+Ressources: je me suis inspiré du design Dark mode avec des couleurs plus vives
 
 Pour la charte graphique et le maquettage : 
     En annexe sur mon gitHub => annexes
