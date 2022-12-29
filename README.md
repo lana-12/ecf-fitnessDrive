@@ -30,9 +30,6 @@ Cette application est principalement destiné aux employés de l'entreprise fict
 Pour le choix des couleurs :
 je me suis inspiré du design Dark mode avec des couleurs plus vives
 
-## Ressources
-Je me suis inspiré du design Dark mode avec des couleurs plus vives
-
 Pour la charte graphique et le maquettage :
 En annexe sur mon gitHub => annexes
 
