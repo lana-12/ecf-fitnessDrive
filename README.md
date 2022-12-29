@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-
 # FitnessDrive
 
-=======
-FitnessDrive
-
-> > > > > > > 05d9044ef9d8c2827b0bb33cefc32e439277788d
-> > > > > > > Réalisé pour mes évaluations de fin d'études pour le Titre Professionnel Développeur web et web mobile.
-> > > > > > > Ce projet est une application web développé avec PHP, Symfony, Html(twig), Css(Sass), Bootstrap et JavaScript.
+Réalisé pour mes évaluations de fin d'études pour le Titre Professionnel Développeur web et web mobile.
+Ce projet est une application web développé avec PHP, Symfony, Html(twig), Css(Sass), Bootstrap et JavaScript.
 
 Le lien du projet ici : https://fitnessdrive.fly.dev.
 
@@ -31,16 +25,13 @@ Cette application est principalement destiné aux employés de l'entreprise fict
 - Recherche dynamique pour trouver un Utilisateur, une Franchise et une structure
 - Visualiser all/active/inactive
 
-<<<<<<< HEAD
-
 ## Ressources
 
 Pour le choix des couleurs :
 je me suis inspiré du design Dark mode avec des couleurs plus vives
-=======
-Ressources: je me suis inspiré du design Dark mode avec des couleurs plus vives
 
-> > > > > > > 05d9044ef9d8c2827b0bb33cefc32e439277788d
+## Ressources
+Je me suis inspiré du design Dark mode avec des couleurs plus vives
 
 Pour la charte graphique et le maquettage :
 En annexe sur mon gitHub => annexes
