@@ -27,17 +27,20 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 ">
 
     {% if app.user %}
                 <h3 class=''>Bienvenue {{ app.user.username }}</h3>
+                <p class="textGreen mx-5">En cliquant sur le boutton, vous pouvez visualiser vos structures et vos permissions.</p>
+                <p class="textGreen mx-5">N'hésitez pas à nous contacter.</p>
 
-        {% if is_granted('ROLE_ADMIN') %}
-                <a class="btn btnHome btn-sm " role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_admin', {'id':id}) }}">Connexion</a>
+{# Changement de route une fois connecté, admin accède directement à sa page, voir LoginFormAuthenticator #}
+
+        {# {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btnHome btn-sm " role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_admin', {'id':id}) }}">Connexion</a> #}
         
 
-
-        {% elseif is_granted('ROLE_PARTNER') %}
+        {% if is_granted('ROLE_PARTNER') %}
 
                 <a class="btn btn-sm btnHome" role="button" title="Connectez-vous " alt="Connectez-vous " href="{{ path('app_partner_show', {'id': id}) }}">Connexion  </a>
                 

@@ -24,11 +24,38 @@
 
         <div class="row">
             <div class="col-12">
-                <h4 class="titleStructure">Vos Structures</h4>
+                <h4 class="titleStructure"><u>Vos Structures</u></h4>
                     <!-- Display the structures du partner -->
                     {% include "partner/_listStructures.html.twig" %}
             </div>
         </div>
+
+{# A REVOIR TOUTES LES PERMISSIONS NE S AFFICHE PAS  #}
+        {# <div class="row">
+            <div class="col-12 ">
+                <h4 class="titleStructure"><u>Vos Permissions</u></h4>
+                    <!-- Display the permissions of structures du partner -->
+
+                {% for structure in structures %}
+                    <div class="permList">
+	                    <h5>Pour la structure <strong>{{structure.nameStructure}}</strong> :</h5>
+                    {% for permission in permissions %}
+                        <p>
+                            <ul>
+                                <li>{{permission.title}}</li>
+                            </ul>
+
+                        </p>
+                    {% else %}
+                    <div class="alert alert-success text-center">
+                        <p>Vous n'avez aucune permission pour cette structure</p>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    
+                {% endfor %}
+            </div>
+        </div> #}
 
         <a class="rocket back textGreen" href='#back'>
             <i class="fa fa-rocket" alt="Retour en haut" title="Retour en haut"></i>

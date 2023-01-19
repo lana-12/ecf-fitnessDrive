@@ -28,6 +28,7 @@ class HomeController extends AbstractController
 /**
  * @var User $user 
  */
+        
         $user= $this->getUser();
         if (in_array('ROLE_PARTNER', $user->getRoles()) ){
             $status = $partnerRepository->findOneByName($user->getUsername());
@@ -37,12 +38,13 @@ class HomeController extends AbstractController
             $status = $structureRepository->findOneByName($user->getUsername());
             $id = $status[0]->getId();
         }
-        if (in_array('ROLE_ADMIN', $user->getRoles()) ){
-            // $status = $user->getUsername();
-            $id = $user->getId();
-        }
+        //Route admin apres login Avant. Maintenant j'ai modifier voir LoginFormAuthenticator  
+        // if (in_array('ROLE_ADMIN', $user->getRoles()) ){
+        //     // $status = $user->getUsername();
+        //     $id = $user->getId();
             
-        
+        // }
+            
         return $this->render('home/index.html.twig',[
             'user'=> $user,
             // 'partner'=> $partners,

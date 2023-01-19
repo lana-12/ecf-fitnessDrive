@@ -22,7 +22,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private RouterInterface $router)
     {
     }
 
@@ -45,6 +45,16 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
+        }
+
+        $roles = $token->getRoleNames();
+        if (in_array('ROLE_ADMIN', $roles, true)) {
+            /**
+             * @var User $user 
+             */
+            $user = $token->getUser();
+            $id = $user->getId();
+            return new  RedirectResponse($this->router->generate("app_admin", ['id' => $id]));
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_home'));

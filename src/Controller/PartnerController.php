@@ -39,10 +39,16 @@ class PartnerController extends AbstractController
         //avec StructureRepository
         // $structures = $structureRepository->findAllStructuresByPartner($id);
         $structures= $partner->getStructures();
+        
+        $repositoryS = $doctrine->getRepository(Structure::class);
+        $structure = $repositoryS->find($id);
+
+        $permissions = $structure->getPermissions();
 
             return $this->render('partner/index.html.twig',[
                 'partner'=> $partner,
                 'structures' => $structures,
+                'permissions'=> $permissions,
             ]);
     }
 
