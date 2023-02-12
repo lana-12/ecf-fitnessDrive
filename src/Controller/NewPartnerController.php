@@ -33,7 +33,7 @@ class NewPartnerController extends AbstractController
             $formPartner->handleRequest($request);
 
         //S'assure de la validité du form et que les valaurs sont cohérentes
-        if ($formPartner->isSubmitted() && $formPartner->isValid()){
+            if ($formPartner->isSubmitted() && $formPartner->isValid()){
             if(!$partner->getId()){
                 
             }

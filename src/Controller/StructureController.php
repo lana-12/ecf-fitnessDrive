@@ -17,12 +17,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
+
 /**
  * Route pour les structures uniquement avec détail de leurs structures
  */
 
 #[Route('/structure')]
-
 class StructureController extends AbstractController
 {
     #[Route('/show/{id<\d+>}', name: 'app_structure_show')]
