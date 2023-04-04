@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\MailService;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,7 +21,7 @@ class ContactController extends AbstractController
 {
     
     #[Route('/contact', name: 'app_contact')]
-    public function index(ManagerRegistry $doctrine, EntityManagerInterface $manager, Request $request, MailerInterface $mailer, PartnerRepository $partnerRepo, StructureRepository $structureRepo ): Response
+    public function index(ManagerRegistry $doctrine, EntityManagerInterface $manager, Request $request, MailerInterface $mailer, PartnerRepository $partnerRepo, StructureRepository $structureRepo, MailService $mail ): Response
     {
 
     /**
@@ -44,18 +45,27 @@ class ContactController extends AbstractController
             $manager->flush();
             
             // Send Email by contact
-            $email = (new TemplatedEmail())
-                ->from($contact->getEmail())
-                ->to('fitnessDrive@outlook.fr')
-                ->subject($contact->getSubject())
-                // path of the Twig template to render
-                ->htmlTemplate('email/contact.html.twig')
-                // pass variables (name => value) to the template
-                ->context([
-                    'contact' => $contact
-                ]);
+            $mail->
+                sendEmail(
+                    $contact->getEmail(),
+                    'fitnessDrive@outlook.fr',
+                    $contact->getSubject(),
+                    'contact',
+                    compact('contact')
 
-            $mailer->send($email);
+                //     = (new TemplatedEmail())
+                // ->from($contact->getEmail())
+                // ->to('fitnessDrive@outlook.fr')
+                // ->subject($contact->getSubject())
+                // // path of the Twig template to render
+                // ->htmlTemplate('email/contact.html.twig')
+                // // pass variables (name => value) to the template
+                // ->context([
+                //     'contact' => $contact
+                // ]
+            );
+
+            // $mailer->send($email);
             $this->addFlash('success', 'Votre message a été envoyé avec succès !');
             
         }
