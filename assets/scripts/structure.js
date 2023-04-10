@@ -54,6 +54,9 @@ function displayActive(){
     });
     btnAll.classList.remove('active');
     btnActive.classList.add('active');
+    btnInActive.classList.remove("active");
+
+    
 }
 
 function displayInActive(){
@@ -64,6 +67,7 @@ function displayInActive(){
         element.classList.add('d-none');
     });
     btnActive.classList.remove("active");
+    btnAll.classList.remove('active');
     btnInActive.classList.add("active");
 }
 

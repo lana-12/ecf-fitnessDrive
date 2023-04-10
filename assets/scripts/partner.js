@@ -54,6 +54,8 @@ function displayActive(){
     });
     btnAll.classList.remove('active');
     btnActive.classList.add('active');
+    btnInActive.classList.remove("active");
+
 }
 
 function displayInActive(){
