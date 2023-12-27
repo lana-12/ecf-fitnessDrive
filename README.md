@@ -14,7 +14,7 @@ This application is primarily intended for FitnessDRIVE employees. From their ow
     - mdp : trinhductrinhduc
 
 - Admin
-    - Vous pouvez voir le rendu sur le mode d'emploi. [Lien](https://github.com/lana-12/ecf-fitnessDrive/blob/main/annexes/Mode%20d%20Emploi.pdf)
+    - You can see how it looks in the instructions for use in folder [/annexes](https://github.com/lana-12/ecf-fitnessDrive/blob/main/annexes/Mode%20d%20Emploi.pdf)
 ---
 
 ## Installation
