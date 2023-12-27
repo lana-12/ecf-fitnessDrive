@@ -1,4 +1,4 @@
-# FitnessDrive [Lien](https://fitnessdrive.fly.dev/)
+# FitnessDrive 
 
 ## Content
 This application is primarily intended for FitnessDRIVE employees. From their own space, they can manage access to the various options offered by FitnessDRIVE to the brand's franchisees. From this interface, franchisees can only see their activated options and the rooms they own. Only employees can modify rights.
