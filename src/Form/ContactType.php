@@ -57,7 +57,7 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez saisir un mot de passe!']),
                     new Length([
-                        'min' => 5, 'max' => 100, 'minMessage' => 'Le nom doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' => 'Le nom doit faire entre {{ limit }} et {{ limit }} caractères'
+                        'min' => 2, 'max' => 100, 'minMessage' => 'Le nom doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' => 'Le nom doit faire entre {{ limit }} et {{ limit }} caractères'
                     ]),
                 ]
             ])

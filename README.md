@@ -5,16 +5,18 @@ This application is primarily intended for FitnessDRIVE employees. From their ow
 
 ---
 ## Read-only access code
-- Franchise Toulouse 
-    - id  : ibanez@exemple.fr
-    - mdp : ibanezibanez
+- Franchise
+    - id  : avenger@exemple.fr
+    - mdp : avenger
 
 - its structure 
-    - id  : trinhduc@exemple.fr
-    - mdp : trinhductrinhduc
+    - id  : gamora@exemple.fr
+    - mdp : gamora
 
 - Admin
-    - You can see how it looks in the instructions for use in folder [/annexes](https://github.com/lana-12/ecf-fitnessDrive/blob/main/annexes/Mode%20d%20Emploi.pdf)
+   - id  : fitnessdrive.ad01@outlook.com
+   - mdp : admin
+
 ---
 
 ## Installation

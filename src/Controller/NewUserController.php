@@ -15,9 +15,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/user')]
-
 class NewUserController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+    private UserPasswordHasherInterface $userPasswordHasher;
+    private MailService $mailService;
+
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher, MailService $mailService)
+    {
+        $this->entityManager = $entityManager;
+        $this->userPasswordHasher = $userPasswordHasher;
+        $this->mailService = $mailService;
+    }
+
+
+    #[Security("is_granted('ROLE_ADMIN')", statusCode: 403)]
+    #[Route('/list', name: 'app_user_list')]
+    public function index(UserRepository $userRepository, Request $request): Response
+    {
+        $page = (int) $request->query->get('page', 1);
+        $users = $userRepository->getPaginatedUser($page);
+        $filteredUsers = [];
+
+        foreach ($users as $user) {
+            if (!in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+                $filteredUsers[] = $user;
+            }
+        }
+
+        return $this->render('admin/user/index.html.twig', [
+            'titlePage' => 'Liste de Compte de connexion',
+            'countUsers' => $userRepository->countUsers(),
+            'users' => $filteredUsers,
+        ]);
+    }
+
+
+    
+
     #[Route('/new', name: 'user_new')]
 
     /**
@@ -146,21 +181,7 @@ class NewUserController extends AbstractController
         ]);
     }
 
-    /**
-     * Display list Users
-     */
-    #[Security("is_granted('ROLE_ADMIN')", statusCode: 403)]
-    #[Route('/list', name: 'app_user_list')]
-    public function index(UserRepository $userRepository, Request $request): Response
-    {
-        $users = $userRepository->getPaginatedUser((int)$request->query->get("page"));
-        
-        return $this->render('admin/user/index.html.twig', [
-            'titlePage'=> 'Liste de Compte de connexion',
-            'users' => $userRepository->findAll(),
-            'countUsers' => $userRepository->countUsers(),
-            'users' => $users,
-        ]);
-    }
+   
+    
     
 }

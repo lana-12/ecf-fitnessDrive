@@ -69,7 +69,7 @@ class StructureType extends AbstractType
                 'constraints'=> [
                     new NotBlank(['message'=> 'Le champ ne peut pas être vide !']),
                     new Length([
-                        'min'=> 5, 'max'=> 100, 'minMessage' =>'Le nom doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' =>'Le nom doit faire entre {{ limit }} et {{ limit }} caractères']),
+                        'min'=> 2, 'max'=> 100, 'minMessage' =>'Le nom doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' =>'Le nom doit faire entre {{ limit }} et {{ limit }} caractères']),
                     ]       
                 ])  
                 
@@ -82,7 +82,7 @@ class StructureType extends AbstractType
                 'constraints'=> [
                     new NotBlank(['message'=> 'Le champ ne peut pas être vide !']),
                     new Length([
-                        'min'=> 5, 'max'=> 255, 'minMessage' =>'L\'adresse doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' =>'L\'adresse doit faire entre {{ limit }} et {{ limit }} caractères']),
+                        'min'=> 2, 'max'=> 255, 'minMessage' =>'L\'adresse doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' =>'L\'adresse doit faire entre {{ limit }} et {{ limit }} caractères']),
                     ]       
             ])
             ->add('zipcode', TextType::class,[
@@ -106,7 +106,7 @@ class StructureType extends AbstractType
                 'constraints'=> [
                     new NotBlank(['message'=> 'Veuillez saisir une ville valide !']),
                     new Length([
-                        'min'=> 5, 'max'=> 100, 'minMessage' =>'Le champ doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' =>'Le champ doit faire entre {{ limit }} et {{ limit }} caractères']),
+                        'min'=> 2, 'max'=> 100, 'minMessage' =>'Le champ doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' =>'Le champ doit faire entre {{ limit }} et {{ limit }} caractères']),
                 ]
             ])
             ->add('phone', TextType::class,[

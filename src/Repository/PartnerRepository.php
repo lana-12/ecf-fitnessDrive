@@ -71,6 +71,22 @@ class PartnerRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+
+    /**
+     * Return partners associated with the user with the given ID
+     *
+     * @param int $userId The ID of the user
+     * @return Partner[]|null The partners associated with the user, or null if none found
+     */
+    public function findByUserId(int $userId): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.user', 'u')
+            ->andWhere('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
     /**
      * Pagination partner
      */

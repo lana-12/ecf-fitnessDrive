@@ -27,7 +27,7 @@ class PermissionType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez saisir un titre de permission !']),
                     new Length([
-                        'min' => 10, 'max' => 250,
+                        'min' => 2, 'max' => 250,
                     'minMessage' => 'Le nom de la permission doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' => 'Le nom de la pr doit faire entre {{ limit }} et {{ limit }} caractères'
                     ]),
                 ]
@@ -43,7 +43,7 @@ class PermissionType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez saisir une description de permission !']),
                     new Length([
-                        'min' => 10, 'max' => 5000,
+                        'min' => 2, 'max' => 5000,
                     'minMessage' => 'La description de la permission doit faire entre {{ limit }} et {{ limit }} caractères', 'maxMessage' => 'La description de la pr doit faire entre {{ limit }} et {{ limit }} caractères'
                     ]),
                 ]

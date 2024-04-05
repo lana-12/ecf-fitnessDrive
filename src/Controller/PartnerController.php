@@ -15,15 +15,17 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 /**
  * Route pour les franchises uniquement avec détail de leurs structures
  */
 #[Route('/partner')]
+
 class PartnerController extends AbstractController
 {
     #[Route('/show/{id<\d+>}', name: 'app_partner_show')]
@@ -31,8 +33,9 @@ class PartnerController extends AbstractController
     public function index(ManagerRegistry $doctrine, int $id, Partner $partner, PartnerRepository $partnerRepo): Response
     {
         // Method with ManagerRegistry => recup all the partner {$id}
+        // dd($id);
         $repositoryPartner = $doctrine->getRepository(Partner::class);
-        $partner = $repositoryPartner->find($id);
+        $partner = $partnerRepo->find($id);
         
         //2 Methodes => recup tt les structures du partner
         //avec StructureRepository

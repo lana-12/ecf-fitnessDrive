@@ -85,6 +85,24 @@ class StructureRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+
+    /**
+     * Return structures associated with the user with the given ID
+     *
+     * @param int $userId The ID of the user
+     * @return Structure[]|null The structures associated with the user, or null if none found
+     */
+    public function findByUserId(int $userId): ?array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.user', 'u')
+            ->andWhere('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     /**
      * Pagination structure
      */

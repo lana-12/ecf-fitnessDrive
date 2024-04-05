@@ -11,13 +11,27 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Security("is_granted('ROLE_ADMIN')", statusCode: 403)]
 class NewStructureController extends AbstractController
 {
-    /**
-     * For create structure
-    */
+    #[Route('/structureList', name: 'app_structureList')]
+    public function index(StructureRepository $structureRepository, Request $request): Response
+    {
+        // display how many structures
+        $countStructures = $structureRepository->countStructures();
+
+        return $this->render('admin/structure/list.html.twig', [
+            'titlePage' => 'Liste des structures',
+            'structures' => $structureRepository->findAllStructures(),
+            'countStructures' => $countStructures,
+            'structures' => $structureRepository->getPaginatedStructure((int) $request->query->get("page")),
+
+        ]);
+    }
+   
     #[Route('/new_structure', name: 'new_structure')]
     public function formNewStructure(Request $request, EntityManagerInterface $entityManager, Structure $structure=null, MailService $mail): Response
     {
@@ -27,18 +41,8 @@ class NewStructureController extends AbstractController
         $formStructure = $this->createForm(StructureType::class, $structure);
         $formStructure->handleRequest($request);
 
-        
-        //S'assure de la validité du form et que les valaurs sont cohérentes
         if ($formStructure->isSubmitted() && $formStructure->isValid()) {
-            // if (!$structure->getId()) {
-                
-            // }
-            // Ajoute des permissions aux structures
             $permissions = $structure->getPermissions();
-                // foreach ($permissions as $permission){
-                //     $structure->addPermission($permission);
-                // }
-        
             $entityManager->persist($structure);
             $entityManager->flush();
 
@@ -51,13 +55,12 @@ class NewStructureController extends AbstractController
                 'Activation de votre Structure',
                 'registerStructure',
                 compact('structure')
-
             );
 
             $this->addFlash('send', 'Email d\'Activation a bien été envoyé');
 
-            $partner = $structure->getPartner();
             //sendEmail partner
+            $partner = $structure->getPartner();
             $mail->sendEmail(
                 'fitnessDrive@outlook.fr',
                 $partner->getUser()->getEmail(),
@@ -66,12 +69,12 @@ class NewStructureController extends AbstractController
                 compact('partner')
 
             );
-
             $this->addFlash('send2', 'Email de modification a bien été envoyé à la  franchise');
         }
         
         //RECUP NOM PARTNER + STRUCTURE POUR LE MODE EDIT
         $partner = $structure->getPartner();
+
         return $this->render('admin/structure/newStructure.html.twig', [
             'formStructure' => $formStructure->createView(),
             //Variable in editMode
@@ -81,10 +84,6 @@ class NewStructureController extends AbstractController
         ]);
     }
 
-
-    /**
-     * For edit structure
-     */
     #[Route('/structure/{id}/edit', name: 'structure_edit')]
     
     public function formEditStructure(Request $request, EntityManagerInterface $entityManager, Structure $structure=null, MailService $mail): Response
@@ -95,8 +94,6 @@ class NewStructureController extends AbstractController
         $formStructure = $this->createForm(StructureType::class, $structure);
         $formStructure->handleRequest($request);
         
-
-        //S'assure de la validité du form et que les valaurs sont cohérentes
         if ($formStructure->isSubmitted() && $formStructure->isValid()) {
             if (!$structure->getId()) {
                 
@@ -122,23 +119,20 @@ class NewStructureController extends AbstractController
                 compact('structure')
 
             );
-
             $this->addFlash('send', 'Email de Modification a bien été envoyé à la structure');
 
-            $partner = $structure->getPartner();
             //sendEmail partner
+            $partner = $structure->getPartner();
             $mail->sendEmail(
                 'fitnessDrive@outlook.fr',
                 $partner->getUser()->getEmail(),
                 'Modification de votre structure',
                 'editStructureOfPartner',
                 compact('partner')
-
             );
-
             $this->addFlash('send2', 'Email de modification a bien été envoyé à la  franchise');
-            
         }
+
         //RECUP NOM PARTNER + STRUCTURE POUR LE MODE EDIT
         $partner = $structure->getPartner();
         
@@ -150,24 +144,6 @@ class NewStructureController extends AbstractController
             'structure' => $structure,
             'partner'=> $partner,
             
-        ]);
-    }
-
-    /**
-     * Display list structures
-     */
-    #[Route('/structureList', name: 'app_structureList')]
-    public function index(StructureRepository $structureRepository, Request $request): Response
-    {
-        // display how many structures
-        $countStructures = $structureRepository->countStructures();
-        
-        return $this->render('admin/structure/list.html.twig', [
-            'titlePage' => 'Liste des structures',
-            'structures' => $structureRepository->findAllStructures(),
-            'countStructures' => $countStructures,
-            'structures'=> $structureRepository->getPaginatedStructure((int) $request->query->get("page")),
-
         ]);
     }
 

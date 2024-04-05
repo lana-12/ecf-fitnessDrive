@@ -10,17 +10,30 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
+#[Security("is_granted('ROLE_ADMIN')", statusCode: 403)]
 class NewPermissionController extends AbstractController
 {
-    #[Route('/new', name: 'app_permission_new')]
-
-    /**
-     * For create Permission 
-     */
     
+    #[Route('/permission', name: 'app_permission')]
+    public function index(PermissionRepository $permissionRepository, Request $request): Response
+    {
+        $countPermissions = $permissionRepository->countPermissions();
+
+
+        return $this->render('admin/permission/index.html.twig', [
+            'titlePage' => 'Liste des permissions',
+            'permissions' => $permissionRepository->findAllPermissions(),
+            'countPermissions' => $countPermissions,
+            'permissions' => $permissionRepository->getPaginatedPermission((int) $request->query->get("page")),
+
+        ]);
+    }
+
+
+    #[Route('/new', name: 'app_permission_new')]
     public function newPermission(Request $request, EntityManagerInterface $entityManager, Permission $permission = null, ManagerRegistry $doctrine): Response
     {
         if (!$permission) {
@@ -52,12 +65,8 @@ class NewPermissionController extends AbstractController
     }
 
 
-    /**
-     * For edit Permission 
-     */
-    
+   
     #[Route('/{id}/edit', name: 'app_permission_edit')]
-    
     public function editPermission(Request $request, EntityManagerInterface $entityManager, Permission $permission = null, ManagerRegistry $doctrine): Response
     {
         if (!$permission) {
@@ -88,22 +97,4 @@ class NewPermissionController extends AbstractController
         ]);
     }
 
-    /**
-     * display list Permission
-     */
-
-    #[Route('/permission', name: 'app_permission')]
-    public function index(PermissionRepository $permissionRepository, Request $request): Response
-    {
-        $countPermissions = $permissionRepository->countPermissions();
-        
-
-        return $this->render('admin/permission/index.html.twig', [
-            'titlePage' => 'Liste des permissions',
-            'permissions' => $permissionRepository->findAllPermissions(),
-            'countPermissions' => $countPermissions,
-            'permissions' => $permissionRepository->getPaginatedPermission((int) $request->query->get("page")),
-            
-        ]);
-    }
 }

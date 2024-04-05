@@ -17,40 +17,39 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
-
-    public function index(ManagerRegistry $doctrine, PartnerRepository $partnerRepository, StructureRepository $structureRepository): Response
+    public function index(PartnerRepository $partnerRepository, StructureRepository $structureRepository): Response
     {
-        // $repository = $doctrine->getRepository(Partner::class);
-        // $partners = $repository->findAll();
-
-        // $repository = $doctrine->getRepository(Structure::class);
-        // $structures = $repository->findAll();
-/**
- * @var User $user 
- */
+        /**
+         * @var User $user 
+         */
         
         $user= $this->getUser();
+
         if (in_array('ROLE_PARTNER', $user->getRoles()) ){
-            $status = $partnerRepository->findOneByName($user->getUsername());
-            $id = $status[0]->getId();
+            $id = $user->getId();
+            $partners = $partnerRepository->findByUserId($id);
+            foreach ($partners as $partner) {
+                if($partner->getUser()->getId() === $id){
+                    return $this->redirectToRoute('app_partner_show', ['id'=> $partner->getId()]);
+                }
+            }
         }
+
         if (in_array('ROLE_STRUCTURE', $user->getRoles()) ){
-            $status = $structureRepository->findOneByName($user->getUsername());
-            $id = $status[0]->getId();
+            $id = $user->getId();
+
+            $strutures = $structureRepository->findByUserId($id);
+            foreach ($strutures as $struture) {
+                if ($struture->getUser()->getId() === $id) {
+                    return $this->redirectToRoute('app_structure_show', ['id' => $struture->getId()]);
+                }
+            }
+            
         }
-        //Route admin apres login Avant. Maintenant j'ai modifier voir LoginFormAuthenticator  
-        // if (in_array('ROLE_ADMIN', $user->getRoles()) ){
-        //     // $status = $user->getUsername();
-        //     $id = $user->getId();
-            
-        // }
-            
+        
         return $this->render('home/index.html.twig',[
             'user'=> $user,
-            // 'partner'=> $partners,
-            // 'structure'=> $structures,
             'id'=> $id,
-            
         ]);
     }
 
