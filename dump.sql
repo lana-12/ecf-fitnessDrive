@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `fitness_drive`
 --
-CREATE DATABASE IF NOT EXISTS `fitness_drive` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `fitness_drive`;
+-- CREATE DATABASE IF NOT EXISTS `fitness_drive` DEFAULT CHARACTER SET utf8mb4 COLLATE -- utf8mb4_general_ci;
+-- USE `fitness_drive`;
 
 -- --------------------------------------------------------
 
