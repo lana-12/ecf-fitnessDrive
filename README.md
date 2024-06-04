@@ -26,6 +26,8 @@ This application is primarily intended for FitnessDRIVE employees. From their ow
 git clone https://github.com/lana-12/ecf-fitnessDrive.git
 
 composer install
+npm install
+npm run build
 
 symfony serve:start
 # en http
